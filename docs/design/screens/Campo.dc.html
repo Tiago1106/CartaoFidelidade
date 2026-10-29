@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Campo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<label style="display: flex; flex-direction: column; gap: 8px; width: 100%; font-family: Manrope, system-ui, sans-serif">
+<sc-if value="{{temRotulo}}" hint-placeholder-val="{{ true }}">
+<span style="font-size: 14px; line-height: 20px; font-weight: 600; color: #16181B">{{rotulo}}</span>
+</sc-if>
+<span style="{{boxStyle}}">
+<sc-if value="{{temIcone}}" hint-placeholder-val="{{ false }}">
+<dc-import name="Icone" icone="{{icone}}" size="22" color="#5B6068" hint-size="22px,22px"></dc-import>
+</sc-if>
+<sc-if value="{{temPrefixo}}" hint-placeholder-val="{{ true }}">
+<span style="font-size: 17px; line-height: 24px; font-weight: 600; color: #16181B">{{prefixo}}</span>
+<span style="width: 1px; height: 24px; background: #E2DED3"></span>
+</sc-if>
+<input type="{{tipo}}" inputmode="{{modo}}" autocomplete="{{auto}}" placeholder="{{placeholder}}" value="{{valor}}" style="flex: 1; min-width: 0; height: 100%; border: none; outline: none; background: transparent; padding: 0; font-family: Manrope, system-ui, sans-serif; font-size: 17px; line-height: 24px; color: #16181B">
+<sc-if value="{{temSufixo}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 17px; line-height: 24px; color: #5B6068">{{sufixo}}</span>
+</sc-if>
+</span>
+<sc-if value="{{temMensagem}}" hint-placeholder-val="{{ false }}">
+<span style="{{msgStyle}}">{{mensagem}}</span>
+</sc-if>
+</label>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"rotulo":{"editor":"text","default":"Celular"},"placeholder":{"editor":"text","default":"(11) 90000-0000"},"valor":{"editor":"text","default":""},"prefixo":{"editor":"text","default":"+55"},"sufixo":{"editor":"text","default":""},"icone":{"editor":"text","default":""},"mensagem":{"editor":"text","default":""},"estado":{"editor":"enum","default":"default","options":["default","focus","error"]},"tipo":{"editor":"enum","default":"tel","options":["tel","text","email","password","number"]},"$preview":{"width":342,"height":104}}'>
+class Component extends DCLogic {
+renderVals() {
+const estado = this.props.estado ?? 'default';
+const prefixo = this.props.prefixo ?? '+55';
+const mensagem = this.props.mensagem ?? '';
+const border = estado === 'error' ? '#B3261E' : '#8C8678';
+const ring = estado === 'focus' ? 'outline:2px solid #16181B;outline-offset:2px;' : '';
+const boxStyle = 'display:flex;align-items:center;gap:12px;box-sizing:border-box;height:56px;padding:0 16px;border-radius:12px;background:#FFFFFF;border:1.5px solid ' + border + ';' + ring;
+const msgStyle = 'font-size:14px;line-height:20px;color:' + (estado === 'error' ? '#B3261E' : '#5B6068');
+const tipo = this.props.tipo ?? 'tel';
+return {
+tipo,
+modo: tipo === 'tel' ? 'tel' : (tipo === 'email' ? 'email' : (tipo === 'number' ? 'numeric' : 'text')),
+auto: tipo === 'tel' ? 'tel-national' : (tipo === 'email' ? 'email' : (tipo === 'password' ? 'current-password' : 'name')),
+rotulo: this.props.rotulo ?? 'Celular',
+temRotulo: (this.props.rotulo ?? 'Celular') !== '',
+icone: this.props.icone ?? '',
+temIcone: (this.props.icone ?? '') !== '',
+placeholder: this.props.placeholder ?? '(11) 90000-0000',
+valor: this.props.valor ?? '',
+prefixo,
+temPrefixo: prefixo !== '',
+sufixo: this.props.sufixo ?? '',
+temSufixo: (this.props.sufixo ?? '') !== '',
+mensagem,
+temMensagem: mensagem !== '',
+boxStyle,
+msgStyle
+};
+}
+}
+</script>
+</body>
+</html>

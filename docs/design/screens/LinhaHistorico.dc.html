@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Linha de histórico</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; min-height: 56px; font-family: Manrope, system-ui, sans-serif">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="{{tituloStyle}}">{{titulo}}</span>
+<span style="font-size: 14px; line-height: 20px; color: #5B6068">{{detalhe}}</span>
+</span>
+<sc-if value="{{temAcao}}" hint-placeholder-val="{{ true }}">
+<button type="button" style="flex: none; min-height: 44px; padding: 0 12px; margin-right: -12px; border: none; background: transparent; cursor: pointer; font-family: Manrope, system-ui, sans-serif; font-size: 15px; line-height: 22px; font-weight: 700; color: #B3261E">Estornar</button>
+</sc-if>
+<sc-if value="{{estornado}}" hint-placeholder-val="{{ false }}">
+<span style="flex: none; display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 9999px; font-size: 12px; line-height: 16px; font-weight: 700; background: #F0EDE5; color: #5B6068">Estornada</span>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"titulo":{"editor":"text","default":"Carimbo · Cartão Corte"},"detalhe":{"editor":"text","default":"Hoje, 14:32 · Ana"},"estado":{"editor":"enum","default":"normal","options":["normal","estornado"]},"acao":{"editor":"enum","default":"nao","options":["nao","sim"]},"$preview":{"width":342,"height":56}}'>
+class Component extends DCLogic {
+renderVals() {
+const est = (this.props.estado ?? 'normal') === 'estornado';
+return {
+titulo: this.props.titulo ?? '',
+detalhe: this.props.detalhe ?? '',
+estornado: est,
+temAcao: !est && (this.props.acao ?? 'nao') === 'sim',
+tituloStyle: 'font-size:17px;line-height:24px;font-weight:600;color:' + (est ? '#5B6068' : '#16181B') + ';' + (est ? 'text-decoration:line-through;' : '')
+};
+}
+}
+</script>
+</body>
+</html>

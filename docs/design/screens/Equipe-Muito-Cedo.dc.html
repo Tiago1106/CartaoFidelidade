@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Equipe, visita muito recente</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="position: absolute; left: 0; right: 0; top: 220px; display: flex; flex-direction: column; align-items: center; gap: 32px; padding: 0 24px; box-sizing: border-box; text-align: center">
+<div style="width: 112px; height: 112px; border-radius: 9999px; background: #FBEFD3; display: flex; align-items: center; justify-content: center">
+<dc-import name="Icone" icone="clock" size="56" color="#8A5A00" hint-size="56px,56px"></dc-import>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: center">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Visita muito recente</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">Maria já ganhou um carimbo no Cartão Corte hoje, às 14:32. Esse cartão volta a aceitar visitas às 15:32.</p>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 20px; color: #5B6068">Os outros cartões dela podem ser registrados normalmente. Se foi um engano, peça ao dono para estornar a visita anterior.</p>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0 24px 32px; box-sizing: border-box">
+<dc-import name="Botao" label="Voltar ao leitor" hint-size="100%,56px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

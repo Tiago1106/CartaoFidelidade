@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Perfil</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Perfil</h1>
+<div style="display: flex; align-items: center; gap: 16px">
+<div style="width: 72px; height: 72px; flex: none; border-radius: 9999px; background: #FBEFD3; display: flex; align-items: center; justify-content: center; font-size: 30px; line-height: 36px; font-weight: 800; color: #8A5A00">M</div>
+<div style="display: flex; flex-direction: column">
+<span style="font-size: 20px; line-height: 26px; font-weight: 700; color: #16181B">Maria</span>
+<span style="font-size: 15px; line-height: 22px; color: #5B6068">+55 (11) 90000-0000</span>
+</div>
+</div>
+<div style="border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3; overflow: hidden">
+<dc-import name="LinhaMenu" rotulo="Nome" valor="Maria" hint-size="100%,56px"></dc-import>
+<dc-import name="LinhaMenu" rotulo="Celular" valor="(11) 90000-0000" seta="nao" divisor="sim" hint-size="100%,56px"></dc-import>
+<dc-import name="LinhaMenu" rotulo="E-mail" valor="Adicionar" divisor="sim" hint-size="100%,56px"></dc-import>
+</div>
+<div style="border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3; overflow: hidden">
+<dc-import name="LinhaMenu" rotulo="Termos de uso" valor="" hint-size="100%,56px"></dc-import>
+<dc-import name="LinhaMenu" rotulo="Política de Privacidade" valor="" divisor="sim" hint-size="100%,56px"></dc-import>
+</div>
+<dc-import name="Botao" label="Sair" variant="secondary" hint-size="100%,56px"></dc-import>
+<div style="display: flex; justify-content: center">
+<a href="#excluir-conta" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; line-height: 22px; font-weight: 600; color: #B3261E">Excluir minha conta</a>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0">
+<dc-import name="BarraAbas" ativa="perfil" hint-size="100%,88px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

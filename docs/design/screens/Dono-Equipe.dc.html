@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dono, equipe</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Equipe</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">3 funcionários ativos</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<dc-import name="LinhaFuncionario" nome="Ana Ribeiro" detalhe="82 visitas neste mês" estado="ativo" hint-size="100%,72px"></dc-import>
+<dc-import name="LinhaFuncionario" nome="Rafael Gomes" detalhe="64 visitas neste mês" estado="ativo" hint-size="100%,72px"></dc-import>
+<dc-import name="LinhaFuncionario" nome="Marina Alves" detalhe="40 visitas neste mês" estado="ativo" hint-size="100%,72px"></dc-import>
+<dc-import name="LinhaFuncionario" nome="Bruno Teixeira" detalhe="Convite enviado há 1 dia" estado="pendente" hint-size="100%,72px"></dc-import>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 104px; padding: 0 24px; box-sizing: border-box">
+<dc-import name="Botao" label="Convidar funcionário" hint-size="100%,56px"></dc-import>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0">
+<dc-import name="BarraAbas" modo="dono" ativa="equipe" hint-size="100%,88px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

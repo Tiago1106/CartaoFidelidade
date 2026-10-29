@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dono, plano e cobrança</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 1200px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Plano</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">Assinatura ativa</p>
+</div>
+<div style="box-sizing: border-box; padding: 20px 16px; border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<h2 style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 700; color: #16181B">Essencial</h2>
+<span style="font-size: 17px; line-height: 24px; font-weight: 700; color: #16181B">R$ 39 por mês</span>
+</div>
+<dc-import name="LinhaBarra" nome="Visitas neste mês" valor="212 de 300" pct="71" hint-size="100%,42px"></dc-import>
+<span style="font-size: 14px; line-height: 20px; color: #5B6068">Próxima cobrança em 12/11/2026. Passar do limite não trava o balcão.</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 700; color: #16181B">Trocar de plano</h2>
+<dc-import name="OpcaoCartao" nome="Essencial · R$ 39" detalhe="Até 300 visitas por mês · plano atual" estado="selecionado" hint-size="100%,72px"></dc-import>
+<dc-import name="OpcaoCartao" nome="Profissional · R$ 79" detalhe="Até 800 visitas por mês" estado="normal" hint-size="100%,72px"></dc-import>
+<dc-import name="OpcaoCartao" nome="Studio · R$ 149" detalhe="Até 2.000 visitas por mês" estado="normal" hint-size="100%,72px"></dc-import>
+<dc-import name="OpcaoCartao" nome="Grande · R$ 249" detalhe="Até 5.000 visitas por mês" estado="normal" hint-size="100%,72px"></dc-import>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<dc-import name="Botao" label="Trocar de plano" desativado="true" hint-size="100%,56px"></dc-import>
+<dc-import name="Botao" label="Cancelar assinatura" variant="ghost" hint-size="100%,56px"></dc-import>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 20px; color: #5B6068">A cobrança é feita pelo Mercado Pago. Ao cancelar, o acesso segue até o fim do período pago e nenhum dado é apagado.</p>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0">
+<dc-import name="BarraAbas" modo="dono" ativa="plano" hint-size="100%,88px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1200}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

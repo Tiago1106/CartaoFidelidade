@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Cartão de fidelidade</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<button type="button" aria-label="{{rotulo}}" style="{{cardStyle}}">
+<div style="display: flex; align-items: center; gap: 12px; width: 100%; height: 40px">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; text-align: left">
+<span style="{{nomeStyle}}">{{nome}}</span>
+<span style="{{tipoStyle}}">{{tipo}}</span>
+</div>
+<sc-if value="{{pronto}}" hint-placeholder-val="{{ false }}">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 9999px; background: #F2B84B; color: #1A1305; font-size: 14px; line-height: 20px; font-weight: 700">
+<dc-import name="Icone" icone="gift" size="16" color="#1A1305" hint-size="16px,16px"></dc-import>
+Prêmio
+</span>
+</sc-if>
+<sc-if value="{{naoPronto}}" hint-placeholder-val="{{ true }}">
+<span style="{{contagemStyle}}">{{contagem}}</span>
+</sc-if>
+</div>
+<div style="display: grid; grid-template-columns: repeat(5, 44px); justify-content: space-between; row-gap: 12px; width: 100%">
+<sc-for list="{{carimbos}}" as="c" hint-placeholder-count="10">
+<div style="{{c.style}}">
+<sc-if value="{{c.cheio}}" hint-placeholder-val="{{ true }}"><dc-import name="Selo" size="44" variante="invertido" hint-size="44px,44px"></dc-import></sc-if>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%">
+<div style="display: flex; flex-direction: column; text-align: left">
+<span style="{{rotuloStyle}}">Validade</span>
+<span style="{{valorStyle}}">{{validade}}</span>
+</div>
+<div style="display: flex; flex-direction: column; text-align: right">
+<span style="{{rotuloStyle}}">Prêmio</span>
+<span style="{{valorStyle}}">{{rodape}}</span>
+</div>
+</div>
+</button>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nome":{"editor":"text","default":"Barbearia Navalha"},"tipo":{"editor":"text","default":"Barbearia"},"atual":{"editor":"int","default":7,"min":0,"max":10},"total":{"editor":"int","default":10,"min":1,"max":10},"validade":{"editor":"text","default":"31/12/2026"},"juntar":{"editor":"enum","default":"nao","options":["nao","sim"]},"cor":{"editor":"color","default":"#16181B"},"tom":{"editor":"enum","default":"escuro","options":["claro","escuro"]},"$preview":{"width":342,"height":240}}'>
+class Component extends DCLogic {
+renderVals() {
+const total = Math.min(10, Math.max(1, Number(this.props.total ?? 10)));
+const atual = Math.min(total, Math.max(0, Number(this.props.atual ?? 7)));
+const escuro = (this.props.tom ?? 'escuro') === 'escuro';
+const cor = this.props.cor ?? '#16181B';
+const pronto = atual >= total;
+const faltam = total - atual;
+const txt = escuro ? '#FFFFFF' : '#16181B';
+const sub = escuro ? 'rgba(255,255,255,0.78)' : 'rgba(22,24,27,0.72)';
+const vazio = escuro ? 'rgba(255,255,255,0.6)' : 'rgba(22,24,27,0.5)';
+const carimbos = [];
+for (let i = 0; i < total; i++) {
+const cheio = i < atual;
+carimbos.push({ cheio, style: cheio
+? 'width:44px;height:44px;display:flex;align-items:center;justify-content:center'
+: 'width:44px;height:44px;border-radius:9999px;border:2px dashed ' + vazio + ';box-sizing:border-box' });
+}
+const nome = this.props.nome ?? 'Barbearia Navalha';
+const cardStyle = 'display:flex;flex-direction:column;align-items:flex-start;gap:16px;width:100%;height:240px;box-sizing:border-box;padding:16px;border-radius:' + (this.props.juntar === 'sim' ? '20px 20px 0 0' : '20px') + ';border:none;background:' + cor + ';box-shadow:0 -2px 10px rgba(22,24,27,0.14);text-align:left;cursor:pointer;font-family:Manrope,system-ui,sans-serif;';
+return {
+nome,
+rotulo: 'Cartão ' + nome + ', ' + atual + ' de ' + total + ' carimbos',
+tipo: this.props.tipo ?? 'Barbearia',
+carimbos,
+pronto,
+naoPronto: !pronto,
+contagem: atual + '/' + total,
+cardStyle,
+nomeStyle: 'font-size:17px;line-height:22px;font-weight:700;color:' + txt + ';overflow:hidden;text-overflow:ellipsis;white-space:nowrap',
+tipoStyle: 'font-size:13px;line-height:18px;color:' + sub,
+contagemStyle: 'font-size:17px;line-height:24px;font-weight:700;color:' + txt,
+validade: this.props.validade ?? '31/12/2026',
+rodape: pronto ? 'Disponível' : (faltam === 1 ? 'Falta 1 carimbo' : 'Faltam ' + faltam + ' carimbos'),
+rotuloStyle: 'font-size:12px;line-height:16px;color:' + sub,
+valorStyle: 'font-size:14px;line-height:20px;font-weight:700;color:' + txt
+};
+}
+}
+</script>
+</body>
+</html>

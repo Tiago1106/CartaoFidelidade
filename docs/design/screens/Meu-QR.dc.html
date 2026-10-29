@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu QR Code</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Meu QR Code</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">Vale para todos os seus cartões.</p>
+</div>
+<div style="box-sizing: border-box; padding: 32px 24px 24px; border-radius: 24px; background: #FFFFFF; border: 1.5px solid #E2DED3; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center">
+<dc-import name="Icone" icone="qr" size="240" color="#16181B" hint-size="240px,240px"></dc-import>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; width: 240px">
+<div role="progressbar" aria-label="Tempo até renovar o código" aria-valuemin="0" aria-valuemax="30" aria-valuenow="24" style="width: 100%; height: 6px; border-radius: 9999px; background: #E2DED3; overflow: hidden">
+<div style="width: 80%; height: 100%; border-radius: 9999px; background: #8A5A00"></div>
+</div>
+<span style="font-size: 15px; line-height: 22px; font-weight: 600; color: #16181B">Renova em 0:24</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 20px; line-height: 26px; font-weight: 700; color: #16181B">Maria</span>
+<span style="font-size: 15px; line-height: 22px; color: #5B6068">Mostre este código para quem te atende.</span>
+</div>
+</div></div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0">
+<dc-import name="BarraAbas" ativa="qr" hint-size="100%,88px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

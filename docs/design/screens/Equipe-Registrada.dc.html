@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Equipe, visita registrada</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #FBEFD3; font-family: Manrope, system-ui, sans-serif">
+<div style="position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; gap: 32px; padding: 0 24px; box-sizing: border-box; text-align: center">
+<div style="position: relative; width: 168px; height: 168px; display: flex; align-items: center; justify-content: center">
+<dc-import name="Selo" size="132" hint-size="132px,132px"></dc-import>
+<div style="position: absolute; right: -8px; top: 4px; transform: rotate(10deg)">
+<dc-import name="Icone" icone="sparkles" size="34" color="#8A5A00" hint-size="34px,34px"></dc-import>
+</div>
+<div style="position: absolute; left: -4px; bottom: 8px; transform: rotate(-12deg)">
+<dc-import name="Icone" icone="sparkles" size="26" color="#8A5A00" hint-size="26px,26px"></dc-import>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: center">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Visita registrada!</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">Maria · Cartão Corte</p>
+</div>
+<span style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 9999px; background: #FFFFFF; font-size: 16px; line-height: 24px; font-weight: 700; color: #16181B">8 de 10 carimbos</span>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0 24px 32px; box-sizing: border-box">
+<dc-import name="Botao" label="Ler próximo cliente" hint-size="100%,56px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

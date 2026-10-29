@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Linha com barra</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="display: flex; flex-direction: column; gap: 6px; width: 100%; font-family: Manrope, system-ui, sans-serif">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<span style="font-size: 15px; line-height: 22px; font-weight: 600; color: #16181B">{{nome}}</span>
+<span style="font-size: 15px; line-height: 22px; font-weight: 700; color: #16181B">{{valor}}</span>
+</div>
+<div role="progressbar" aria-label="{{nome}}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{pct}}" style="width: 100%; height: 8px; border-radius: 9999px; background: #E2DED3; overflow: hidden">
+<div style="{{fillStyle}}"></div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nome":{"editor":"text","default":"Ana"},"valor":{"editor":"text","default":"48"},"pct":{"editor":"int","default":100,"min":0,"max":100},"$preview":{"width":342,"height":42}}'>
+class Component extends DCLogic {
+renderVals() {
+const pct = Math.max(0, Math.min(100, Number(this.props.pct ?? 100)));
+return {
+nome: this.props.nome ?? 'Ana',
+valor: this.props.valor ?? '',
+pct,
+fillStyle: 'height:100%;border-radius:9999px;background:#8A5A00;width:' + pct + '%'
+};
+}
+}
+</script>
+</body>
+</html>

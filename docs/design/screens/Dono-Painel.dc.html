@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dono, painel</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 1120px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; margin-right: -12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Painel</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">Barbearia Navalha</p>
+</div>
+<dc-import name="BotaoIcone" icone="qr" rotulo="Ler QR Code" hint-size="44px,44px"></dc-import>
+</div>
+<dc-import name="Segmentado" opcoes="Hoje|7 dias|30 dias" ativa="1" hint-size="100%,52px"></dc-import>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+<div style="height: 97px"><dc-import name="Indicador" rotulo="Visitas" valor="186" hint-size="100%,97px"></dc-import></div>
+<div style="height: 97px"><dc-import name="Indicador" rotulo="Clientes ativos" valor="94" hint-size="100%,97px"></dc-import></div>
+<div style="height: 97px"><dc-import name="Indicador" rotulo="Clientes novos" valor="21" hint-size="100%,97px"></dc-import></div>
+<div style="height: 97px"><dc-import name="Indicador" rotulo="Voltaram" valor="58" hint-size="100%,97px"></dc-import></div>
+<div style="height: 97px"><dc-import name="Indicador" rotulo="Prêmios liberados" valor="7" hint-size="100%,97px"></dc-import></div>
+<div style="height: 97px"><dc-import name="Indicador" rotulo="Prêmios resgatados" valor="5" hint-size="100%,97px"></dc-import></div>
+</div>
+<div style="box-sizing: border-box; padding: 20px 16px; border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 700; color: #16181B">Visitas por funcionário</h2>
+<dc-import name="LinhaBarra" nome="Ana" valor="82" pct="100" hint-size="100%,42px"></dc-import>
+<dc-import name="LinhaBarra" nome="Rafael" valor="64" pct="78" hint-size="100%,42px"></dc-import>
+<dc-import name="LinhaBarra" nome="Marina" valor="40" pct="49" hint-size="100%,42px"></dc-import>
+</div>
+<div style="box-sizing: border-box; padding: 20px 16px; border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<h2 style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 700; color: #16181B">Uso do plano</h2>
+<span style="font-size: 14px; line-height: 20px; color: #5B6068">Este mês</span>
+</div>
+<dc-import name="LinhaBarra" nome="Visitas registradas" valor="212 de 300" pct="71" hint-size="100%,42px"></dc-import>
+<span style="font-size: 14px; line-height: 20px; color: #5B6068">Plano Essencial</span>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0">
+<dc-import name="BarraAbas" modo="dono" ativa="painel" hint-size="100%,88px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1120}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

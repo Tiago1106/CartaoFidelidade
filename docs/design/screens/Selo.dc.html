@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Selo do Freguês</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<svg width="{{size}}" height="{{size}}" viewBox="65 65 382 382" role="img" aria-label="Freguês" style="display: block">
+<g fill="{{corCorpo}}">
+<circle cx="432" cy="256" r="15"/><circle cx="429.83" cy="283.53" r="15"/><circle cx="423.39" cy="310.39" r="15"/><circle cx="412.82" cy="335.9" r="15"/><circle cx="398.39" cy="359.45" r="15"/><circle cx="380.45" cy="380.45" r="15"/><circle cx="359.45" cy="398.39" r="15"/><circle cx="335.9" cy="412.82" r="15"/><circle cx="310.39" cy="423.39" r="15"/><circle cx="283.53" cy="429.83" r="15"/>
+<circle cx="256" cy="432" r="15"/><circle cx="228.47" cy="429.83" r="15"/><circle cx="201.61" cy="423.39" r="15"/><circle cx="176.1" cy="412.82" r="15"/><circle cx="152.55" cy="398.39" r="15"/><circle cx="131.55" cy="380.45" r="15"/><circle cx="113.61" cy="359.45" r="15"/><circle cx="99.18" cy="335.9" r="15"/><circle cx="88.61" cy="310.39" r="15"/><circle cx="82.17" cy="283.53" r="15"/>
+<circle cx="80" cy="256" r="15"/><circle cx="82.17" cy="228.47" r="15"/><circle cx="88.61" cy="201.61" r="15"/><circle cx="99.18" cy="176.1" r="15"/><circle cx="113.61" cy="152.55" r="15"/><circle cx="131.55" cy="131.55" r="15"/><circle cx="152.55" cy="113.61" r="15"/><circle cx="176.1" cy="99.18" r="15"/><circle cx="201.61" cy="88.61" r="15"/><circle cx="228.47" cy="82.17" r="15"/>
+<circle cx="256" cy="80" r="15"/><circle cx="283.53" cy="82.17" r="15"/><circle cx="310.39" cy="88.61" r="15"/><circle cx="335.9" cy="99.18" r="15"/><circle cx="359.45" cy="113.61" r="15"/><circle cx="380.45" cy="131.55" r="15"/><circle cx="398.39" cy="152.55" r="15"/><circle cx="412.82" cy="176.1" r="15"/><circle cx="423.39" cy="201.61" r="15"/><circle cx="429.83" cy="228.47" r="15"/>
+<circle cx="256" cy="256" r="176"/>
+</g>
+<circle cx="256" cy="256" r="140" fill="none" stroke="{{corMarca}}" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 19.99"/>
+<path d="M207.11 336V176H304.89V206.22H237.33V240.89H291.56V271.11H237.33V336Z" fill="{{corMarca}}"/>
+</svg>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"size":{"editor":"int","default":96,"min":24,"max":400,"unit":"px"},"variante":{"editor":"enum","default":"normal","options":["normal","invertido"]},"$preview":{"width":96,"height":96}}'>
+class Component extends DCLogic {
+renderVals() {
+const inv = (this.props.variante ?? 'normal') === 'invertido';
+return { size: this.props.size ?? 96, corCorpo: inv ? '#F2B84B' : '#1A1305', corMarca: inv ? '#1A1305' : '#F2B84B' };
+}
+}
+</script>
+</body>
+</html>

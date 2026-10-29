@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Equipe, entrar</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#16181B}a:hover{color:#8A5A00}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="position: absolute; top: 48px; left: 12px">
+<dc-import name="BotaoIcone" icone="arrowLeft" rotulo="Voltar" hint-size="44px,44px"></dc-import>
+</div>
+<div style="padding: 112px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Entrar na sua conta</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">Use o e-mail e a senha da sua equipe.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px">
+<dc-import name="Campo" rotulo="E-mail" placeholder="voce@exemplo.com" valor="" prefixo="" tipo="email" estado="focus" hint-size="100%,84px"></dc-import>
+<dc-import name="Campo" rotulo="Senha" placeholder="Sua senha" valor="" prefixo="" tipo="password" estado="default" hint-size="100%,84px"></dc-import>
+</div>
+<div>
+<a href="#recuperar" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; line-height: 22px; font-weight: 600">Esqueci minha senha</a>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0 24px 32px; box-sizing: border-box">
+<dc-import name="Botao" label="Entrar" desativado="true" hint-size="100%,56px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

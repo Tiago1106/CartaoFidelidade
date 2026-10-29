@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ilustração</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 508px; overflow: hidden; background: #FBEFD3; font-family: Manrope, system-ui, sans-serif">
+<sc-for list="{{pattern}}" as="p" hint-placeholder-count="16">
+<div style="{{p.style}}">
+<dc-import name="Icone" icone="{{p.icone}}" size="{{p.size}}" color="#8A5A00" hint-size="28px,28px"></dc-import>
+</div>
+</sc-for>
+
+<sc-if value="{{is1}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; left: 117px; top: 176px; width: 156px; height: 156px; border-radius: 24px; background: #FFFFFF; box-shadow: 0 8px 24px rgba(26, 19, 5, 0.12); display: flex; align-items: center; justify-content: center">
+<dc-import name="Icone" icone="qr" size="92" color="#16181B" hint-size="92px,92px"></dc-import>
+</div>
+</sc-if>
+
+<sc-if value="{{is2}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 68px; top: 190px; width: 254px; box-sizing: border-box; padding: 20px 22px; border-radius: 24px; background: #FFFFFF; box-shadow: 0 8px 24px rgba(26, 19, 5, 0.12); display: flex; flex-direction: column; gap: 14px">
+<div style="font-size: 14px; line-height: 20px; font-weight: 600; color: #16181B">Barbearia Navalha · 7 de 10</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; width: 210px">
+<sc-for list="{{stamps}}" as="s" hint-placeholder-count="10">
+<div style="{{s.style}}">
+<sc-if value="{{s.filled}}" hint-placeholder-val="{{ true }}"><dc-import name="Icone" icone="check" size="18" color="#1A1305" hint-size="18px,18px"></dc-import></sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is3}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 123px; top: 182px; width: 144px; height: 144px; border-radius: 24px; background: #F2B84B; box-shadow: 0 8px 24px rgba(26, 19, 5, 0.12); display: flex; align-items: center; justify-content: center">
+<dc-import name="Icone" icone="gift" size="76" color="#1A1305" hint-size="76px,76px"></dc-import>
+</div>
+<div style="position: absolute; left: 286px; top: 176px; transform: rotate(10deg)">
+<dc-import name="Icone" icone="sparkles" size="34" color="#8A5A00" hint-size="34px,34px"></dc-import>
+</div>
+<div style="position: absolute; left: 66px; top: 300px; transform: rotate(-12deg)">
+<dc-import name="Icone" icone="sparkles" size="26" color="#8A5A00" hint-size="26px,26px"></dc-import>
+</div>
+</sc-if>
+
+<sc-if value="{{isLogo}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 129px; top: 188px">
+<dc-import name="Selo" size="132" hint-size="132px,132px"></dc-import>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"slide":{"editor":"enum","default":"1","options":["1","2","3","logo"]},"$preview":{"width":390,"height":508}}'>
+class Component extends DCLogic {
+renderVals() {
+const slide = String(this.props.slide ?? '1');
+const base = [[28,64,30,-14,'star'],[232,40,28,12,'heart'],[120,36,26,8,'sparkles'],[338,150,28,-10,'scissors'],[34,170,32,14,'phone'],[92,112,26,-6,'circleCheck'],[286,112,24,16,'star'],[22,290,28,-12,'gift'],[340,282,32,10,'sparkles'],[70,392,30,12,'heart'],[300,402,28,-14,'trophy'],[190,446,26,6,'scissors'],[352,372,24,-8,'circleCheck'],[128,468,22,-12,'star'],[260,466,24,14,'qr'],[14,432,24,8,'scissors']];
+const pattern = base.map((p) => ({ icone: p[4], size: p[2], style: 'position:absolute;left:' + p[0] + 'px;top:' + p[1] + 'px;opacity:0.4;transform:rotate(' + p[3] + 'deg)' }));
+const stamps = [];
+for (let i = 0; i < 10; i++) {
+const filled = i < 7;
+stamps.push({ filled, style: filled
+? 'width:34px;height:34px;border-radius:9999px;background:#F2B84B;display:flex;align-items:center;justify-content:center;box-sizing:border-box'
+: 'width:34px;height:34px;border-radius:9999px;border:2px dashed #8C8678;box-sizing:border-box' });
+}
+return { pattern, stamps, is1: slide === '1', is2: slide === '2', is3: slide === '3', isLogo: slide === 'logo' };
+}
+}
+</script>
+</body>
+</html>

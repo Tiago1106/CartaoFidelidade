@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Pontos de página</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div role="img" aria-label="{{aria}}" style="display: inline-flex; align-items: center; gap: 6px; height: 8px">
+<sc-for list="{{dots}}" as="dot" hint-placeholder-count="3">
+<span style="{{dot.style}}"></span>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"step":{"editor":"int","default":1,"min":1,"max":3},"total":{"editor":"int","default":3,"min":2,"max":6},"$preview":{"width":56,"height":40}}'>
+class Component extends DCLogic {
+renderVals() {
+const step = this.props.step ?? 1;
+const total = this.props.total ?? 3;
+const dots = [];
+for (let i = 1; i <= total; i++) {
+const on = i === step;
+dots.push({ style: 'display:block;height:8px;border-radius:9999px;background:' + (on ? '#8A5A00' : '#D9D4C6') + ';width:' + (on ? '24px' : '8px') });
+}
+return { dots, aria: 'Passo ' + step + ' de ' + total };
+}
+}
+</script>
+</body>
+</html>

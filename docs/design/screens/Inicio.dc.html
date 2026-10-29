@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Início, cartões</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Olá, Maria</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">Você tem 1 prêmio para resgatar.</p>
+</div>
+<div style="display: flex; flex-direction: column">
+<div style="position: relative">
+<dc-import name="CartaoFidelidade" nome="Studio Bela" tipo="Salão de beleza" atual="10" total="10" validade="30/11/2026" cor="#F4C6D7" tom="claro" hint-size="100%,240px"></dc-import>
+</div>
+<div style="position: relative; margin-top: -168px">
+<dc-import name="CartaoFidelidade" nome="Barbearia Navalha" tipo="Barbearia" atual="7" total="10" validade="31/12/2026" cor="#16181B" tom="escuro" hint-size="100%,240px"></dc-import>
+</div>
+<div style="position: relative; margin-top: -168px">
+<dc-import name="CartaoFidelidade" nome="Espaço Vita" tipo="Estética" atual="2" total="10" validade="15/03/2027" cor="#CFE3D4" tom="claro" hint-size="100%,240px"></dc-import>
+</div>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 20px; color: #5B6068; text-align: center">Toque em um cartão para ver os carimbos e o QR Code.</p>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0">
+<dc-import name="BarraAbas" ativa="cartoes" hint-size="100%,88px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Linha de menu</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<button type="button" style="{{linhaStyle}}">
+<span style="flex: none; font-size: 16px; line-height: 24px; font-weight: 600; color: #16181B">{{rotulo}}</span>
+<span style="flex: 1; min-width: 0; text-align: right; font-size: 16px; line-height: 24px; color: #5B6068; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{valor}}</span>
+<sc-if value="{{temSeta}}" hint-placeholder-val="{{ true }}">
+<dc-import name="Icone" icone="chevron" size="20" color="#5B6068" hint-size="20px,20px"></dc-import>
+</sc-if>
+</button>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"rotulo":{"editor":"text","default":"Nome"},"valor":{"editor":"text","default":"Maria"},"seta":{"editor":"enum","default":"sim","options":["sim","nao"]},"divisor":{"editor":"enum","default":"nao","options":["sim","nao"]},"$preview":{"width":342,"height":56}}'>
+class Component extends DCLogic {
+renderVals() {
+const seta = (this.props.seta ?? 'sim') === 'sim';
+const divisor = (this.props.divisor ?? 'nao') === 'sim';
+return {
+rotulo: this.props.rotulo ?? 'Nome',
+valor: this.props.valor ?? '',
+temSeta: seta,
+linhaStyle: 'display:flex;align-items:center;gap:12px;width:100%;min-height:56px;box-sizing:border-box;padding:0 16px;border:none;background:#FFFFFF;cursor:' + (seta ? 'pointer' : 'default') + ';font-family:Manrope,system-ui,sans-serif;' + (divisor ? 'border-top:1px solid #E2DED3;' : '')
+};
+}
+}
+</script>
+</body>
+</html>

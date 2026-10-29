@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Linha de cliente</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<button type="button" style="display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; min-height: 72px; padding: 12px 16px; border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3; text-align: left; cursor: pointer; font-family: Manrope, system-ui, sans-serif">
+<span aria-hidden="true" style="flex: none; width: 44px; height: 44px; border-radius: 9999px; background: #F0EDE5; display: flex; align-items: center; justify-content: center; font-size: 16px; line-height: 20px; font-weight: 700; color: #16181B">{{iniciais}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="display: flex; align-items: center; gap: 8px">
+<span style="font-size: 17px; line-height: 24px; font-weight: 700; color: #16181B; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{nome}}</span>
+<sc-if value="{{temPremio}}" hint-placeholder-val="{{ false }}">
+<span style="flex: none; display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 9999px; font-size: 12px; line-height: 16px; font-weight: 700; background: #FBEFD3; color: #8A5A00">Prêmio</span>
+</sc-if>
+</span>
+<span style="font-size: 14px; line-height: 20px; color: #5B6068">{{detalhe}}</span>
+</span>
+<dc-import name="Icone" icone="chevron" size="20" color="#5B6068" hint-size="20px,20px"></dc-import>
+</button>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nome":{"editor":"text","default":"Maria Souza"},"detalhe":{"editor":"text","default":"Última visita há 2 dias"},"premio":{"editor":"enum","default":"nao","options":["nao","sim"]},"$preview":{"width":342,"height":72}}'>
+class Component extends DCLogic {
+renderVals() {
+const nome = this.props.nome ?? 'Maria Souza';
+const partes = nome.trim().split(/\s+/);
+const iniciais = ((partes[0] || '').charAt(0) + (partes.length > 1 ? partes[partes.length - 1].charAt(0) : '')).toUpperCase();
+return {
+nome,
+iniciais,
+detalhe: this.props.detalhe ?? '',
+temPremio: (this.props.premio ?? 'nao') === 'sim'
+};
+}
+}
+</script>
+</body>
+</html>

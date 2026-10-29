@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Linha de cartão</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<button type="button" style="display: flex; align-items: center; gap: 16px; width: 100%; box-sizing: border-box; padding: 16px; border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3; text-align: left; cursor: pointer; font-family: Manrope, system-ui, sans-serif">
+<span style="{{amostraStyle}}">
+<dc-import name="Selo" size="30" variante="invertido" hint-size="30px,30px"></dc-import>
+</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="display: flex; align-items: center; gap: 8px">
+<span style="font-size: 17px; line-height: 24px; font-weight: 700; color: #16181B; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{nome}}</span>
+<span style="{{chipStyle}}">{{estadoTexto}}</span>
+</span>
+<span style="font-size: 14px; line-height: 20px; color: #5B6068">{{detalhe}}</span>
+<span style="font-size: 14px; line-height: 20px; color: #5B6068">{{clientes}}</span>
+</span>
+<dc-import name="Icone" icone="chevron" size="20" color="#5B6068" hint-size="20px,20px"></dc-import>
+</button>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nome":{"editor":"text","default":"Cartão Corte"},"detalhe":{"editor":"text","default":"10 visitas · 1 corte grátis"},"clientes":{"editor":"text","default":"64 clientes"},"cor":{"editor":"color","default":"#16181B"},"estado":{"editor":"enum","default":"ativo","options":["ativo","arquivado"]},"$preview":{"width":342,"height":108}}'>
+class Component extends DCLogic {
+renderVals() {
+const ativo = (this.props.estado ?? 'ativo') === 'ativo';
+return {
+nome: this.props.nome ?? 'Cartão Corte',
+detalhe: this.props.detalhe ?? '',
+clientes: this.props.clientes ?? '',
+estadoTexto: ativo ? 'Ativo' : 'Arquivado',
+amostraStyle: 'flex:none;width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:' + (this.props.cor ?? '#16181B') + ';' + (ativo ? '' : 'opacity:0.5;'),
+chipStyle: 'flex:none;display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:9999px;font-size:12px;line-height:16px;font-weight:700;background:' + (ativo ? '#FBEFD3' : '#F0EDE5') + ';color:' + (ativo ? '#8A5A00' : '#5B6068')
+};
+}
+}
+</script>
+</body>
+</html>

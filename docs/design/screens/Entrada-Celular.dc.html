@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Entrada, celular</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#16181B}a:hover{color:#8A5A00}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="position: absolute; top: 48px; left: 12px">
+<dc-import name="BotaoIcone" icone="arrowLeft" rotulo="Voltar" hint-size="44px,44px"></dc-import>
+</div>
+<div style="padding: 112px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Qual é o seu celular?</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">Enviamos um código por SMS para confirmar que é você.</p>
+</div>
+<dc-import name="Campo" rotulo="Celular" placeholder="(11) 90000-0000" prefixo="+55" estado="focus" hint-size="100%,84px"></dc-import>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0 24px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-size: 13px; line-height: 19px; color: #5B6068; text-align: center">Ao continuar, você aceita os <a href="#termos">Termos de uso</a> e a <a href="#privacidade">Política de Privacidade</a>.</p>
+<dc-import name="Botao" label="Enviar código" hint-size="100%,56px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

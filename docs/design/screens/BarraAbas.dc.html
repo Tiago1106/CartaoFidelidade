@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Barra de abas</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<nav aria-label="Navegação principal" style="display: flex; width: 100%; box-sizing: border-box; height: 88px; padding: 8px 8px 24px; background: #FFFFFF; border-top: 1px solid #E2DED3; font-family: Manrope, system-ui, sans-serif">
+<sc-for list="{{abas}}" as="a" hint-placeholder-count="3">
+<button type="button" aria-current="{{a.atual}}" style="{{a.itemStyle}}">
+<span style="{{a.pillStyle}}">
+<dc-import name="Icone" icone="{{a.icone}}" size="24" color="{{a.cor}}" hint-size="24px,24px"></dc-import>
+</span>
+<span style="{{a.labelStyle}}">{{a.label}}</span>
+</button>
+</sc-for>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"ativa":{"editor":"enum","default":"cartoes","options":["cartoes","qr","perfil","painel","clientes","equipe","plano"]},"modo":{"editor":"enum","default":"cliente","options":["cliente","dono"]},"$preview":{"width":390,"height":88}}'>
+class Component extends DCLogic {
+renderVals() {
+const ativa = this.props.ativa ?? 'cartoes';
+const dono = (this.props.modo ?? 'cliente') === 'dono';
+const def = dono ? [['painel', 'chart', 'Painel'], ['cartoes', 'ticket', 'Cartões'], ['clientes', 'users', 'Clientes'], ['equipe', 'user', 'Equipe'], ['plano', 'card', 'Plano']] : [['cartoes', 'ticket', 'Cartões'], ['qr', 'qr', 'Meu QR'], ['perfil', 'user', 'Perfil']];
+const abas = def.map((d) => {
+const on = d[0] === ativa;
+const isQr = !dono && d[0] === 'qr';
+const pillBg = isQr ? '#F2B84B' : (on ? '#FBEFD3' : 'transparent');
+const cor = isQr ? '#1A1305' : (on ? '#8A5A00' : '#5B6068');
+return {
+icone: d[1],
+label: d[2],
+cor,
+atual: on ? 'page' : 'false',
+itemStyle: 'flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:none;background:transparent;padding:0;cursor:pointer;font-family:Manrope,system-ui,sans-serif;',
+pillStyle: 'display:flex;align-items:center;justify-content:center;height:32px;width:' + (isQr ? '56px' : (dono ? '56px' : '64px')) + ';border-radius:9999px;background:' + pillBg + ';',
+labelStyle: 'font-size:12px;line-height:16px;font-weight:' + (on || isQr ? '700' : '600') + ';color:' + (on ? '#8A5A00' : '#5B6068') + ';'
+};
+});
+return { abas };
+}
+}
+</script>
+</body>
+</html>

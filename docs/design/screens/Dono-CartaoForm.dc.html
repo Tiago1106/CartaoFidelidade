@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dono, configurar cartão</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 1560px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="position: absolute; top: 48px; left: 12px">
+<dc-import name="BotaoIcone" icone="arrowLeft" rotulo="Voltar" hint-size="44px,44px"></dc-import>
+</div>
+<div style="padding: 112px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Novo cartão</h1>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: 14px; line-height: 20px; font-weight: 600; color: #16181B">Como o cliente vai ver</span>
+<dc-import name="CartaoFidelidade" nome="Barbearia Navalha" tipo="Cartão Corte" atual="3" total="10" validade="25/11/2026" cor="#16181B" tom="escuro" hint-size="100%,240px"></dc-import>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: 14px; line-height: 20px; font-weight: 600; color: #16181B">Cor do cartão</span>
+<dc-import name="SeletorCor" ativa="0" hint-size="100%,108px"></dc-import>
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px">
+<dc-import name="Campo" rotulo="Nome do cartão" placeholder="Ex.: Cartão Corte" valor="Cartão Corte" prefixo="" tipo="text" estado="default" hint-size="100%,84px"></dc-import>
+<dc-import name="Campo" rotulo="Recompensa" placeholder="Ex.: 1 corte grátis" valor="1 corte grátis" prefixo="" tipo="text" estado="default" hint-size="100%,84px"></dc-import>
+<dc-import name="Campo" rotulo="Visitas para completar" placeholder="10" valor="10" prefixo="" sufixo="visitas" tipo="number" estado="default" hint-size="100%,84px"></dc-import>
+<dc-import name="Campo" rotulo="Validade dos pontos" placeholder="30" valor="30" prefixo="" sufixo="dias sem visita" tipo="number" estado="default" hint-size="100%,84px"></dc-import>
+<dc-import name="Campo" rotulo="Validade do prêmio" placeholder="30" valor="30" prefixo="" sufixo="dias" tipo="number" estado="default" hint-size="100%,84px"></dc-import>
+<dc-import name="Campo" rotulo="Intervalo entre visitas" placeholder="60" valor="60" prefixo="" sufixo="minutos" tipo="number" mensagem="Evita carimbos repetidos do mesmo cliente neste cartão." estado="default" hint-size="100%,104px"></dc-import>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 24px 32px; box-sizing: border-box; background: #F7F6F2; border-top: 1px solid #E2DED3">
+<dc-import name="Botao" label="Criar cartão" hint-size="100%,56px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1560}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

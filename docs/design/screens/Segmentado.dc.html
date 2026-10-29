@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Segmentado</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div role="tablist" style="display: flex; gap: 4px; width: 100%; box-sizing: border-box; padding: 4px; border-radius: 14px; background: #F0EDE5; font-family: Manrope, system-ui, sans-serif">
+<sc-for list="{{opcoes}}" as="o" hint-placeholder-count="3">
+<button type="button" role="tab" aria-selected="{{o.sel}}" style="{{o.style}}">{{o.label}}</button>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"opcoes":{"editor":"text","default":"Hoje|7 dias|30 dias"},"ativa":{"editor":"int","default":1,"min":0,"max":5},"$preview":{"width":342,"height":52}}'>
+class Component extends DCLogic {
+renderVals() {
+const labels = String(this.props.opcoes ?? 'Hoje|7 dias|30 dias').split('|');
+const ativa = Number(this.props.ativa ?? 1);
+const opcoes = labels.map((label, i) => {
+const on = i === ativa;
+return {
+label,
+sel: on ? 'true' : 'false',
+style: 'flex:1;min-width:0;height:44px;border-radius:10px;cursor:pointer;font-family:Manrope,system-ui,sans-serif;font-size:15px;line-height:22px;font-weight:' + (on ? '700' : '600') + ';color:' + (on ? '#16181B' : '#5B6068') + ';background:' + (on ? '#FFFFFF' : 'transparent') + ';border:' + (on ? '1.5px solid #E2DED3' : '1.5px solid transparent') + ';'
+};
+});
+return { opcoes };
+}
+}
+</script>
+</body>
+</html>

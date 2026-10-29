@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Opção de cartão</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<button type="button" role="radio" aria-checked="{{marcado}}" aria-disabled="{{bloqueado}}" style="{{linhaStyle}}">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; text-align: left">
+<span style="{{nomeStyle}}">{{nome}}</span>
+<span style="font-size: 14px; line-height: 20px; color: #5B6068">{{detalhe}}</span>
+</span>
+<span style="{{radioStyle}}">
+<sc-if value="{{selecionado}}" hint-placeholder-val="{{ true }}">
+<span style="width: 12px; height: 12px; border-radius: 9999px; background: #16181B"></span>
+</sc-if>
+</span>
+</button>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nome":{"editor":"text","default":"Cartão Corte"},"detalhe":{"editor":"text","default":"7 de 10 carimbos"},"estado":{"editor":"enum","default":"selecionado","options":["selecionado","normal","bloqueado"]},"$preview":{"width":342,"height":72}}'>
+class Component extends DCLogic {
+renderVals() {
+const estado = this.props.estado ?? 'selecionado';
+const sel = estado === 'selecionado';
+const bloq = estado === 'bloqueado';
+return {
+nome: this.props.nome ?? 'Cartão Corte',
+detalhe: this.props.detalhe ?? '',
+selecionado: sel,
+marcado: sel ? 'true' : 'false',
+bloqueado: bloq ? 'true' : 'false',
+nomeStyle: 'font-size:16px;line-height:24px;font-weight:700;color:' + (bloq ? '#5B6068' : '#16181B'),
+linhaStyle: 'display:flex;align-items:center;gap:12px;width:100%;min-height:72px;box-sizing:border-box;padding:12px 16px;border-radius:16px;background:' + (sel ? '#FBEFD3' : (bloq ? '#F0EDE5' : '#FFFFFF')) + ';border:' + (sel ? '2px solid #16181B' : '1.5px solid #E2DED3') + ';cursor:' + (bloq ? 'not-allowed' : 'pointer') + ';font-family:Manrope,system-ui,sans-serif;',
+radioStyle: 'flex:none;width:24px;height:24px;box-sizing:border-box;border-radius:9999px;display:flex;align-items:center;justify-content:center;background:#FFFFFF;border:2px solid ' + (sel ? '#16181B' : (bloq ? '#C9C4B6' : '#8C8678')) + ';'
+};
+}
+}
+</script>
+</body>
+</html>

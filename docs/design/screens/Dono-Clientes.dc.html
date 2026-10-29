@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dono, clientes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 1000px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; margin-right: -12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Clientes</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">128 clientes cadastrados</p>
+</div>
+<dc-import name="BotaoIcone" icone="qr" rotulo="Ler QR Code" hint-size="44px,44px"></dc-import>
+</div>
+<dc-import name="Campo" rotulo="" placeholder="Buscar por nome ou celular" valor="" prefixo="" icone="search" tipo="text" estado="default" hint-size="100%,56px"></dc-import>
+<dc-import name="Segmentado" opcoes="Todos|Com prêmio|Inativos" ativa="0" hint-size="100%,52px"></dc-import>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<dc-import name="LinhaCliente" nome="Maria Souza" detalhe="Última visita há 2 dias" premio="nao" hint-size="100%,72px"></dc-import>
+<dc-import name="LinhaCliente" nome="João Pereira" detalhe="Última visita há 5 dias" premio="sim" hint-size="100%,72px"></dc-import>
+<dc-import name="LinhaCliente" nome="Carlos Lima" detalhe="Última visita há 1 semana" premio="nao" hint-size="100%,72px"></dc-import>
+<dc-import name="LinhaCliente" nome="Ana Beatriz" detalhe="Última visita há 9 dias" premio="nao" hint-size="100%,72px"></dc-import>
+<dc-import name="LinhaCliente" nome="Pedro Henrique" detalhe="Última visita há 12 dias" premio="sim" hint-size="100%,72px"></dc-import>
+<dc-import name="LinhaCliente" nome="Fernanda Costa" detalhe="Última visita há 3 semanas" premio="nao" hint-size="100%,72px"></dc-import>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0">
+<dc-import name="BarraAbas" modo="dono" ativa="clientes" hint-size="100%,88px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1000}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

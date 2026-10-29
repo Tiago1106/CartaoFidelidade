@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Início, sem cartões</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Olá, Maria</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">Seus cartões de fidelidade aparecem aqui.</p>
+</div>
+<div style="box-sizing: border-box; padding: 24px 20px 20px; border-radius: 20px; border: 2px dashed #8C8678; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
+<dc-import name="Selo" size="64" variante="invertido" hint-size="64px,64px"></dc-import>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h2 style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 700; color: #16181B">Seu primeiro cartão começa aqui</h2>
+<p style="margin: 0; font-size: 15px; line-height: 22px; color: #5B6068">Na próxima visita, mostre seu QR Code para quem te atende. O cartão é criado na hora.</p>
+</div>
+<dc-import name="Botao" label="Mostrar meu QR Code" hint-size="100%,56px"></dc-import>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0">
+<dc-import name="BarraAbas" ativa="cartoes" hint-size="100%,88px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

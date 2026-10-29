@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Botão de ícone</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<button type="button" aria-label="{{rotulo}}" style="width: 44px; height: 44px; padding: 0; border: none; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<span style="width: 32px; height: 32px; border-radius: 9999px; background: #F0EDE5; display: flex; align-items: center; justify-content: center">
+<dc-import name="Icone" icone="{{icone}}" size="16" color="#16181B" hint-size="16px,16px"></dc-import>
+</span>
+</button>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"icone":{"editor":"enum","default":"x","options":["x","arrowLeft","chevron","check","user","qr","chart","users","card"]},"rotulo":{"editor":"text","default":"Fechar"},"$preview":{"width":44,"height":44}}'>
+class Component extends DCLogic {
+renderVals() {
+return { icone: this.props.icone ?? 'x', rotulo: this.props.rotulo ?? 'Fechar' };
+}
+}
+</script>
+</body>
+</html>

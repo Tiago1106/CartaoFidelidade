@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dono, ficha do cliente</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 1060px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="position: absolute; top: 48px; left: 12px">
+<dc-import name="BotaoIcone" icone="arrowLeft" rotulo="Voltar" hint-size="44px,44px"></dc-import>
+</div>
+<div style="padding: 112px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">João Pereira</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">(11) 98765-4321</p>
+<p style="margin: 0; font-size: 14px; line-height: 20px; color: #5B6068">Cliente desde 12/03/2026</p>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+<div style="height: 97px"><dc-import name="Indicador" rotulo="Visitas" valor="23" hint-size="100%,97px"></dc-import></div>
+<div style="height: 97px"><dc-import name="Indicador" rotulo="Prêmios resgatados" valor="2" hint-size="100%,97px"></dc-import></div>
+</div>
+<div style="box-sizing: border-box; padding: 20px 16px; border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 700; color: #16181B">Cartões</h2>
+<dc-import name="LinhaBarra" nome="Cartão Corte" valor="Prêmio disponível" pct="100" hint-size="100%,42px"></dc-import>
+<dc-import name="LinhaBarra" nome="Cartão Barba" valor="2 de 5" pct="40" hint-size="100%,42px"></dc-import>
+</div>
+<div style="box-sizing: border-box; padding: 20px 16px; border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0 0 8px; font-size: 20px; line-height: 26px; font-weight: 700; color: #16181B">Histórico</h2>
+<dc-import name="LinhaHistorico" titulo="Carimbo · Cartão Corte" detalhe="Hoje, 14:32 · Ana" estado="normal" acao="sim" hint-size="100%,56px"></dc-import>
+<div style="height: 1px; background: #E2DED3"></div>
+<dc-import name="LinhaHistorico" titulo="Carimbo · Cartão Barba" detalhe="22/10, 10:05 · Rafael" estado="normal" acao="nao" hint-size="100%,56px"></dc-import>
+<div style="height: 1px; background: #E2DED3"></div>
+<dc-import name="LinhaHistorico" titulo="Carimbo · Cartão Corte" detalhe="18/10, 17:48 · Ana" estado="estornado" acao="nao" hint-size="100%,56px"></dc-import>
+<div style="height: 1px; background: #E2DED3"></div>
+<dc-import name="LinhaHistorico" titulo="Carimbo · Cartão Corte" detalhe="09/10, 09:20 · Marina" estado="normal" acao="nao" hint-size="100%,56px"></dc-import>
+<div style="height: 1px; background: #E2DED3"></div>
+<dc-import name="LinhaHistorico" titulo="Prêmio resgatado · Cartão Corte" detalhe="25/09, 16:10 · Ana" estado="normal" acao="nao" hint-size="100%,56px"></dc-import>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 20px; color: #5B6068">Só o dono pode estornar uma visita. O carimbo sai do cartão do cliente.</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1060}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

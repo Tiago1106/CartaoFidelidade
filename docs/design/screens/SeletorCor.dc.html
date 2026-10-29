@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Seletor de cor</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div role="radiogroup" aria-label="Cor do cartão" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; width: 100%; font-family: Manrope, system-ui, sans-serif">
+<sc-for list="{{cores}}" as="c" hint-placeholder-count="8">
+<button type="button" role="radio" aria-checked="{{c.sel}}" aria-label="{{c.nome}}" style="{{c.style}}">
+<sc-if value="{{c.marcada}}" hint-placeholder-val="{{ false }}"><dc-import name="Icone" icone="check" size="22" color="{{c.check}}" hint-size="22px,22px"></dc-import></sc-if>
+</button>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"ativa":{"editor":"int","default":0,"min":0,"max":7},"$preview":{"width":342,"height":100}}'>
+class Component extends DCLogic {
+renderVals() {
+const paleta = [['#16181B','Grafite','#FFFFFF'],['#1F3A5F','Azul-marinho','#FFFFFF'],['#5B3A29','Marrom','#FFFFFF'],['#F4C6D7','Rosa','#16181B'],['#CFE3D4','Verde-claro','#16181B'],['#CFE0F2','Azul-claro','#16181B'],['#E3D5F0','Lilás','#16181B'],['#E9E4D6','Areia','#16181B']];
+const ativa = Number(this.props.ativa ?? 0);
+const cores = paleta.map((p, i) => {
+const on = i === ativa;
+return {
+nome: p[1],
+sel: on ? 'true' : 'false',
+marcada: on,
+check: p[2],
+style: 'height:48px;border-radius:9999px;cursor:pointer;display:flex;align-items:center;justify-content:center;background:' + p[0] + ';box-sizing:border-box;border:' + (on ? '3px solid #16181B' : '1.5px solid #E2DED3') + ';' + (on ? 'box-shadow:0 0 0 2px #F7F6F2 inset;' : '')
+};
+});
+return { cores };
+}
+}
+</script>
+</body>
+</html>

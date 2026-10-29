@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dono, cartões</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Manrope, system-ui, sans-serif">
+<div style="padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; margin-right: -12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 32px; line-height: 37px; font-weight: 800; letter-spacing: -0.5px; color: #16181B">Cartões</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px; color: #5B6068">2 de 5 cartões ativos</p>
+</div>
+<dc-import name="BotaoIcone" icone="qr" rotulo="Ler QR Code" hint-size="44px,44px"></dc-import>
+</div>
+<dc-import name="Segmentado" opcoes="Ativos|Arquivados" ativa="0" hint-size="100%,52px"></dc-import>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<dc-import name="LinhaCartao" nome="Cartão Corte" detalhe="10 visitas · 1 corte grátis" clientes="64 clientes" cor="#16181B" estado="ativo" hint-size="100%,108px"></dc-import>
+<dc-import name="LinhaCartao" nome="Cartão Barba" detalhe="5 visitas · 1 barba grátis" clientes="31 clientes" cor="#8A5A00" estado="ativo" hint-size="100%,108px"></dc-import>
+</div>
+<div style="box-sizing: border-box; padding: 0 16px; border-radius: 20px; background: #FFFFFF; border: 1.5px solid #E2DED3">
+<dc-import name="LinhaMenu" rotulo="QR do balcão e NFC" valor="" seta="sim" divisor="nao" hint-size="100%,56px"></dc-import>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 104px; padding: 0 24px; box-sizing: border-box">
+<dc-import name="Botao" label="Novo cartão" hint-size="100%,56px"></dc-import>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0">
+<dc-import name="BarraAbas" modo="dono" ativa="cartoes" hint-size="100%,88px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

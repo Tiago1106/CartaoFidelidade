@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dono, estornar visita</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 1060px; overflow: hidden; background: #1A1C1F; font-family: Manrope, system-ui, sans-serif">
+<div style="position: absolute; left: 0; top: 0">
+<dc-import name="Dono-Cliente" hint-size="390px,1060px"></dc-import>
+</div>
+<div style="position: absolute; inset: 0; background: rgba(22, 24, 27, 0.5)"></div>
+<div role="dialog" aria-modal="true" aria-label="Estornar visita" style="position: absolute; left: 0; right: 0; bottom: 0; box-sizing: border-box; padding: 40px 24px 32px; border-radius: 24px 24px 0 0; background: #FFFFFF; display: flex; flex-direction: column; gap: 24px">
+<div style="position: absolute; top: 8px; right: 12px">
+<dc-import name="BotaoIcone" icone="x" rotulo="Fechar" hint-size="44px,44px"></dc-import>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800; letter-spacing: -0.3px; color: #16181B">Estornar visita?</h2>
+<p style="margin: 0; font-size: 16px; line-height: 24px; color: #5B6068">Carimbo do Cartão Corte, hoje às 14:32, registrado por Ana. Essa visita completou o cartão: o prêmio será cancelado e o cartão volta a 9 de 10.</p>
+</div>
+<dc-import name="Campo" rotulo="Motivo" placeholder="Ex.: carimbo lançado por engano" valor="Carimbo lançado por engano" prefixo="" tipo="text" mensagem="Obrigatório. Fica registrado no histórico." estado="focus" hint-size="100%,104px"></dc-import>
+<dc-import name="Botao" label="Estornar visita" hint-size="100%,56px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1060}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
