@@ -80,7 +80,18 @@ Escolhas de partida. Troque só com justificativa curta registrada em `docs/DECI
 
 ## Comandos
 
-A definir no M0 e registrar aqui. Scripts esperados na raiz: `pnpm dev`, `pnpm build`, `pnpm test`, `pnpm lint`, `pnpm typecheck`, `pnpm db:migrate`, `pnpm db:seed`.
+Scripts na raiz (rodam em todos os pacotes quando o pacote tem o script):
+
+- `pnpm install`: instala tudo (Node 22 ou superior, pnpm 10).
+- `pnpm dev`: sobe os apps em modo de desenvolvimento.
+- `pnpm build`: compila os pacotes.
+- `pnpm test`: Vitest em cada pacote.
+- `pnpm lint`: ESLint e verificação do Prettier.
+- `pnpm format`: formata com o Prettier.
+- `pnpm typecheck`: `tsc --noEmit` em cada pacote.
+- `docker compose up -d`: Postgres 16 local (usuário e senha `postgres`, banco `fregues`, porta 5432).
+
+`pnpm db:migrate` e `pnpm db:seed` chegam no M0.
 
 ## Variáveis de ambiente (lista de partida)
 
