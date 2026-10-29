@@ -1,0 +1,131 @@
+@import 'tailwindcss';
+
+:root {
+  --background: #f7f6f2;
+  --foreground: #16181b;
+  --card: #ffffff;
+  --card-foreground: #16181b;
+  --popover: #ffffff;
+  --popover-foreground: #16181b;
+  --primary: #f2b84b;
+  --primary-foreground: #1a1305;
+  --primary-ink: #8a5a00;
+  --secondary: #f0ede5;
+  --secondary-foreground: #16181b;
+  --muted: #f0ede5;
+  --muted-foreground: #5b6068;
+  --accent: #fbefd3;
+  --accent-foreground: #3d2e0b;
+  --destructive: #b3261e;
+  --destructive-foreground: #ffffff;
+  --success: #1f6b45;
+  --success-foreground: #ffffff;
+  --border: #e2ded3;
+  --input: #8c8678;
+  --ring: #16181b;
+  --viewfinder: #0b0c0e;
+  --viewfinder-foreground: #f7f6f2;
+  --radius: 12px;
+  --radius-card: 20px;
+  --radius-panel: 24px;
+  --radius-bar: 4px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-ink: var(--primary-ink);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-viewfinder: var(--viewfinder);
+  --color-viewfinder-foreground: var(--viewfinder-foreground);
+  --radius-lg: var(--radius);
+  --radius-card: var(--radius-card);
+  --radius-panel: var(--radius-panel);
+  --radius-bar: var(--radius-bar);
+  --font-sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* Type scale: size / line height / weight (see CLAUDE.md). Use as text-<name>. */
+@theme {
+  --text-display: 38px;
+  --text-display--line-height: 42px;
+  --text-display--font-weight: 800;
+  --text-display--letter-spacing: -0.8px;
+  --text-title-1: 32px;
+  --text-title-1--line-height: 37px;
+  --text-title-1--font-weight: 800;
+  --text-title-2: 24px;
+  --text-title-2--line-height: 30px;
+  --text-title-2--font-weight: 800;
+  --text-title-3: 18px;
+  --text-title-3--line-height: 24px;
+  --text-title-3--font-weight: 700;
+  --text-metric: 36px;
+  --text-metric--line-height: 40px;
+  --text-metric--font-weight: 800;
+  --text-body-lg: 17px;
+  --text-body-lg--line-height: 26px;
+  --text-body-lg--font-weight: 400;
+  --text-body: 16px;
+  --text-body--line-height: 24px;
+  --text-body--font-weight: 400;
+  --text-body-sm: 15px;
+  --text-body-sm--line-height: 22px;
+  --text-body-sm--font-weight: 400;
+  --text-caption: 14px;
+  --text-caption--line-height: 20px;
+  --text-caption--font-weight: 400;
+  --text-micro: 13px;
+  --text-micro--line-height: 19px;
+  --text-micro--font-weight: 400;
+  --text-label: 14px;
+  --text-label--line-height: 20px;
+  --text-label--font-weight: 600;
+  --text-button: 17px;
+  --text-button--line-height: 24px;
+  --text-button--font-weight: 700;
+  --text-overline: 12px;
+  --text-overline--line-height: 16px;
+  --text-overline--font-weight: 700;
+  --text-overline--letter-spacing: 0.6px;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}

@@ -27,7 +27,7 @@ This file drives development, one task at a time. The workflow is in the `approv
 | Id | Task | Deliverable | Status |
 |---|---|---|---|
 | T01 | Monorepo and tooling | `git init`; pnpm workspaces with `apps/api`, `apps/web`, `packages/shared`; TypeScript `strict`; ESLint and Prettier; Vitest; root scripts (`dev`, `build`, `test`, `lint`, `typecheck`); `docker-compose.yml` with Postgres 16; `.env.example`; GitHub Actions CI; short `README`. Update the "Comandos" section of `CLAUDE.md`. | Done |
-| T02 | Web app base | Vite + React + TS; Tailwind v4; shadcn/ui; tokens and type scale from `CLAUDE.md` in `index.css`; local Manrope font; React Router; minimal PWA (manifest and icons from `docs/design/logo/`); Storybook with a 390 x 844 viewport and a "Tokens" page (colors, type, radii). | Pending |
+| T02 | Web app base | Vite + React + TS; Tailwind v4; shadcn/ui; tokens and type scale from `CLAUDE.md` in `index.css`; local Manrope font; React Router; minimal PWA (manifest and icons from `docs/design/logo/`); Storybook with a 390 x 844 viewport and a "Tokens" page (colors, type, radii). | In review |
 | T03 | Design system 1: buttons and icons | `Button`, `IconButton`, `Icon`. Every variant and state in stories. Reference: `Botao`, `BotaoIcone`, `Icone`. | Pending |
 | T04 | Design system 2: brand | `StampSeal` (normal and inverted), `Logo` (horizontal, and vertical with tagline), `StepDots`. Reference: `Selo`, `Pontos`, `docs/design/logo/`. | Pending |
 | T05 | Design system 3: fields | `TextField` (prefix, suffix, icon, optional label, states) and `OtpInput`. Reference: `Campo`, `Codigo`. | Pending |
@@ -72,3 +72,5 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-29  T01  In review  Monorepo, tooling, Docker, CI and README ready; waiting for Tiago.
 2026-10-29  T01  In progress  Started on branch task/T01-monorepo-tooling.
 2026-10-29  T01  Done  Approved by Tiago; merged into main.
+2026-10-29  T02  In progress  Started on branch task/T02-web-base.
+2026-10-29  T02  In review  Web base, tokens, PWA and Storybook ready; waiting for Tiago.
