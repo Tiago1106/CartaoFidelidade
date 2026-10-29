@@ -11,5 +11,8 @@
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.5"
   }
 }
