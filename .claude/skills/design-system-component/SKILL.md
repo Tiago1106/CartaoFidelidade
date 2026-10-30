@@ -7,15 +7,15 @@ description: How to build or change a reusable UI component for Freguês (shadcn
 
 ## Where things live
 
-- shadcn primitives: `apps/web/src/components/ui/`.
+- shadcn primitives: `apps/web/src/components/ui/`, flat files as the CLI creates them (`button.tsx`), with `*.stories.tsx` and `*.test.tsx` beside them.
 - Product composites (`ProgramCard`, `BottomNav`, `StampSeal`, ...): `apps/web/src/components/product/`.
-- One folder per component with `index.ts`, the component, its story (`*.stories.tsx`) and its test (`*.test.tsx`).
+- Each product composite has its own folder with `index.ts`, the component, its story (`*.stories.tsx`) and its test (`*.test.tsx`).
 - Tokens and type scale: `apps/web/src/index.css` (values are in `CLAUDE.md`).
 
 ## Steps
 
 1. **Read the design.** Open the component's `.dc.html` in `docs/design/screens/` (the mapping table in `CLAUDE.md` gives the Portuguese design name and the English code name). Note every prop, every state and every measure from the inline styles and the `renderVals` logic at the end of the file.
-2. **Start from shadcn when it exists** (Button, Input, Label, Checkbox, RadioGroup, Progress, Badge, Avatar, ...). Restyle it with the product tokens. Do not fork behavior without a reason.
+2. **Always start from shadcn when it exists** (Button, Input, Label, Checkbox, RadioGroup, Progress, Tabs, InputOTP, Badge, Avatar, ...). Add it with `pnpm exec shadcn add <name>` (decision D-014), change the import of `cn` to `@/lib/utils`, then restyle it with the product tokens. Do not fork behavior without a reason. Product composites are built on top of the shadcn component, never beside it.
 3. **API of the component.** Props in English, camelCase. Variants with `class-variance-authority`. Forward `ref` and `className`. Native attributes pass through. No logic that belongs to a screen.
 4. **Tokens only.** No raw hex in components, no arbitrary pixel values when a token or type-scale class exists. The only dynamic color is `cardColor` (and the text color derived from it by the contrast function).
 5. **States.** Implement every state the design shows (default, focus, error, disabled, selected, blocked, complete, ...). The Storybook story shows all of them side by side.

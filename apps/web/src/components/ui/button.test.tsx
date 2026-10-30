@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import { Button } from './Button';
+import { Button } from './button';
 
 describe('Button', () => {
   it('calls onClick when clicked', async () => {
@@ -36,8 +36,19 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveAttribute('type', 'button');
   });
 
-  it('forwards the ref and the type', () => {
+  it('accepts type="submit"', () => {
     render(<Button type="submit">Enviar</Button>);
     expect(screen.getByRole('button')).toHaveAttribute('type', 'submit');
+  });
+
+  it('renders as the child element with asChild', () => {
+    render(
+      <Button asChild>
+        <a href="/s/studio-bela">Abrir</a>
+      </Button>,
+    );
+    const link = screen.getByRole('link', { name: 'Abrir' });
+    expect(link).toHaveAttribute('href', '/s/studio-bela');
+    expect(link).not.toHaveAttribute('type');
   });
 });
