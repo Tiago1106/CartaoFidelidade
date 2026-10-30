@@ -28,11 +28,11 @@ This file drives development, one task at a time. The workflow is in the `approv
 |---|---|---|---|
 | T01 | Monorepo and tooling | `git init`; pnpm workspaces with `apps/api`, `apps/web`, `packages/shared`; TypeScript `strict`; ESLint and Prettier; Vitest; root scripts (`dev`, `build`, `test`, `lint`, `typecheck`); `docker-compose.yml` with Postgres 16; `.env.example`; GitHub Actions CI; short `README`. Update the "Comandos" section of `CLAUDE.md`. | Done |
 | T02 | Web app base | Vite + React + TS; Tailwind v4; shadcn/ui; tokens and type scale from `CLAUDE.md` in `index.css`; local Manrope font; React Router; minimal PWA (manifest and icons from `docs/design/logo/`); Storybook with a 390 x 844 viewport and a "Tokens" page (colors, type, radii). | Done |
-| T03 | Design system 1: buttons and icons | `Button`, `IconButton`, `Icon`. Every variant and state in stories. Reference: `Botao`, `BotaoIcone`, `Icone`. | Pending |
-| T04 | Design system 2: brand | `StampSeal` (normal and inverted), `Logo` (horizontal, and vertical with tagline), `StepDots`. Reference: `Selo`, `Pontos`, `docs/design/logo/`. | Pending |
-| T05 | Design system 3: fields | `TextField` (prefix, suffix, icon, optional label, states) and `OtpInput`. Reference: `Campo`, `Codigo`. | Pending |
-| T06 | Design system 4: card | `StampGrid`, `ProgramCard` (light and dark by contrast, complete, `joined`), `QrCard` (QR with `qrcode`, bar and countdown, `role="progressbar"`). Contrast function with a test. Reference: `CartaoFidelidade`, `Meu-QR`, `Inicio-Selecionado`. | Pending |
-| T07 | Design system 5: navigation and choices | `BottomNav` (customer and owner), `MenuRow`, `RadioCard`, `SegmentedControl`. Reference: `BarraAbas`, `LinhaMenu`, `OpcaoCartao`, `Segmentado`. | Pending |
+| T03 | Design system 1: buttons and icons | `Button`, `IconButton`, `Icon`. Every variant and state in stories. Reference: `Botao`, `BotaoIcone`, `Icone`. | Done |
+| T04 | Design system 2: brand | `StampSeal` (normal and inverted), `Logo` (horizontal, and vertical with tagline), `StepDots`. Reference: `Selo`, `Pontos`, `docs/design/logo/`. | Done |
+| T05 | Design system 3: fields | `TextField` (prefix, suffix, icon, optional label, states) and `OtpInput`. Reference: `Campo`, `Codigo`. | Done |
+| T06 | Design system 4: card | `StampGrid`, `ProgramCard` (light and dark by contrast, complete, `joined`), `QrCard` (QR with `qrcode`, bar and countdown, `role="progressbar"`). Contrast function with a test. Reference: `CartaoFidelidade`, `Meu-QR`, `Inicio-Selecionado`. | Done |
+| T07 | Design system 5: navigation and choices | `BottomNav` (customer and owner), `MenuRow`, `RadioCard`, `SegmentedControl`. Reference: `BarraAbas`, `LinhaMenu`, `OpcaoCartao`, `Segmentado`. | Done |
 
 ## Phase B. Customer screens, with fixed data
 
@@ -75,3 +75,8 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-29  T02  In progress  Started on branch task/T02-web-base.
 2026-10-29  T02  In review  Web base, tokens, PWA and Storybook ready; waiting for Tiago.
 2026-10-29  T02  Done  Approved by Tiago; merged into main.
+2026-10-29  T03  In progress  Started on branch task/T03-buttons-icons.
+2026-10-29  T03  In review  Button, IconButton and Icon ready with stories; waiting for Tiago.
+2026-10-30  T03  Adjusting  Tiago asked to build every base component from shadcn; regenerating Button with the CLI.
+2026-10-30  T03-T07  In review  Design system delivered as one batch at Tiago's request, every base component generated with the shadcn CLI; waiting for Tiago.
+2026-10-30  T03-T07  Done  Approved by Tiago; merged into main.
