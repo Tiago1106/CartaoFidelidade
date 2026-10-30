@@ -72,6 +72,8 @@
 @theme {
   /* Soft shadow on top of the stacked wallet cards (CLAUDE.md, "Interface e sistema de design"). */
   --shadow-card-stack: 0 -2px 10px rgba(22, 24, 27, 0.14);
+  /* Soft shadow of the tiles in the onboarding illustration (design `Ilustracao`). */
+  --shadow-art: 0 8px 24px rgba(26, 19, 5, 0.12);
   --animate-caret-blink: caret-blink 1.25s ease-out infinite;
 
   @keyframes caret-blink {

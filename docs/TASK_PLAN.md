@@ -41,7 +41,7 @@ Read the `implement-screen` skill before each screen. Screen numbers are the can
 | Id | Task | Screens | Status |
 |---|---|---|---|
 | T08 | Customer app shell | Phone frame, routes, `fixtures` and data hooks (D-008), simulated route guard. | Done |
-| T09 | Welcome | 01.1, 01.2, 01.3 (`OnboardingArt`, `StepDots`, skip). | Pending |
+| T09 | Welcome | 01.1, 01.2, 01.3 (`OnboardingArt`, `StepDots`, skip). | In review |
 | T10 | Profile choice | 02 (sheet with the X in the corner). | Pending |
 | T11 | Sign in | 03 (phone) and 04 (SMS code, resend countdown, change number). UI only, with simulated submit. | Pending |
 | T12 | First access | 05 (name). | Pending |
@@ -83,3 +83,5 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-30  T08  In progress  Started on branch task/T08-customer-shell.
 2026-10-30  T08  In review  Customer shell, fixtures, hooks and simulated guard ready; waiting for Tiago.
 2026-10-30  T08  Done  Approved by Tiago; merged into main.
+2026-10-30  T09  In progress  Started on branch task/T09-welcome.
+2026-10-30  T09  In review  Welcome screens 01.1 to 01.3 and OnboardingArt ready; waiting for Tiago.
