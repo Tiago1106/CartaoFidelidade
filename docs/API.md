@@ -178,6 +178,8 @@ Todos com acesso `customer`.
 }
 ```
 
+[Premissa] `business` traz também `category` (texto, por exemplo "Barbearia"), usado como subtítulo do cartão no Início, como no desenho. Esse campo ainda não existe em `businesses` (`DATA_MODEL.md`); decidir no M1, ao desenhar o cadastro do negócio.
+
 `cardColor` é a cor do cartão (hex) e o app escolhe o texto claro ou escuro pelo contraste. O campo "Validade" do cartão usa `progress.expiresAt`; com prêmio disponível, usa `availableRedemptions[].expiresAt`. Se não há ciclo aberto (ciclo vencido ou recém-concluído), `progress.current = 0`, `progress.expiresAt = null` e `required` vem das regras atuais do cartão. O servidor resolve vencimentos antes de responder (`DATA_MODEL.md`, 10.3).
 
 `GET /v1/customer/enrollments/:id` — a mesma estrutura mais `stamps` (visitas do ciclo atual, da mais recente para a mais antiga, cada uma com `number`, `createdAt`, `staffFirstName` e `reversed`; nunca traz o motivo do estorno, RN-PRE-08), `redemptions` (todos os prêmios, com status) e `pastCycles` (ciclos concluídos ou vencidos, com datas).

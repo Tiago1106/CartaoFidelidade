@@ -35,3 +35,14 @@ docker compose up -d   # Postgres 16 on localhost:5432
 | `pnpm typecheck` | `tsc --noEmit` in every package |
 
 `pnpm db:migrate` and `pnpm db:seed` arrive with milestone M0.
+
+## Looking at screens in development
+
+The customer app uses a simulated session until the API exists. In `pnpm dev`, open any
+route with `?session=` to jump to a state (it is remembered in the browser):
+
+| URL                                         | State                                            |
+| ------------------------------------------- | ------------------------------------------------ |
+| `http://localhost:5173/?session=signed-in`  | Signed in, with a name: Home, My QR and Profile. |
+| `http://localhost:5173/?session=signed-out` | Signed out: goes to the welcome screen.          |
+| `http://localhost:5173/?session=needs-name` | New account, name step pending.                  |
