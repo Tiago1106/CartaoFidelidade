@@ -40,7 +40,7 @@ Read the `implement-screen` skill before each screen. Screen numbers are the can
 
 | Id | Task | Screens | Status |
 |---|---|---|---|
-| T08 | Customer app shell | Phone frame, routes, `fixtures` and data hooks (D-008), simulated route guard. | Pending |
+| T08 | Customer app shell | Phone frame, routes, `fixtures` and data hooks (D-008), simulated route guard. | Done |
 | T09 | Welcome | 01.1, 01.2, 01.3 (`OnboardingArt`, `StepDots`, skip). | Pending |
 | T10 | Profile choice | 02 (sheet with the X in the corner). | Pending |
 | T11 | Sign in | 03 (phone) and 04 (SMS code, resend countdown, change number). UI only, with simulated submit. | Pending |
@@ -80,3 +80,6 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-30  T03  Adjusting  Tiago asked to build every base component from shadcn; regenerating Button with the CLI.
 2026-10-30  T03-T07  In review  Design system delivered as one batch at Tiago's request, every base component generated with the shadcn CLI; waiting for Tiago.
 2026-10-30  T03-T07  Done  Approved by Tiago; merged into main.
+2026-10-30  T08  In progress  Started on branch task/T08-customer-shell.
+2026-10-30  T08  In review  Customer shell, fixtures, hooks and simulated guard ready; waiting for Tiago.
+2026-10-30  T08  Done  Approved by Tiago; merged into main.

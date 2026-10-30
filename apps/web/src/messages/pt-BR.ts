@@ -4,8 +4,8 @@ export const messages = {
     name: 'Freguês',
     tagline: 'Quem volta, ganha.',
   },
-  home: {
-    placeholder: 'O app está em construção.',
+  shell: {
+    placeholder: 'Tela em construção',
   },
   nav: {
     label: 'Navegação principal',
