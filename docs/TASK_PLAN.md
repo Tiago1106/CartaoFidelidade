@@ -85,3 +85,5 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-30  T08  Done  Approved by Tiago; merged into main.
 2026-10-30  T09  In progress  Started on branch task/T09-welcome.
 2026-10-30  T09  In review  Welcome screens 01.1 to 01.3 and OnboardingArt ready; waiting for Tiago.
+2026-10-31  T09  Adjusting  Tiago asked: dots right above the button, white sheet sized to its content.
+2026-10-31  T09  In review  Adjusted: sheet fits its content, dots above the button; waiting for Tiago.

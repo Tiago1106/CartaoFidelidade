@@ -38,6 +38,18 @@ for (const [width, height] of [
         sheetPad: getComputedStyle(sheet).padding,
         h1: `${getComputedStyle(h1).fontSize}/${getComputedStyle(h1).lineHeight} ${getComputedStyle(h1).fontWeight} ${getComputedStyle(h1).letterSpacing}`,
         p: `${getComputedStyle(p).fontSize}/${getComputedStyle(p).lineHeight} ${getComputedStyle(p).color}`,
+        gaps: (() => {
+          const t = p.getBoundingClientRect(),
+            d = root.querySelector('[role=img]').getBoundingClientRect(),
+            b = cta.getBoundingClientRect(),
+            sh = sheet.getBoundingClientRect();
+          return {
+            top: Math.round(t.top - sh.top),
+            textToDots: Math.round(d.top - t.bottom),
+            dotsToButton: Math.round(b.top - d.bottom),
+            bottom: Math.round(sh.bottom - b.bottom),
+          };
+        })(),
         skip: box(skip),
         cta: box(cta),
         rootBg: getComputedStyle(root).backgroundColor,

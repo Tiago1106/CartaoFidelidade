@@ -29,7 +29,7 @@ export function WelcomePage() {
 
   return (
     <section data-screen="welcome" className="relative flex h-full flex-col bg-accent">
-      <div className="min-h-40 shrink basis-[508px]">
+      <div className="min-h-40 flex-1">
         <OnboardingArt slide={step as 1 | 2 | 3} />
       </div>
 
@@ -41,13 +41,13 @@ export function WelcomePage() {
         </div>
       )}
 
-      <div className="flex shrink-0 grow flex-col items-center justify-between gap-4 rounded-t-panel bg-card px-6 pt-10 pb-8">
+      <div className="flex shrink-0 flex-col items-center rounded-t-panel bg-card px-6 pt-10 pb-8">
         <div className="flex flex-col gap-2 text-center">
           <h1 className="text-title-2 tracking-[-0.3px] text-foreground">{slide.title}</h1>
           <p className="text-body text-muted-foreground">{slide.body}</p>
         </div>
-        <StepDots step={step} total={TOTAL} />
-        <div className="w-full">
+        <StepDots step={step} total={TOTAL} className="mt-6" />
+        <div className="mt-4 w-full">
           <Button onClick={isLast ? finish : next}>
             {isLast ? messages.welcome.start : messages.welcome.next}
           </Button>
