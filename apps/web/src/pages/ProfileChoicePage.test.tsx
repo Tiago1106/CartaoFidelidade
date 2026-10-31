@@ -1,18 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { routes } from '@/router';
-import { SessionProvider, type SessionStatus } from '@/session/SessionProvider';
+import type { SessionStatus } from '@/session/SessionProvider';
+import { renderRoutes } from '@/test/renderRoutes';
 
 function renderAt(entries: string[], status: SessionStatus = 'signed-out', index?: number) {
-  const router = createMemoryRouter(routes, { initialEntries: entries, initialIndex: index });
-  render(
-    <SessionProvider initialStatus={status}>
-      <RouterProvider router={router} />
-    </SessionProvider>,
-  );
-  return router;
+  return renderRoutes(entries, status, index).router;
 }
 
 describe('ProfileChoicePage', () => {

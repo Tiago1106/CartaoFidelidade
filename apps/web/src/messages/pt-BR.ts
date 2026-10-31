@@ -6,6 +6,41 @@ export const messages = {
   },
   common: {
     close: 'Fechar',
+    back: 'Voltar',
+  },
+  signIn: {
+    phone: {
+      title: 'Qual é o seu celular?',
+      subtitle: 'Enviamos um código por SMS para confirmar que é você.',
+      label: 'Celular',
+      prefix: '+55',
+      placeholder: '(11) 90000-0000',
+      termsBefore: 'Ao continuar, você aceita os ',
+      termsLink: 'Termos de uso',
+      termsMiddle: ' e a ',
+      privacyLink: 'Política de Privacidade',
+      termsAfter: '.',
+      submit: 'Enviar código',
+    },
+    code: {
+      title: 'Digite o código',
+      sentToBefore: 'Enviamos 6 dígitos por SMS para ',
+      sentToAfter: '.',
+      change: 'Alterar número',
+      resendIn: (time: string) => `Reenviar código em ${time}`,
+      resend: 'Reenviar código',
+      confirm: 'Confirmar',
+    },
+    // [Premissa] Error texts are not in the design; written to be short and plain.
+    errors: {
+      invalidPhone: 'Confira o número. Use o DDD e 9 dígitos.',
+      phoneNotSupported: 'Por enquanto, só números de celular do Brasil (+55).',
+      rateLimited: 'Muitos pedidos de código. Tente de novo mais tarde.',
+      otpInvalid: 'Código incorreto. Tente de novo.',
+      otpExpired: 'Código vencido. Peça um novo código.',
+      otpLocked: 'Muitas tentativas. Tente de novo em 15 minutos.',
+      generic: 'Algo deu errado. Tente de novo.',
+    },
   },
   profileChoice: {
     title: 'Como você vai usar o Freguês?',

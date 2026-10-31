@@ -1,18 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { routes } from '@/router';
-import { SessionProvider } from '@/session/SessionProvider';
+import { renderRoutes } from '@/test/renderRoutes';
 
 function renderWelcome(path = '/welcome') {
-  const router = createMemoryRouter(routes, { initialEntries: [path] });
-  render(
-    <SessionProvider initialStatus="signed-out">
-      <RouterProvider router={router} />
-    </SessionProvider>,
-  );
-  return router;
+  return renderRoutes([path]).router;
 }
 
 describe('WelcomePage', () => {

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { messages } from '@/messages/pt-BR';
@@ -28,10 +29,20 @@ export function OtpInput({
   className,
 }: OtpInputProps) {
   const invalid = Boolean(error);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // On an error, the focus comes back to the code with every digit selected, so the next
+  // digit typed replaces the whole code instead of the person erasing six digits one by one.
+  useEffect(() => {
+    if (!error) return;
+    inputRef.current?.focus();
+    inputRef.current?.select();
+  }, [error]);
 
   return (
     <div className={cn('flex w-full flex-col gap-3', className)}>
       <InputOTP
+        ref={inputRef}
         maxLength={OTP_LENGTH}
         value={value}
         onChange={onChange}

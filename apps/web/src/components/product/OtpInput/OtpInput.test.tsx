@@ -48,4 +48,32 @@ describe('OtpInput', () => {
       'true',
     );
   });
+
+  it('on an error, the focus comes back to the code and the next digits replace it all', async () => {
+    function Wrong() {
+      const [value, setValue] = useState('000000');
+      const [error, setError] = useState<string>();
+      return (
+        <>
+          <OtpInput
+            value={value}
+            onChange={(v) => {
+              setValue(v);
+              setError(undefined);
+            }}
+            error={error}
+          />
+          <button type="button" onClick={() => setError('Código incorreto.')}>
+            Confirmar
+          </button>
+        </>
+      );
+    }
+    render(<Wrong />);
+    await userEvent.click(screen.getByRole('button', { name: 'Confirmar' }));
+    const input = screen.getByLabelText('Código de verificação de 6 dígitos');
+    expect(input).toHaveFocus();
+    await userEvent.keyboard('654321');
+    expect(input).toHaveValue('654321');
+  });
 });

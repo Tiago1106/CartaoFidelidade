@@ -46,3 +46,18 @@ route with `?session=` to jump to a state (it is remembered in the browser):
 | `http://localhost:5173/?session=signed-in`  | Signed in, with a name: Home, My QR and Profile. |
 | `http://localhost:5173/?session=signed-out` | Signed out: goes to the welcome screen.          |
 | `http://localhost:5173/?session=needs-name` | New account, name step pending.                  |
+
+### Signing in (simulated)
+
+There is no SMS yet. When you ask for a code, the app generates a real one, valid for 5 minutes
+and for that number only, and prints it in the **browser console** (press F12, tab Console):
+
+```
+[OTP simulado] +5511900000000 -> 482913 (vale 5 min, até 14:32:10)
+```
+
+This only happens in `pnpm dev`, never in a production build. The rules are the real ones:
+the code works once, a new code replaces the previous one, five wrong codes lock the number for
+15 minutes, and a number can ask for three codes per hour. The number `(11) 90000-0000` is the
+existing account (goes Home). Any other number is a new account (goes to the name step).
+The memory of codes and limits lives in the open page: reloading it starts over.

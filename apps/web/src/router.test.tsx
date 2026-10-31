@@ -1,19 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { routes } from './router';
-import { SessionProvider, type SessionStatus } from './session/SessionProvider';
+import type { SessionStatus } from './session/SessionProvider';
+import { renderRoutes } from './test/renderRoutes';
 
 function renderAt(path: string, status: SessionStatus) {
-  const router = createMemoryRouter(routes, { initialEntries: [path] });
-  const view = render(
-    <SessionProvider initialStatus={status}>
-      <RouterProvider router={router} />
-    </SessionProvider>,
-  );
+  const { router, container } = renderRoutes([path], status);
   const screenName = () =>
-    view.container.querySelector('[data-screen]')?.getAttribute('data-screen') ?? null;
+    container.querySelector('[data-screen]')?.getAttribute('data-screen') ?? null;
   return { router, screenName };
 }
 
@@ -54,9 +48,14 @@ describe('customer routes and the simulated guard', () => {
     ['/welcome', 'welcome'],
     ['/profile-choice', 'profile-choice'],
     ['/sign-in', 'sign-in'],
-    ['/sign-in/code', 'sign-in-code'],
   ])('signed out: %s is open', (path, screen) => {
     expect(renderAt(path, 'signed-out').screenName()).toBe(screen);
+  });
+
+  it('the code screen needs the number of the previous screen, or goes back to it', () => {
+    const { router, screenName } = renderAt('/sign-in/code', 'signed-out');
+    expect(router.state.location.pathname).toBe('/sign-in');
+    expect(screenName()).toBe('sign-in');
   });
 
   it('RN-ENT-07: the name step is closed to who has not signed in', () => {
