@@ -46,3 +46,10 @@ route with `?session=` to jump to a state (it is remembered in the browser):
 | `http://localhost:5173/?session=signed-in`  | Signed in, with a name: Home, My QR and Profile. |
 | `http://localhost:5173/?session=signed-out` | Signed out: goes to the welcome screen.          |
 | `http://localhost:5173/?session=needs-name` | New account, name step pending.                  |
+
+### Signing in (simulated)
+
+Until the API exists, the code that works is `123456`. The number `(11) 90000-0000` is the
+existing account (goes Home). Any other number is a new account (goes to the name step).
+Five wrong codes lock the number, and a number can ask for three codes. To start over,
+reload the page (this memory is not kept) or use `?session=signed-out`.

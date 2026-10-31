@@ -2,6 +2,8 @@ import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-do
 import { AppFrame } from './layouts/AppFrame';
 import { CustomerTabsLayout } from './layouts/CustomerTabsLayout';
 import { ScreenPlaceholder } from './pages/ScreenPlaceholder';
+import { SignInCodePage } from './pages/SignInCodePage';
+import { SignInPhonePage } from './pages/SignInPhonePage';
 import { ProfileChoicePage } from './pages/ProfileChoicePage';
 import { WelcomePage } from './pages/WelcomePage';
 import { PublicOnly, RequireNameStep, RequireSession } from './session/guards';
@@ -16,8 +18,8 @@ export const routes: RouteObject[] = [
         children: [
           { path: '/welcome', element: <WelcomePage /> },
           { path: '/profile-choice', element: <ProfileChoicePage /> },
-          { path: '/sign-in', element: <ScreenPlaceholder screen="sign-in" /> },
-          { path: '/sign-in/code', element: <ScreenPlaceholder screen="sign-in-code" /> },
+          { path: '/sign-in', element: <SignInPhonePage /> },
+          { path: '/sign-in/code', element: <SignInCodePage /> },
         ],
       },
       {

@@ -43,7 +43,7 @@ Read the `implement-screen` skill before each screen. Screen numbers are the can
 | T08 | Customer app shell | Phone frame, routes, `fixtures` and data hooks (D-008), simulated route guard. | Done |
 | T09 | Welcome | 01.1, 01.2, 01.3 (`OnboardingArt`, `StepDots`, skip). | Done |
 | T10 | Profile choice | 02 (sheet with the X in the corner). | Done |
-| T11 | Sign in | 03 (phone) and 04 (SMS code, resend countdown, change number). UI only, with simulated submit. | Pending |
+| T11 | Sign in | 03 (phone) and 04 (SMS code, resend countdown, change number). UI only, with simulated submit. | In review |
 | T12 | First access | 05 (name). | Pending |
 | T13 | Home | 06, 06.1, 06.2 (stacked cards, selection, attached QR, simulated 30 s countdown). | Pending |
 | T14 | My QR and Profile | 07, 08. | Pending |
@@ -95,3 +95,5 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-31  T10  Adjusting  Tiago asked: replace "salão" by "negócio" in the profile hint and in welcome step 2.
 2026-10-31  T10  In review  Adjusted: "negócio" instead of "salão" in two texts; waiting for Tiago.
 2026-10-31  T10  Done  Approved by Tiago; merged into main.
+2026-10-31  T11  In progress  Started on branch task/T11-sign-in.
+2026-10-31  T11  In review  Sign-in screens 03 and 04 with simulated OTP ready; waiting for Tiago.
