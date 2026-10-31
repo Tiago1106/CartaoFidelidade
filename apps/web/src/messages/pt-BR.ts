@@ -42,6 +42,15 @@ export const messages = {
       generic: 'Algo deu errado. Tente de novo.',
     },
   },
+  signUp: {
+    title: 'Como podemos te chamar?',
+    subtitle: 'É assim que você aparece para quem te atende.',
+    label: 'Nome',
+    placeholder: 'Seu nome',
+    submit: 'Continuar',
+    // [Premissa] Not in the design; written to be short and plain.
+    error: 'Algo deu errado. Tente de novo.',
+  },
   profileChoice: {
     title: 'Como você vai usar o Freguês?',
     description: 'Escolha uma opção para continuar.',
