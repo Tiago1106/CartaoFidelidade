@@ -1,5 +1,6 @@
 // Captures the sign-in screens into docs/evidence/T11/ and prints key measures.
-// Requires `pnpm dev` on http://localhost:5173. The code to type is 123456 (simulated).
+// Requires `pnpm dev` on http://localhost:5173. The code is read from the browser console,
+// where the simulated sign-in prints it (there is no SMS yet).
 import { chromium } from 'playwright';
 import { fileURLToPath } from 'node:url';
 import { mkdirSync } from 'node:fs';
@@ -34,6 +35,11 @@ for (const [width, height] of [
   [360, 640],
 ]) {
   const page = await browser.newPage({ viewport: { width, height } });
+  const codes = [];
+  page.on('console', (msg) => {
+    const match = /\[OTP simulado\] (\S+) -> (\d{6})/.exec(msg.text());
+    if (match) codes.push({ phone: match[1], code: match[2], text: msg.text() });
+  });
   await page.goto('http://localhost:5173/sign-in?session=signed-out');
   await page.waitForSelector('[data-screen="sign-in"]');
   await page.evaluate(() => document.fonts.ready);
@@ -59,6 +65,17 @@ for (const [width, height] of [
   await page.getByRole('button', { name: 'Confirmar' }).click();
   await page.waitForSelector('[role="alert"]');
   await page.screenshot({ path: `${outDir}sign-in-code-error-${width}x${height}.png` });
+
+  const issued = codes.at(-1);
+  console.log(`${width}x${height} console:`, issued?.text);
+  // After the error the focus is back on the code with it selected, so typing replaces it.
+  await page.keyboard.type(issued.code);
+  await page.getByRole('button', { name: 'Confirmar' }).click();
+  await page.waitForSelector('[data-screen="home"]');
+  console.log(
+    `${width}x${height} signed in with the code of the console ->`,
+    new URL(page.url()).pathname,
+  );
   await page.close();
 }
 await browser.close();

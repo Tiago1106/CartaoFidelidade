@@ -1,9 +1,11 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { DEV_OTP_CODE, requestOtp, resetSimulatedAuth } from '@/data/auth';
+import { configureSimulatedAuth, requestOtp, resetSimulatedAuth } from '@/data/auth';
 import { renderRoutes } from '@/test/renderRoutes';
 
+/** The code the simulation generates in these tests. */
+const CODE = '482913';
 const existing = '+5511900000000';
 const stranger = '+5521987654321';
 
@@ -23,6 +25,7 @@ function tick(seconds: number) {
 
 beforeEach(() => {
   resetSimulatedAuth();
+  configureSimulatedAuth({ generateCode: () => CODE, announce: () => {} });
   vi.useFakeTimers({ shouldAdvanceTime: true });
 });
 afterEach(() => vi.useRealTimers());
@@ -65,21 +68,21 @@ describe('SignInCodePage (screen 04)', () => {
 
   it('RN-ENT-07: the code of an existing account signs in and goes Home', async () => {
     const { router } = await openCodeScreen(existing);
-    await user().type(codeInput(), DEV_OTP_CODE);
+    await user().type(codeInput(), CODE);
     await user().click(confirm());
     await vi.waitFor(() => expect(router.state.location.pathname).toBe('/'));
   });
 
   it('RN-ENT-07: the code of a new account goes to the name step', async () => {
     const { router } = await openCodeScreen(stranger);
-    await user().type(codeInput(), DEV_OTP_CODE);
+    await user().type(codeInput(), CODE);
     await user().click(confirm());
     await vi.waitFor(() => expect(router.state.location.pathname).toBe('/sign-up'));
   });
 
   it('confirms with the Enter key', async () => {
     const { router } = await openCodeScreen(existing);
-    await user().type(codeInput(), `${DEV_OTP_CODE}{Enter}`);
+    await user().type(codeInput(), `${CODE}{Enter}`);
     await vi.waitFor(() => expect(router.state.location.pathname).toBe('/'));
   });
 
@@ -114,9 +117,27 @@ describe('SignInCodePage (screen 04)', () => {
     );
   });
 
+  it('RN-AUT-02: a code that is 5 minutes old has expired', async () => {
+    await openCodeScreen();
+    act(() => vi.advanceTimersByTime(5 * 60 * 1000));
+    await user().type(codeInput(), CODE);
+    await user().click(confirm());
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'Código vencido. Peça um novo código.',
+    );
+  });
+
+  it('RN-AUT-02: a code that is 4 minutes old still works', async () => {
+    const { router } = await openCodeScreen();
+    act(() => vi.advanceTimersByTime(4 * 60 * 1000));
+    await user().type(codeInput(), CODE);
+    await user().click(confirm());
+    await vi.waitFor(() => expect(router.state.location.pathname).toBe('/'));
+  });
+
   it('RN-AUT-02: says the code expired when no code was asked for', async () => {
     await openCodeScreen(existing, { requested: false });
-    await user().type(codeInput(), DEV_OTP_CODE);
+    await user().type(codeInput(), CODE);
     await user().click(confirm());
     expect(await screen.findByRole('alert')).toHaveTextContent(
       'Código vencido. Peça um novo código.',
