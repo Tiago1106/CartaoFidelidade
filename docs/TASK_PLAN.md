@@ -42,7 +42,7 @@ Read the `implement-screen` skill before each screen. Screen numbers are the can
 |---|---|---|---|
 | T08 | Customer app shell | Phone frame, routes, `fixtures` and data hooks (D-008), simulated route guard. | Done |
 | T09 | Welcome | 01.1, 01.2, 01.3 (`OnboardingArt`, `StepDots`, skip). | Done |
-| T10 | Profile choice | 02 (sheet with the X in the corner). | Pending |
+| T10 | Profile choice | 02 (sheet with the X in the corner). | Done |
 | T11 | Sign in | 03 (phone) and 04 (SMS code, resend countdown, change number). UI only, with simulated submit. | Pending |
 | T12 | First access | 05 (name). | Pending |
 | T13 | Home | 06, 06.1, 06.2 (stacked cards, selection, attached QR, simulated 30 s countdown). | Pending |
@@ -88,3 +88,10 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-31  T09  Adjusting  Tiago asked: dots right above the button, white sheet sized to its content.
 2026-10-31  T09  In review  Adjusted: sheet fits its content, dots above the button; waiting for Tiago.
 2026-10-31  T09  Done  Approved by Tiago; merged into main.
+2026-10-31  T10  In progress  Started on branch task/T10-profile-choice.
+2026-10-31  T10  In review  Profile choice sheet (screen 02) and the Sheet component ready; waiting for Tiago.
+2026-10-31  T10  Adjusting  Tiago asked: "Sou do salão" becomes "Sou prestador".
+2026-10-31  T10  In review  Adjusted: "Sou prestador"; waiting for Tiago.
+2026-10-31  T10  Adjusting  Tiago asked: replace "salão" by "negócio" in the profile hint and in welcome step 2.
+2026-10-31  T10  In review  Adjusted: "negócio" instead of "salão" in two texts; waiting for Tiago.
+2026-10-31  T10  Done  Approved by Tiago; merged into main.

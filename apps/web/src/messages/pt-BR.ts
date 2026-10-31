@@ -4,6 +4,16 @@ export const messages = {
     name: 'Freguês',
     tagline: 'Quem volta, ganha.',
   },
+  common: {
+    close: 'Fechar',
+  },
+  profileChoice: {
+    title: 'Como você vai usar o Freguês?',
+    description: 'Escolha uma opção para continuar.',
+    customer: 'Sou cliente',
+    staff: 'Sou prestador',
+    hint: 'Chegou pela tag NFC ou pelo QR do negócio? Escolha “Sou cliente”.',
+  },
   shell: {
     placeholder: 'Tela em construção',
   },
@@ -22,7 +32,7 @@ export const messages = {
       },
       {
         title: 'Junte carimbos',
-        body: 'A cada visita você ganha um carimbo. Acompanhe no app quantos faltam em cada salão.',
+        body: 'A cada visita você ganha um carimbo. Acompanhe no app quantos faltam em cada negócio.',
       },
       {
         title: 'Troque por prêmios',

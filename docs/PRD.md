@@ -93,7 +93,7 @@ O desenho está em um canvas de design (Claude Design), com as telas aprovadas u
 |---|---|---|
 | 00 | Página do negócio (`/s/<slug>`) | Aberta pela etiqueta NFC ou pelo QR do balcão. Logo, nome do negócio, prévia dos cartões ativos e "Entrar com meu celular" (RN-ENT-02). Quem já está logado vai direto para o Início. |
 | 01 | Como funciona (3 passos) | Onboarding com "Pular". Mostra o QR, os carimbos e o prêmio. |
-| 02 | Escolha de perfil | Folha sobre a logo com "Sou cliente" e "Sou do salão". |
+| 02 | Escolha de perfil | Folha sobre a logo com "Sou cliente" e "Sou prestador". |
 | 03 | Entrada: celular | Celular (+55) e aviso dos Termos e da Política. |
 | 04 | Entrada: código SMS | Seis dígitos, reenvio com contagem, "Alterar número". |
 | 05 | Cadastro: nome | **Só no primeiro acesso.** Pede o nome. |
