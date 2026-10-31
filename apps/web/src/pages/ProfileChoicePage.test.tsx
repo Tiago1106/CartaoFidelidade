@@ -21,7 +21,7 @@ describe('ProfileChoicePage', () => {
     const dialog = screen.getByRole('dialog', { name: 'Como você vai usar o Freguês?' });
     expect(dialog).toHaveAccessibleDescription('Escolha uma opção para continuar.');
     expect(screen.getByRole('button', { name: 'Sou cliente' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Sou do salão' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Sou prestador' })).toBeInTheDocument();
     expect(
       screen.getByText('Chegou pela tag NFC ou pelo QR do salão? Escolha “Sou cliente”.'),
     ).toBeInTheDocument();
@@ -58,9 +58,9 @@ describe('ProfileChoicePage', () => {
     expect(router.state.location.pathname).toBe('/sign-in');
   });
 
-  it('"Sou do salão" goes to the staff area', async () => {
+  it('"Sou prestador" goes to the staff area', async () => {
     const router = renderAt(['/profile-choice']);
-    await userEvent.click(screen.getByRole('button', { name: 'Sou do salão' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sou prestador' }));
     expect(router.state.location.pathname).toBe('/staff/sign-in');
   });
 

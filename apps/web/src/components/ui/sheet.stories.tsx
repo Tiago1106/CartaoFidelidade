@@ -34,7 +34,7 @@ function Content() {
       </SheetHeader>
       <div className="flex w-full flex-col gap-3">
         <Button>Sou cliente</Button>
-        <Button variant="secondary">Sou do salão</Button>
+        <Button variant="secondary">Sou prestador</Button>
       </div>
     </SheetContent>
   );

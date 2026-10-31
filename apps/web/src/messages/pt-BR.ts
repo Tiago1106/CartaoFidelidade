@@ -11,7 +11,7 @@ export const messages = {
     title: 'Como você vai usar o Freguês?',
     description: 'Escolha uma opção para continuar.',
     customer: 'Sou cliente',
-    staff: 'Sou do salão',
+    staff: 'Sou prestador',
     hint: 'Chegou pela tag NFC ou pelo QR do salão? Escolha “Sou cliente”.',
   },
   shell: {

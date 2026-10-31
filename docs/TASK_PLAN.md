@@ -90,3 +90,5 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-31  T09  Done  Approved by Tiago; merged into main.
 2026-10-31  T10  In progress  Started on branch task/T10-profile-choice.
 2026-10-31  T10  In review  Profile choice sheet (screen 02) and the Sheet component ready; waiting for Tiago.
+2026-10-31  T10  Adjusting  Tiago asked: "Sou do salão" becomes "Sou prestador".
+2026-10-31  T10  In review  Adjusted: "Sou prestador"; waiting for Tiago.
