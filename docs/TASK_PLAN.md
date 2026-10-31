@@ -92,3 +92,5 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-31  T10  In review  Profile choice sheet (screen 02) and the Sheet component ready; waiting for Tiago.
 2026-10-31  T10  Adjusting  Tiago asked: "Sou do salão" becomes "Sou prestador".
 2026-10-31  T10  In review  Adjusted: "Sou prestador"; waiting for Tiago.
+2026-10-31  T10  Adjusting  Tiago asked: replace "salão" by "negócio" in the profile hint and in welcome step 2.
+2026-10-31  T10  In review  Adjusted: "negócio" instead of "salão" in two texts; waiting for Tiago.

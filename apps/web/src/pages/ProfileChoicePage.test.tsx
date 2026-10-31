@@ -23,7 +23,7 @@ describe('ProfileChoicePage', () => {
     expect(screen.getByRole('button', { name: 'Sou cliente' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Sou prestador' })).toBeInTheDocument();
     expect(
-      screen.getByText('Chegou pela tag NFC ou pelo QR do salão? Escolha “Sou cliente”.'),
+      screen.getByText('Chegou pela tag NFC ou pelo QR do negócio? Escolha “Sou cliente”.'),
     ).toBeInTheDocument();
   });
 

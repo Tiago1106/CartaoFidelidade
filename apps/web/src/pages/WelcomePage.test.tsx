@@ -36,7 +36,7 @@ describe('WelcomePage', () => {
     expect(screen.getByRole('img', { name: 'Passo 2 de 3' })).toBeInTheDocument();
     expect(
       screen.getByText(
-        'A cada visita você ganha um carimbo. Acompanhe no app quantos faltam em cada salão.',
+        'A cada visita você ganha um carimbo. Acompanhe no app quantos faltam em cada negócio.',
       ),
     ).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: 'Continuar' }));
