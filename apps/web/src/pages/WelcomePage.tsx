@@ -7,8 +7,8 @@ import { messages } from '@/messages/pt-BR';
 const slides = messages.welcome.slides;
 const TOTAL = slides.length;
 
-/** After the welcome: the next step of the flow. [Premissa] The profile choice (02) comes in T10. */
-const AFTER_WELCOME = '/sign-in';
+/** After the welcome comes the profile choice (screen 02). */
+const AFTER_WELCOME = '/profile-choice';
 
 function parseStep(value: string | null): number {
   const step = Number(value);

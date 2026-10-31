@@ -41,7 +41,7 @@ describe('customer routes and the simulated guard', () => {
     },
   );
 
-  it.each(['/welcome', '/sign-in', '/sign-in/code', '/sign-up'])(
+  it.each(['/welcome', '/profile-choice', '/sign-in', '/sign-in/code', '/sign-up'])(
     'a signed in customer is sent Home from %s',
     (path) => {
       const { router, screenName } = renderAt(path, 'signed-in');
@@ -52,6 +52,7 @@ describe('customer routes and the simulated guard', () => {
 
   it.each([
     ['/welcome', 'welcome'],
+    ['/profile-choice', 'profile-choice'],
     ['/sign-in', 'sign-in'],
     ['/sign-in/code', 'sign-in-code'],
   ])('signed out: %s is open', (path, screen) => {

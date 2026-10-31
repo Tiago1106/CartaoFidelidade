@@ -4,6 +4,16 @@ export const messages = {
     name: 'Freguês',
     tagline: 'Quem volta, ganha.',
   },
+  common: {
+    close: 'Fechar',
+  },
+  profileChoice: {
+    title: 'Como você vai usar o Freguês?',
+    description: 'Escolha uma opção para continuar.',
+    customer: 'Sou cliente',
+    staff: 'Sou do salão',
+    hint: 'Chegou pela tag NFC ou pelo QR do salão? Escolha “Sou cliente”.',
+  },
   shell: {
     placeholder: 'Tela em construção',
   },

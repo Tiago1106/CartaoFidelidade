@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-do
 import { AppFrame } from './layouts/AppFrame';
 import { CustomerTabsLayout } from './layouts/CustomerTabsLayout';
 import { ScreenPlaceholder } from './pages/ScreenPlaceholder';
+import { ProfileChoicePage } from './pages/ProfileChoicePage';
 import { WelcomePage } from './pages/WelcomePage';
 import { PublicOnly, RequireNameStep, RequireSession } from './session/guards';
 
@@ -14,6 +15,7 @@ export const routes: RouteObject[] = [
         element: <PublicOnly />,
         children: [
           { path: '/welcome', element: <WelcomePage /> },
+          { path: '/profile-choice', element: <ProfileChoicePage /> },
           { path: '/sign-in', element: <ScreenPlaceholder screen="sign-in" /> },
           { path: '/sign-in/code', element: <ScreenPlaceholder screen="sign-in-code" /> },
         ],
@@ -22,6 +24,8 @@ export const routes: RouteObject[] = [
         element: <RequireNameStep />,
         children: [{ path: '/sign-up', element: <ScreenPlaceholder screen="sign-up" /> }],
       },
+      // [Premissa] The staff area is not built yet; /staff/sign-in is its future entry.
+      { path: '/staff/sign-in', element: <ScreenPlaceholder screen="staff-sign-in" /> },
       { path: '/s/:slug', element: <ScreenPlaceholder screen="business-page" /> },
       {
         element: <RequireSession />,

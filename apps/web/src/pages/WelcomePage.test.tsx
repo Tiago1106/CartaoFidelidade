@@ -59,13 +59,13 @@ describe('WelcomePage', () => {
   it('Skip leaves the welcome from any step', async () => {
     const router = renderWelcome('/welcome?step=2');
     await userEvent.click(screen.getByRole('button', { name: 'Pular' }));
-    expect(router.state.location.pathname).toBe('/sign-in');
+    expect(router.state.location.pathname).toBe('/profile-choice');
   });
 
   it('"Começar" leaves the welcome', async () => {
     const router = renderWelcome('/welcome?step=3');
     await userEvent.click(screen.getByRole('button', { name: 'Começar' }));
-    expect(router.state.location.pathname).toBe('/sign-in');
+    expect(router.state.location.pathname).toBe('/profile-choice');
   });
 
   it('the back button of the browser goes to the previous step', async () => {
