@@ -34,7 +34,25 @@ docker compose up -d   # Postgres 16 on localhost:5432
 | `pnpm format`    | Format with Prettier            |
 | `pnpm typecheck` | `tsc --noEmit` in every package |
 
-`pnpm db:migrate` and `pnpm db:seed` arrive with T18 and T20.
+`pnpm db:seed` arrives with T20.
+
+## Database
+
+```bash
+cp .env.example .env
+docker compose up -d     # Postgres 16 on localhost:5432
+pnpm db:migrate          # applies apps/api/migrations and sets the passwords of the two roles
+pnpm db:codegen          # regenerates the Kysely types after a migration
+```
+
+- `app_user` is what requests use and is subject to row level security. `app_system` ignores it
+  and is used only inside `apps/api/src/system/`.
+- A migration that was applied is never edited: `pnpm db:migrate` refuses a changed file. Add a
+  new numbered file instead.
+- If port 5432 is already taken by another Postgres, change the left side of `ports` in
+  `docker-compose.yml` and the port in the three `DATABASE_URL*` variables of your `.env`.
+- Integration tests (`*.int.test.ts`) start their own Postgres with Docker, on a random port.
+  `pnpm --filter @fregues/api test:unit` skips them.
 
 ## API
 

@@ -11,6 +11,7 @@ export default tseslint.config(
       '**/coverage/**',
       'docs/**',
       '**/storybook-static/**',
+      'apps/api/src/db/types.generated.ts',
     ],
   },
   js.configs.recommended,

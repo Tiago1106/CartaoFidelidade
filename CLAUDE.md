@@ -91,7 +91,7 @@ Scripts na raiz (rodam em todos os pacotes quando o pacote tem o script):
 - `pnpm typecheck`: `tsc --noEmit` em cada pacote.
 - `docker compose up -d`: Postgres 16 local (usuário e senha `postgres`, banco `fregues`, porta 5432).
 
-`pnpm db:migrate` e `pnpm db:seed` chegam no M0.
+`pnpm db:migrate` aplica as migrações de `apps/api/migrations/` (e dá senha aos papéis `app_user` e `app_system`, tiradas de `DATABASE_URL` e `DATABASE_URL_SYSTEM`). `pnpm db:codegen` regenera os tipos do Kysely depois de uma migração. Os testes de integração da API (`*.int.test.ts`) sobem um Postgres em contêiner e exigem o Docker ligado; `pnpm --filter @fregues/api test:unit` roda só os que não precisam dele. `pnpm db:seed` chega na T20.
 
 ## Variáveis de ambiente (lista de partida)
 

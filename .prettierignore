@@ -5,3 +5,4 @@ docs
 pnpm-lock.yaml
 .claude
 CLAUDE.md
+apps/api/src/db/types.generated.ts
