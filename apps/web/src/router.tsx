@@ -5,6 +5,7 @@ import { ScreenPlaceholder } from './pages/ScreenPlaceholder';
 import { SignInCodePage } from './pages/SignInCodePage';
 import { SignInPhonePage } from './pages/SignInPhonePage';
 import { ProfileChoicePage } from './pages/ProfileChoicePage';
+import { SignUpPage } from './pages/SignUpPage';
 import { WelcomePage } from './pages/WelcomePage';
 import { PublicOnly, RequireNameStep, RequireSession } from './session/guards';
 
@@ -24,7 +25,7 @@ export const routes: RouteObject[] = [
       },
       {
         element: <RequireNameStep />,
-        children: [{ path: '/sign-up', element: <ScreenPlaceholder screen="sign-up" /> }],
+        children: [{ path: '/sign-up', element: <SignUpPage /> }],
       },
       // [Premissa] The staff area is not built yet; /staff/sign-in is its future entry.
       { path: '/staff/sign-in', element: <ScreenPlaceholder screen="staff-sign-in" /> },

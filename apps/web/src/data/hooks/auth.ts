@@ -1,11 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 import { requestOtp, verifyOtp } from '../auth';
+import { saveFirstAccessName } from '../firstAccess';
 
 // Phase B: simulated. In Phase C these call `/v1/customer/auth/otp/request` and `.../verify`.
 
 /** Asks for an SMS code for a +55 number. */
 export function useRequestOtp() {
   return useMutation({ mutationFn: (phone: string) => requestOtp(phone) });
+}
+
+/** Saves the name of a new account (first access, RN-ENT-07). */
+export function useSaveFirstAccessName() {
+  return useMutation({ mutationFn: (name: string) => saveFirstAccessName(name) });
 }
 
 /** Confirms the code and opens the session. */

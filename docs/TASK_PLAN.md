@@ -44,11 +44,31 @@ Read the `implement-screen` skill before each screen. Screen numbers are the can
 | T09 | Welcome | 01.1, 01.2, 01.3 (`OnboardingArt`, `StepDots`, skip). | Done |
 | T10 | Profile choice | 02 (sheet with the X in the corner). | Done |
 | T11 | Sign in | 03 (phone) and 04 (SMS code, resend countdown, change number). UI only, with simulated submit. | Done |
-| T12 | First access | 05 (name). | Pending |
+| T12 | First access | 05 (name). | Done |
 | T13 | Home | 06, 06.1, 06.2 (stacked cards, selection, attached QR, simulated 30 s countdown). | Pending |
 | T14 | My QR and Profile | 07, 08. | Pending |
 | T15 | Sheets and detail | 09, 10, 06.3. | Pending |
 | T16 | Business page | 00 (`/s/:slug`). | Pending |
+
+## Phase B2. Customer backend now (breakdown approved by Tiago on 2026-11-01)
+
+Tiago wants to test real behavior together with each screen, so the customer side of the backend (M0 slimmed down and M2) comes **before** T13. Order: T12 stays as delivered (simulated). T17 to T26 build the API with its tests. T27 wires screens 03, 04 and 05 and removes the simulated sign-in. From T13 on, every screen is built already wired to the API (no new `fixtures`). One task at a time, each with Tiago's approval.
+
+| Id | Task | Deliverable | Rules | Status |
+|---|---|---|---|---|
+| T17 | API base | NestJS app in `apps/api`: env config validated, logs that never hold personal data, `GET /health`, error format and codes of `API.md` sections 1 and 2, Zod validation, OpenAPI, injectable `Clock`. Test per error code. | CLAUDE.md golden rules 6 and 8 | Pending |
+| T18 | Database base | Roles `app_user` and `app_system`, plain SQL migration runner (`pnpm db:migrate`), `kysely-codegen`, `SET LOCAL` context helper inside a transaction, Testcontainers test harness. | D-001 | Pending |
+| T19 | Customer and auth tables | Migrations and RLS for `customers`, `otp_codes`, `phone_lockouts`, `sessions`, `sms_messages`. RLS tests (no context returns no rows, foreign `business_id` fails). | RN-AUT, RN-LGP | Pending |
+| T20 | Business, card and stamp tables | Migrations and RLS for `businesses`, `programs`, `business_customers`, `enrollments`, `cycles`, `stamps` (append-only trigger), `qr_tokens`. Isolation tests between business A and B. Seed (`pnpm db:seed`) with Maria and the three cards of the design. | RN-TEN, RN-CAR-04, golden rules 1 and 2 | Pending |
+| T21 | OTP request | SMS provider interface plus a **console provider** (the code is printed in the API log, development only: same temporary exception of D-022, never in production). `POST /v1/customer/auth/otp/request`: +55 only, 3 per hour, 60 s between codes, same answer for new and existing numbers, hashed code. | RN-AUT-01, 02, 03, 05 | Pending |
+| T22 | OTP verify and session | `POST .../otp/verify` (5 attempts, 15 min lock, single use, 5 min validity), access JWT (`jose`), opaque refresh in an `HttpOnly` cookie, `refresh` with rotation, `logout`. | RN-AUT-02, RN-ENT-03 | Pending |
+| T23 | Customer profile | `GET` and `PATCH /v1/customer/me`: first access sends only `name` and `acceptTerms`, with terms version and date recorded. `email` optional. | RN-ENT-07, 08, RN-LGP-02 | Pending |
+| T24 | Enrollments | `GET /v1/customer/enrollments` and `/:id` (progress, validity, prize, history) and `POST .../businesses/:slug/join`. Expiry resolved with the `Clock` (`DATA_MODEL` 10.3). | RN-ENT-02, RN-VAL | Pending |
+| T25 | Customer QR token | `POST /v1/customer/qr-token`: 45 s expiry, renewed every 30 s, single use, hashed, only the last one valid. | RN-QR | Pending |
+| T26 | Dev environment | One command brings everything up: Postgres, migrations, seed, API and web (`pnpm dev`), web talks to the API (proxy or CORS), `.env.example` updated, README. | CLAUDE.md "Comandos" | Pending |
+| T27 | Wire sign-in and first access | Web API client (TanStack Query, access token in memory, silent refresh). Screens 03, 04 and 05 call the real endpoints. The simulated sign-in (`data/auth.ts`, `data/firstAccess.ts`) is deleted. The code is read from the API log. | RN-AUT, RN-ENT-07 | Pending |
+
+After T27, T13 to T16 follow as in Phase B, but each one is **built already wired** to T24 and T25 (the fixtures stop being used). What cannot be tested yet: registering visits, prizes and reversal need M3 and M4. Until then the seed holds the stamps already shown in the design.
 
 ## Phase C. Backend milestones and wiring the screens
 
@@ -56,9 +76,9 @@ Each milestone below is a **block**, not a task. **When it is reached, Claude Co
 
 | Milestone | Content | Screens wired |
 |---|---|---|
-| M0. Foundation | API base (NestJS, config, logs without personal data, `health`, error format), database roles, base migrations, RLS and isolation tests, `Clock`. | None. |
+| M0. Foundation (customer part is T17 to T20, see Phase B2) | API base (NestJS, config, logs without personal data, `health`, error format), database roles, base migrations, RLS and isolation tests, `Clock`. | None. |
 | M1. Business and cards | Business sign-up, staff login, sessions, create and edit cards, public page. | 00, 19, 20 |
-| M2. Customer | SMS OTP, profile, enrollments, `qr-token`. | 03, 04, 05, 06, 06.1, 06.2, 07, 08, 06.3 |
+| M2. Customer (T21 to T27 and T13 to T16 wired, see Phase B2) | SMS OTP, profile, enrollments, `qr-token`. | 03, 04, 05, 06, 06.1, 06.2, 07, 08, 06.3 |
 | M3. Counter | Staff invite, scanner, `scan/resolve`, visit, interval, idempotency. | 11 to 15, 17, 09 |
 | M4. Prize and expiry | Cycles, expiry, prize, redemption, reversal, scheduled jobs. | 10, 16, 27 |
 | M5. Dashboard and management | Owner components, dashboard, customers, customer detail, team, invite, counter QR. | 18 to 26 |
@@ -100,3 +120,7 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-31  T11  Adjusting  Tiago asked for adjustments; waiting for the details.
 2026-10-31  T11  In review  Adjusted: real OTP generated per number with 5 min validity, printed in the console; waiting for Tiago.
 2026-10-31  T11  Done  Approved by Tiago. Squash-merged into main.
+2026-10-31  T12  In progress  Started on branch task/T12-first-access.
+2026-10-31  T12  In review  First access screen 05 ready; waiting for Tiago.
+2026-11-01  T12  Done  Approved by Tiago. Squash-merged into main.
+2026-11-01  T17-T27  Approved  Phase B2 breakdown (customer backend before T13) approved by Tiago.
