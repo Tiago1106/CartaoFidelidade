@@ -13,7 +13,9 @@
     "test": "pnpm -r --if-present test",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
-    "typecheck": "pnpm -r --if-present typecheck"
+    "typecheck": "pnpm -r --if-present typecheck",
+    "db:migrate": "pnpm --filter @fregues/api db:migrate",
+    "db:codegen": "pnpm --filter @fregues/api db:codegen"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

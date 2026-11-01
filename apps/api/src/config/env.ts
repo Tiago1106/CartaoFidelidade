@@ -7,6 +7,12 @@ const schema = z.object({
   PORT: z.coerce.number().int().min(1).max(65535).default(3000),
   APP_URL: z.string().url().default('http://localhost:5173'),
   API_URL: z.string().url().default('http://localhost:3000'),
+  // Database. `DATABASE_URL` is the `app_user` role (subject to RLS), `DATABASE_URL_SYSTEM` is
+  // `app_system` (ignores RLS) and `DATABASE_URL_MIGRATE` is the owner that runs migrations.
+  // The passwords of the two roles are taken from these URLs by `pnpm db:migrate`.
+  DATABASE_URL: z.string().url().optional(),
+  DATABASE_URL_SYSTEM: z.string().url().optional(),
+  DATABASE_URL_MIGRATE: z.string().url().optional(),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).optional(),
 });
 
