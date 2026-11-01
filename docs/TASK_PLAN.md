@@ -56,7 +56,7 @@ Tiago wants to test real behavior together with each screen, so the customer sid
 
 | Id | Task | Deliverable | Rules | Status |
 |---|---|---|---|---|
-| T17 | API base | NestJS app in `apps/api`: env config validated, logs that never hold personal data, `GET /health`, error format and codes of `API.md` sections 1 and 2, Zod validation, OpenAPI, injectable `Clock`. Test per error code. | CLAUDE.md golden rules 6 and 8 | Pending |
+| T17 | API base | NestJS app in `apps/api`: env config validated, logs that never hold personal data, `GET /health`, error format and codes of `API.md` sections 1 and 2, Zod validation, OpenAPI, injectable `Clock`. Test per error code. | CLAUDE.md golden rules 6 and 8 | Done |
 | T18 | Database base | Roles `app_user` and `app_system`, plain SQL migration runner (`pnpm db:migrate`), `kysely-codegen`, `SET LOCAL` context helper inside a transaction, Testcontainers test harness. | D-001 | Pending |
 | T19 | Customer and auth tables | Migrations and RLS for `customers`, `otp_codes`, `phone_lockouts`, `sessions`, `sms_messages`. RLS tests (no context returns no rows, foreign `business_id` fails). | RN-AUT, RN-LGP | Pending |
 | T20 | Business, card and stamp tables | Migrations and RLS for `businesses`, `programs`, `business_customers`, `enrollments`, `cycles`, `stamps` (append-only trigger), `qr_tokens`. Isolation tests between business A and B. Seed (`pnpm db:seed`) with Maria and the three cards of the design. | RN-TEN, RN-CAR-04, golden rules 1 and 2 | Pending |
@@ -124,3 +124,6 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-10-31  T12  In review  First access screen 05 ready; waiting for Tiago.
 2026-11-01  T12  Done  Approved by Tiago. Squash-merged into main.
 2026-11-01  T17-T27  Approved  Phase B2 breakdown (customer backend before T13) approved by Tiago.
+2026-11-01  T17  In progress  Started on branch task/T17-api-base.
+2026-11-01  T17  In review  API base ready (NestJS, health, error format, logs, Clock); waiting for Tiago.
+2026-11-01  T17  Done  Approved by Tiago. Squash-merged into main.

@@ -34,7 +34,13 @@ docker compose up -d   # Postgres 16 on localhost:5432
 | `pnpm format`    | Format with Prettier            |
 | `pnpm typecheck` | `tsc --noEmit` in every package |
 
-`pnpm db:migrate` and `pnpm db:seed` arrive with milestone M0.
+`pnpm db:migrate` and `pnpm db:seed` arrive with T18 and T20.
+
+## API
+
+`pnpm --filter @fregues/api dev` starts the API on http://localhost:3000 (change it with `PORT`).
+`GET /health` tells that it is up and `GET /docs` shows the OpenAPI page. Errors follow
+`docs/API.md` sections 1 and 2. Logs never hold personal data (golden rule 8).
 
 ## Looking at screens in development
 

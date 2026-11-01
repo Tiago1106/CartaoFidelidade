@@ -1,0 +1,36 @@
+// Text that people read: error messages (and, later, e-mails). Keys are the error codes of
+// docs/API.md section 2; values are Brazilian Portuguese. Everything else in the API is English.
+// [Premissa] The texts are not in the documents; they are short and plain, and the app decides
+// the final wording from the `code`.
+export const errorMessages = {
+  VALIDATION_ERROR: 'Confira os dados informados.',
+  UNAUTHENTICATED: 'Entre para continuar.',
+  TOKEN_EXPIRED: 'Sua sessão venceu. Tente de novo.',
+  FORBIDDEN_ROLE: 'Você não tem permissão para fazer isso.',
+  STAFF_INACTIVE: 'Este acesso foi desativado.',
+  NOT_FOUND: 'Não encontramos o que você procura.',
+  RATE_LIMITED: 'Muitos pedidos. Tente de novo mais tarde.',
+  PHONE_NOT_SUPPORTED: 'Por enquanto, só números de celular do Brasil (+55).',
+  OTP_INVALID: 'Código incorreto. Tente de novo.',
+  OTP_EXPIRED: 'Código vencido. Peça um novo código.',
+  OTP_LOCKED: 'Muitas tentativas. Tente de novo em 15 minutos.',
+  INVALID_CREDENTIALS: 'E-mail ou senha incorretos.',
+  EMAIL_TAKEN: 'Este e-mail já está em uso.',
+  INVITE_INVALID: 'Este convite venceu ou já foi usado.',
+  QR_INVALID: 'Não reconhecemos este QR Code.',
+  QR_EXPIRED: 'Este QR Code venceu. Peça para o cliente mostrar o QR de novo.',
+  QR_ALREADY_USED: 'Este QR Code já foi usado.',
+  SCAN_SESSION_INVALID: 'A leitura venceu. Leia o QR Code de novo.',
+  CUSTOMER_NOT_FOUND: 'Não há conta com este celular.',
+  PROGRAM_NOT_ACTIVE: 'Este cartão está arquivado.',
+  STAMP_TOO_SOON: 'A próxima visita deste cliente ainda não pode ser registrada.',
+  PRIZE_NOT_AVAILABLE: 'Este prêmio já foi resgatado ou cancelado.',
+  PRIZE_EXPIRED: 'Este prêmio venceu.',
+  REVERSAL_NOT_ALLOWED: 'Não é possível estornar esta visita.',
+  ALREADY_REVERSED: 'Esta visita já foi estornada.',
+  PROGRAM_LIMIT_REACHED: 'Você chegou ao limite de cartões ativos.',
+  PROGRAM_HAS_HISTORY: 'Cartão com clientes não pode ser excluído. Arquive o cartão.',
+  IDEMPOTENCY_CONFLICT: 'Esta tentativa já foi usada com outros dados.',
+  BILLING_READ_ONLY: 'Seu plano está em modo somente leitura.',
+  INTERNAL_ERROR: 'Algo deu errado. Tente de novo.',
+} as const;
