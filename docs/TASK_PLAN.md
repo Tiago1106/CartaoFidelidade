@@ -57,7 +57,7 @@ Tiago wants to test real behavior together with each screen, so the customer sid
 | Id | Task | Deliverable | Rules | Status |
 |---|---|---|---|---|
 | T17 | API base | NestJS app in `apps/api`: env config validated, logs that never hold personal data, `GET /health`, error format and codes of `API.md` sections 1 and 2, Zod validation, OpenAPI, injectable `Clock`. Test per error code. | CLAUDE.md golden rules 6 and 8 | Done |
-| T18 | Database base | Roles `app_user` and `app_system`, plain SQL migration runner (`pnpm db:migrate`), `kysely-codegen`, `SET LOCAL` context helper inside a transaction, Testcontainers test harness. | D-001 | In review |
+| T18 | Database base | Roles `app_user` and `app_system`, plain SQL migration runner (`pnpm db:migrate`), `kysely-codegen`, `SET LOCAL` context helper inside a transaction, Testcontainers test harness. | D-001 | Done |
 | T19 | Customer and auth tables | Migrations and RLS for `customers`, `otp_codes`, `phone_lockouts`, `sessions`, `sms_messages`. RLS tests (no context returns no rows, foreign `business_id` fails). | RN-AUT, RN-LGP | Pending |
 | T20 | Business, card and stamp tables | Migrations and RLS for `businesses`, `programs`, `business_customers`, `enrollments`, `cycles`, `stamps` (append-only trigger), `qr_tokens`. Isolation tests between business A and B. Seed (`pnpm db:seed`) with Maria and the three cards of the design. | RN-TEN, RN-CAR-04, golden rules 1 and 2 | Pending |
 | T21 | OTP request | SMS provider interface plus a **console provider** (the code is printed in the API log, development only: same temporary exception of D-022, never in production). `POST /v1/customer/auth/otp/request`: +55 only, 3 per hour, 60 s between codes, same answer for new and existing numbers, hashed code. | RN-AUT-01, 02, 03, 05 | Pending |
@@ -129,3 +129,4 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-11-01  T17  Done  Approved by Tiago. Squash-merged into main.
 2026-11-01  T18  In progress  Started on branch task/T18-database-base.
 2026-11-01  T18  In review  Database base ready (roles, migrations, tenant context, Testcontainers); waiting for Tiago.
+2026-11-01  T18  Done  Approved by Tiago. Squash-merged into main.
