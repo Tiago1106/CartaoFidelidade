@@ -140,6 +140,12 @@ Responde `404` se o slug não existe. Não traz dados de clientes nem de equipe.
 
 Cria a conta se o número ainda não existe. `profileComplete = false` leva o app ao primeiro acesso. Erros: `OTP_INVALID`, `OTP_EXPIRED`, `OTP_LOCKED`.
 
+[Implementado na T22] `code` precisa ter 6 dígitos; qualquer outra forma é `VALIDATION_ERROR` e **não** conta como tentativa. `OTP_INVALID` traz `details.attemptsLeft`. Na quinta tentativa errada o código morre e o número é bloqueado por 15 minutos: a resposta é `423 OTP_LOCKED` com `details.retryAfterSeconds` e `Retry-After`. Durante o bloqueio até o código certo é recusado, e `otp/request` também. `OTP_EXPIRED` vale para "nenhum código, já usado, substituído por um novo ou vencido" (um código que foi substituído e é digitado depois conta como errado para o código novo). O refresh token não vai no corpo: vai no cookie `refresh_token` (`HttpOnly; SameSite=Lax; Path=/v1/customer/auth; Max-Age=7776000`, com `Secure` quando a API usa https). `profileComplete` é `true` quando o cliente já tem nome.
+
+`refresh` — sem corpo, usa o cookie → `200` com o mesmo formato de `otp/verify` (novo `accessToken` e novo cookie; o token usado deixa de valer e a sessão se renova por mais 90 dias). Sem cookie, token desconhecido, vencido, revogado ou de cliente anonimizado: `401 UNAUTHENTICATED` e o cookie é apagado. Reapresentar um refresh token já usado revoga todas as sessões daquele login (a "família"), inclusive a mais nova. [Premissa] Duas abas que renovam ao mesmo tempo com o mesmo token fazem uma delas perder a sessão: o app deve ter uma única renovação em andamento por vez.
+
+`logout` — sem corpo, usa o cookie → `204` e o cookie é apagado. Pode ser repetido, ou chamado sem cookie. Encerra só o login do aparelho, não os outros do mesmo cliente.
+
 ---
 
 ## 5. Cliente: conta, cartões e QR

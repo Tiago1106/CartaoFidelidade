@@ -19,6 +19,9 @@ const schema = z
     SMS_PROVIDER: z.enum(['console']).optional(),
     // Key of the hash of the SMS codes. In development a fixed one is used when it is missing.
     OTP_HASH_SECRET: z.string().min(16).optional(),
+    // Key that signs the access tokens (32 characters or more). In development a fixed one is used
+    // when it is missing.
+    JWT_SECRET: z.string().min(32).optional(),
     // How many proxies sit in front of the API. The limit per IP (RN-AUT-03) needs the real
     // address of the caller; with 0 the address of the connection itself is used.
     TRUST_PROXY_HOPS: z.coerce.number().int().min(0).max(5).default(0),
@@ -32,6 +35,13 @@ const schema = z
         code: 'custom',
         path: ['SMS_PROVIDER'],
         message: 'console is for development only',
+      });
+    }
+    if (!env.JWT_SECRET) {
+      context.addIssue({
+        code: 'custom',
+        path: ['JWT_SECRET'],
+        message: 'is required in production',
       });
     }
     if (!env.OTP_HASH_SECRET) {

@@ -155,6 +155,7 @@ export interface Sessions {
   business_id: string | null;
   created_at: Generated<Timestamp>;
   expires_at: Timestamp;
+  family_id: Generated<string>;
   id: Generated<string>;
   last_used_at: Generated<Timestamp>;
   principal_id: string;

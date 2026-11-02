@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { sql, type Transaction } from 'kysely';
 import type { DB } from '../db/types.generated';
+import { insertCustomerSession, type CustomerRow, type NewSession } from './session.repository';
 import { SYSTEM_DATABASE, type SystemDatabase } from './system-database';
 
 // The SQL of the SMS codes of the customer. It runs as `app_system` because the tables
@@ -25,6 +26,21 @@ export interface OtpOperations {
     createdAt: Date;
     expiresAt: Date;
   }): Promise<void>;
+
+  // Confirming a code (`otp/verify`).
+
+  /** The newest code of the number that was not used, replaced or expired at `now`. */
+  openCode(phone: string, now: Date): Promise<{ id: string; codeHash: string } | null>;
+  /** Counts a wrong attempt and returns how many the code has now. */
+  countWrongAttempt(codeId: string): Promise<number>;
+  /** The code is used up: it never works again. */
+  consumeCode(codeId: string, at: Date): Promise<void>;
+  /** Blocks the number until `until` (RN-AUT-02). */
+  lockPhone(phone: string, until: Date): Promise<void>;
+  /** The account of the number. A new number gets one (docs/API.md, `otp/verify`). */
+  findOrCreateCustomer(phone: string, at: Date): Promise<CustomerRow>;
+  /** Opens the session of the customer, in the same transaction that used the code. */
+  createSession(session: NewSession): Promise<void>;
 }
 
 function operations(trx: Transaction<DB>): OtpOperations {
@@ -79,6 +95,57 @@ function operations(trx: Transaction<DB>): OtpOperations {
         })
         .execute();
     },
+    async openCode(phone, now) {
+      const row = await trx
+        .selectFrom('otp_codes')
+        .select(['id', 'code_hash'])
+        .where('phone_e164', '=', phone)
+        .where('consumed_at', 'is', null)
+        .where('expires_at', '>', now)
+        .orderBy('created_at', 'desc')
+        .limit(1)
+        .executeTakeFirst();
+      return row ? { id: row.id, codeHash: row.code_hash } : null;
+    },
+    async countWrongAttempt(codeId) {
+      const row = await trx
+        .updateTable('otp_codes')
+        .set({ attempts: sql<number>`attempts + 1` })
+        .where('id', '=', codeId)
+        .returning('attempts')
+        .executeTakeFirstOrThrow();
+      return row.attempts;
+    },
+    async consumeCode(codeId, at) {
+      await trx
+        .updateTable('otp_codes')
+        .set({ consumed_at: at })
+        .where('id', '=', codeId)
+        .execute();
+    },
+    async lockPhone(phone, until) {
+      await trx
+        .insertInto('phone_lockouts')
+        .values({ phone_e164: phone, locked_until: until })
+        .onConflict((conflict) =>
+          conflict.column('phone_e164').doUpdateSet({ locked_until: until }),
+        )
+        .execute();
+    },
+    async findOrCreateCustomer(phone, at) {
+      await trx
+        .insertInto('customers')
+        .values({ phone_e164: phone, created_at: at })
+        .onConflict((conflict) => conflict.column('phone_e164').doNothing())
+        .execute();
+      const row = await trx
+        .selectFrom('customers')
+        .select(['id', 'phone_e164', 'name', 'email'])
+        .where('phone_e164', '=', phone)
+        .executeTakeFirstOrThrow();
+      return { id: row.id, phone: row.phone_e164, name: row.name, email: row.email };
+    },
+    createSession: (session) => insertCustomerSession(trx, session),
   };
 }
 

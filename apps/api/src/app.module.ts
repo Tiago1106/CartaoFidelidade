@@ -7,12 +7,15 @@ import {
   type Type,
 } from '@nestjs/common';
 import { CLOCK, type Clock } from './clock/clock';
-import { CustomerAuthController } from './customer-auth/customer-auth.controller';
+import { ACCESS_TOKEN_SECRET, AccessTokenService } from './customer-auth/access-token.service';
+import { COOKIE_SECURE, CustomerAuthController } from './customer-auth/customer-auth.controller';
+import { CustomerSessionService } from './customer-auth/customer-session.service';
 import { OTP_CONFIG, OtpService, type OtpConfig } from './customer-auth/otp.service';
 import { OTP_SENDER, type OtpSender } from './customer-auth/otp-sender';
 import { DATABASE, type Database } from './db/database';
 import { HealthController } from './health/health.controller';
 import { OtpRepository } from './system/otp.repository';
+import { SessionRepository } from './system/session.repository';
 import { SYSTEM_DATABASE, type SystemDatabase } from './system/system-database';
 
 const OWNED_DATABASES = Symbol('OWNED_DATABASES');
@@ -32,6 +35,10 @@ export interface CustomerAuthDeps {
   systemDb: SystemDatabase;
   sender: OtpSender;
   otp: OtpConfig;
+  /** Key that signs the access tokens. */
+  accessTokenSecret: string;
+  /** The refresh cookie carries `Secure` (the API is served over https). */
+  cookieSecure: boolean;
 }
 
 @Module({})
@@ -63,8 +70,13 @@ export class AppModule {
               { provide: SYSTEM_DATABASE, useValue: customerAuth.systemDb },
               { provide: OTP_SENDER, useValue: customerAuth.sender },
               { provide: OTP_CONFIG, useValue: customerAuth.otp },
+              { provide: ACCESS_TOKEN_SECRET, useValue: customerAuth.accessTokenSecret },
+              { provide: COOKIE_SECURE, useValue: customerAuth.cookieSecure },
               OtpRepository,
+              SessionRepository,
+              AccessTokenService,
               OtpService,
+              CustomerSessionService,
             ]
           : []),
         ...(deps.ownedDatabases?.length

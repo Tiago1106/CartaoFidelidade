@@ -21,6 +21,8 @@ import { createSystemDatabase, type SystemDatabase } from './system/system-datab
 
 /** Used when `OTP_HASH_SECRET` is not set, in development and in tests only. */
 const DEVELOPMENT_OTP_HASH_SECRET = 'development-only-otp-hash-secret';
+/** Used when `JWT_SECRET` is not set, in development and in tests only. */
+const DEVELOPMENT_JWT_SECRET = 'development-only-jwt-secret-of-32-chars-or-more';
 
 export interface AppOptions {
   env?: Env;
@@ -34,6 +36,8 @@ export interface AppOptions {
   otpSender?: OtpSender;
   /** Settings of the SMS code, instead of the ones of the environment. */
   otp?: Partial<OtpConfig>;
+  /** Key of the access tokens, instead of `JWT_SECRET`. */
+  jwtSecret?: string;
   /** Controllers added next to the real ones. For tests only. */
   extraControllers?: Type[];
 }
@@ -68,10 +72,18 @@ export async function createApp(options: AppOptions = {}): Promise<NestExpressAp
       env.OTP_HASH_SECRET ??
       (env.NODE_ENV === 'production' ? undefined : DEVELOPMENT_OTP_HASH_SECRET);
     if (!hashSecret) throw new Error('OTP_HASH_SECRET is not set.');
+    const accessTokenSecret =
+      options.jwtSecret ??
+      env.JWT_SECRET ??
+      (env.NODE_ENV === 'production' ? undefined : DEVELOPMENT_JWT_SECRET);
+    if (!accessTokenSecret) throw new Error('JWT_SECRET is not set.');
     customerAuth = {
       systemDb,
       sender: options.otpSender ?? createOtpSender(env),
       otp: { ...options.otp, hashSecret },
+      accessTokenSecret,
+      // The browser only keeps a `Secure` cookie from an https address (localhost aside).
+      cookieSecure: env.API_URL.startsWith('https:'),
     };
   }
 
