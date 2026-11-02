@@ -7,6 +7,8 @@ import { createDatabase, type Database } from '../db/database';
 
 export type SystemDatabase = Database;
 
+export const SYSTEM_DATABASE = Symbol('SYSTEM_DATABASE');
+
 export function createSystemDatabase(url: string): SystemDatabase {
   return createDatabase(url);
 }

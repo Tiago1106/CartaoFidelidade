@@ -127,6 +127,8 @@ Responde `404` se o slug não existe. Não traz dados de clientes nem de equipe.
 
 `otp/request` — corpo `{ "phone": "+5511912345678" }` → `202 { "retryAfterSeconds": 60 }`. A resposta é a mesma exista ou não conta para o número (RN-AUT-05). Erros: `PHONE_NOT_SUPPORTED`, `RATE_LIMITED` (3 por hora por número, por IP), `OTP_LOCKED`.
 
+[Implementado na T21] O código vale 5 minutos e um novo pedido invalida o anterior. `RATE_LIMITED` e `OTP_LOCKED` trazem `details.retryAfterSeconds` e o cabeçalho `Retry-After`. O limite por IP é de 20 pedidos por hora [Premissa para o valor, RN-AUT-03]; atrás de um proxy é preciso informar `TRUST_PROXY_HOPS`, senão todos os clientes parecem vir do mesmo endereço. O `retryAfterSeconds: 60` da resposta orienta o app (o botão "Reenviar código"); o servidor não recusa um pedido feito antes disso, só aplica o limite de 3 por hora. Se o provedor de SMS falhar, a resposta é `500 INTERNAL_ERROR`, o código daquele pedido é invalidado e a falha fica em `sms_messages`.
+
 `otp/verify` — corpo `{ "phone": "…", "code": "123456" }` → `200`:
 
 ```json

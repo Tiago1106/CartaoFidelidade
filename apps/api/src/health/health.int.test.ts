@@ -2,16 +2,12 @@ import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { createApp } from '../app';
 import { ManualClock } from '../clock/clock';
+import { loadEnv } from '../config/env';
 import { createDatabase } from '../db/database';
 import { createLogger } from '../logging/logger';
 import { createTestDatabase, type TestDatabase } from '../test/test-database';
 
-const env = {
-  NODE_ENV: 'test' as const,
-  PORT: 3000,
-  APP_URL: 'http://localhost:5173',
-  API_URL: 'http://localhost:3000',
-};
+const env = loadEnv({ NODE_ENV: 'test' });
 
 describe('GET /health with a database', () => {
   let t: TestDatabase;
