@@ -5,13 +5,51 @@
 
 import type { ColumnType } from "kysely";
 
+export type BillingStatus = "active" | "past_due" | "read_only" | "trialing";
+
+export type CycleStatus = "completed" | "expired" | "open";
+
+export type EnrollmentStatus = "active" | "archived";
+
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
 
 export type PrincipalType = "customer" | "staff";
 
+export type ProgramStatus = "active" | "archived";
+
+export type RedemptionStatus = "available" | "canceled" | "expired" | "redeemed";
+
+export type StaffRole = "employee" | "owner";
+
+export type StampMethod = "phone" | "qr";
+
+export type StampType = "credit" | "reversal";
+
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
+
+export interface BusinessCustomers {
+  business_id: string;
+  customer_id: string;
+  first_seen_at: Generated<Timestamp>;
+  marketing_opt_in_at: Timestamp | null;
+  marketing_opt_out_at: Timestamp | null;
+  marketing_source: string | null;
+}
+
+export interface Businesses {
+  billing_status: Generated<BillingStatus>;
+  cancel_at_period_end: Generated<boolean>;
+  category: string | null;
+  created_at: Generated<Timestamp>;
+  current_period_end: Timestamp | null;
+  id: Generated<string>;
+  name: string;
+  past_due_since: Timestamp | null;
+  slug: string;
+  trial_ends_at: Timestamp;
+}
 
 export interface Customers {
   anonymized_at: Timestamp | null;
@@ -22,6 +60,34 @@ export interface Customers {
   phone_e164: string;
   terms_accepted_at: Timestamp | null;
   terms_version: string | null;
+}
+
+export interface Cycles {
+  business_id: string;
+  completed_at: Timestamp | null;
+  enrollment_id: string;
+  expired_at: Timestamp | null;
+  expires_at: Timestamp | null;
+  id: Generated<string>;
+  last_stamp_at: Timestamp | null;
+  number: number;
+  reward_description: string;
+  reward_validity_days: number;
+  stamps_required: number;
+  started_at: Generated<Timestamp>;
+  status: Generated<CycleStatus>;
+  validity_days: number;
+}
+
+export interface Enrollments {
+  business_id: string;
+  created_at: Generated<Timestamp>;
+  current_cycle_id: string | null;
+  customer_id: string;
+  id: Generated<string>;
+  last_stamp_at: Timestamp | null;
+  program_id: string;
+  status: Generated<EnrollmentStatus>;
 }
 
 export interface OtpCodes {
@@ -38,6 +104,45 @@ export interface OtpCodes {
 export interface PhoneLockouts {
   locked_until: Timestamp;
   phone_e164: string;
+}
+
+export interface Programs {
+  archived_at: Timestamp | null;
+  business_id: string;
+  card_color: Generated<string>;
+  created_at: Generated<Timestamp>;
+  id: Generated<string>;
+  min_interval_minutes: Generated<number>;
+  name: string;
+  reward_description: string;
+  reward_validity_days: Generated<number>;
+  stamps_required: number;
+  status: Generated<ProgramStatus>;
+  validity_days: Generated<number>;
+}
+
+export interface QrTokens {
+  consumed_at: Timestamp | null;
+  created_at: Generated<Timestamp>;
+  customer_id: string;
+  expires_at: Timestamp;
+  id: Generated<string>;
+}
+
+export interface Redemptions {
+  business_id: string;
+  cancel_reason: string | null;
+  canceled_at: Timestamp | null;
+  customer_id: string;
+  cycle_id: string;
+  earned_at: Timestamp;
+  enrollment_id: string;
+  expires_at: Timestamp;
+  id: Generated<string>;
+  redeemed_at: Timestamp | null;
+  redeemed_by_staff_id: string | null;
+  reward_description: string;
+  status: Generated<RedemptionStatus>;
 }
 
 export interface SchemaMigrations {
@@ -70,11 +175,49 @@ export interface SmsMessages {
   status: string;
 }
 
+export interface Staff {
+  business_id: string;
+  created_at: Generated<Timestamp>;
+  deactivated_at: Timestamp | null;
+  email: string;
+  email_verified_at: Timestamp | null;
+  id: Generated<string>;
+  is_active: Generated<boolean>;
+  last_login_at: Timestamp | null;
+  name: string;
+  password_hash: string | null;
+  role: StaffRole;
+}
+
+export interface Stamps {
+  business_id: string;
+  created_at: Generated<Timestamp>;
+  customer_id: string;
+  cycle_id: string;
+  enrollment_id: string;
+  id: Generated<string>;
+  idempotency_key: string | null;
+  method: StampMethod | null;
+  reason: string | null;
+  reverses_stamp_id: string | null;
+  staff_id: string;
+  type: Generated<StampType>;
+}
+
 export interface DB {
+  business_customers: BusinessCustomers;
+  businesses: Businesses;
   customers: Customers;
+  cycles: Cycles;
+  enrollments: Enrollments;
   otp_codes: OtpCodes;
   phone_lockouts: PhoneLockouts;
+  programs: Programs;
+  qr_tokens: QrTokens;
+  redemptions: Redemptions;
   schema_migrations: SchemaMigrations;
   sessions: Sessions;
   sms_messages: SmsMessages;
+  staff: Staff;
+  stamps: Stamps;
 }

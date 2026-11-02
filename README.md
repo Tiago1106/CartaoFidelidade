@@ -34,14 +34,13 @@ docker compose up -d   # Postgres 16 on localhost:5432
 | `pnpm format`    | Format with Prettier            |
 | `pnpm typecheck` | `tsc --noEmit` in every package |
 
-`pnpm db:seed` arrives with T20.
-
 ## Database
 
 ```bash
 cp .env.example .env
 docker compose up -d     # Postgres 16 on localhost:5432
 pnpm db:migrate          # applies apps/api/migrations and sets the passwords of the two roles
+pnpm db:seed             # sample data of the design: Maria (+55 11 90000-0000) and her 3 cards
 pnpm db:codegen          # regenerates the Kysely types after a migration
 ```
 

@@ -15,6 +15,7 @@
     "format": "prettier --write .",
     "typecheck": "pnpm -r --if-present typecheck",
     "db:migrate": "pnpm --filter @fregues/api db:migrate",
+    "db:seed": "pnpm --filter @fregues/api db:seed",
     "db:codegen": "pnpm --filter @fregues/api db:codegen"
   },
   "devDependencies": {

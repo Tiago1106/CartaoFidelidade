@@ -211,7 +211,7 @@ ALTER TABLE enrollments
 Notas:
 
 - O ciclo é criado **na primeira visita** (e não na matrícula), copiando as regras atuais do cartão. Antes disso, `current_cycle_id` é nulo.
-- `expires_at` é recalculado a cada visita e a cada estorno: `(date(last_stamp_at AT TIME ZONE 'America/Sao_Paulo') + validity_days + 1) AT TIME ZONE 'America/Sao_Paulo'`, o que equivale a "vale até o fim do dia" (RN-VAL-04).
+- `expires_at` é recalculado a cada visita e a cada estorno: `((date(last_stamp_at AT TIME ZONE 'America/Sao_Paulo') + validity_days + 1)::timestamp) AT TIME ZONE 'America/Sao_Paulo'`, o que equivale a "vale até o fim do dia" (RN-VAL-04). O resultado é o instante em que o dia seguinte começa em São Paulo (`expires_at` é exclusivo). [Corrigido na T20: sem o `::timestamp`, `date AT TIME ZONE` lê a data no fuso da sessão do banco e o horário sai errado. Vale também para `redemptions.expires_at`.]
 
 ---
 
@@ -232,8 +232,8 @@ CREATE TABLE stamps (                                         -- APPEND-ONLY
   idempotency_key     text,
   created_at          timestamptz NOT NULL DEFAULT now(),
   CHECK ( (type = 'credit'   AND method IS NOT NULL AND reverses_stamp_id IS NULL AND reason IS NULL)
-       OR (type = 'reversal' AND method IS NULL AND reverses_stamp_id IS NOT NULL AND length(reason) >= 3) )
-);
+       OR (type = 'reversal' AND method IS NULL AND reverses_stamp_id IS NOT NULL AND reason IS NOT NULL AND length(reason) >= 3) )
+);  -- corrigido na T20: sem `reason IS NOT NULL`, um motivo nulo passava (CHECK nulo é aprovado)
 -- Uma visita só é estornada uma vez (RN-EST-03)
 CREATE UNIQUE INDEX stamps_one_reversal ON stamps (reverses_stamp_id) WHERE type = 'reversal';
 CREATE UNIQUE INDEX stamps_idempotency  ON stamps (business_id, idempotency_key) WHERE idempotency_key IS NOT NULL;
