@@ -8,6 +8,7 @@
     "build": "tsup src/main.ts --format esm --out-dir dist --clean",
     "start": "node dist/main.js",
     "db:migrate": "tsx --env-file-if-exists=../../.env src/db/migrate-cli.ts",
+    "db:seed": "tsx --env-file-if-exists=../../.env src/db/seed-cli.ts",
     "db:codegen": "node --env-file-if-exists=../../.env node_modules/kysely-codegen/dist/cli/bin.js --dialect postgres --url \"env(DATABASE_URL_MIGRATE)\" --out-file src/db/types.generated.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
