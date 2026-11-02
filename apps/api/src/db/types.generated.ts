@@ -9,7 +9,36 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
 
+export type PrincipalType = "customer" | "staff";
+
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
+
+export interface Customers {
+  anonymized_at: Timestamp | null;
+  created_at: Generated<Timestamp>;
+  email: string | null;
+  id: Generated<string>;
+  name: string | null;
+  phone_e164: string;
+  terms_accepted_at: Timestamp | null;
+  terms_version: string | null;
+}
+
+export interface OtpCodes {
+  attempts: Generated<number>;
+  code_hash: string;
+  consumed_at: Timestamp | null;
+  created_at: Generated<Timestamp>;
+  expires_at: Timestamp;
+  id: Generated<string>;
+  ip: string | null;
+  phone_e164: string;
+}
+
+export interface PhoneLockouts {
+  locked_until: Timestamp;
+  phone_e164: string;
+}
 
 export interface SchemaMigrations {
   applied_at: Generated<Timestamp>;
@@ -17,6 +46,35 @@ export interface SchemaMigrations {
   name: string;
 }
 
+export interface Sessions {
+  business_id: string | null;
+  created_at: Generated<Timestamp>;
+  expires_at: Timestamp;
+  id: Generated<string>;
+  last_used_at: Generated<Timestamp>;
+  principal_id: string;
+  principal_type: PrincipalType;
+  refresh_token_hash: string;
+  revoked_at: Timestamp | null;
+  user_agent: string | null;
+}
+
+export interface SmsMessages {
+  cost_micro_usd: number | null;
+  created_at: Generated<Timestamp>;
+  id: Generated<string>;
+  phone_e164: string;
+  provider: string;
+  provider_message_id: string | null;
+  purpose: Generated<string>;
+  status: string;
+}
+
 export interface DB {
+  customers: Customers;
+  otp_codes: OtpCodes;
+  phone_lockouts: PhoneLockouts;
   schema_migrations: SchemaMigrations;
+  sessions: Sessions;
+  sms_messages: SmsMessages;
 }

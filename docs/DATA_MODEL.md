@@ -426,7 +426,9 @@ CREATE POLICY customer_self_update ON customers FOR UPDATE
   USING (id = nullif(current_setting('app.customer_id', true), '')::uuid);
 ```
 
-Tabelas sem RLS e acessadas só por `app_system`: `otp_codes`, `phone_lockouts`, `qr_tokens`, `sessions`, `sms_messages`, `billing_events`. `plans` é leitura pública.
+[Premissa, T19] Os dois trechos acima se contradizem: a política `customer_self_update` dá `UPDATE` ao cliente, mas o texto diz que as escritas do cliente passam por `app_system`. Foi seguido o texto: `customers` só tem a política de leitura `customer_self`, e `app_user` não tem `INSERT`, `UPDATE` nem `DELETE` nela. A política `business_reads_own_customers` entra na T20, junto com `business_customers`. As chaves primárias das tabelas têm `DEFAULT gen_random_uuid()`.
+
+Tabelas sem RLS e acessadas só por `app_system` (`app_user` não tem nenhum direito sobre elas): `otp_codes`, `phone_lockouts`, `qr_tokens`, `sessions`, `sms_messages`, `billing_events`. `plans` é leitura pública.
 
 **Testes obrigatórios de RLS**: (1) com contexto do negócio A, nenhuma consulta devolve dados do B; (2) sem contexto, nenhuma tabela devolve linhas; (3) `INSERT` com `business_id` de outro negócio falha; (4) `UPDATE`/`DELETE` em `stamps` falha para qualquer papel.
 
