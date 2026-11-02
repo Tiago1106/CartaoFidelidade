@@ -76,6 +76,18 @@ curl -X POST http://localhost:3000/v1/customer/auth/otp/request \
 The code works for 5 minutes and only the last one is valid. A number can ask for 3 codes per
 hour, and an IP address for 20. The console sender refuses to run outside development.
 
+Then confirm it. The refresh token comes in a cookie, so keep a cookie jar (`-c`/`-b`):
+
+```bash
+curl -c jar.txt -X POST http://localhost:3000/v1/customer/auth/otp/verify \
+  -H "Content-Type: application/json" -d '{"phone":"+5511900000000","code":"482913"}'
+curl -b jar.txt -c jar.txt -X POST http://localhost:3000/v1/customer/auth/refresh
+curl -b jar.txt -c jar.txt -X POST http://localhost:3000/v1/customer/auth/logout
+```
+
+Five wrong codes kill the code and lock the number for 15 minutes. Each `refresh` gives a new
+refresh token and the old one stops working; showing an old one again ends that whole login.
+
 ## Looking at screens in development
 
 The customer app uses a simulated session until the API exists. In `pnpm dev`, open any

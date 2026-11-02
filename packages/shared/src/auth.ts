@@ -23,3 +23,32 @@ export type OtpRequest = z.infer<typeof otpRequestSchema>;
 export interface OtpRequestResponse {
   retryAfterSeconds: number;
 }
+
+/**
+ * `POST /v1/customer/auth/otp/verify`. The code must be 6 digits: anything else is a
+ * `VALIDATION_ERROR` and does not count as a wrong attempt.
+ */
+export const otpVerifySchema = z.object({
+  phone: z.string().max(32),
+  code: z.string().regex(new RegExp(`^\\d{${OTP_CODE_LENGTH}}$`)),
+});
+export type OtpVerify = z.infer<typeof otpVerifySchema>;
+
+/** The customer as the sign-in answers it. */
+export interface AuthCustomer {
+  id: string;
+  phone: string;
+  /** `null` until the first access is done (RN-ENT-07). */
+  name: string | null;
+  email: string | null;
+  /** `false` takes the app to the first access screen. */
+  profileComplete: boolean;
+}
+
+/** Answer of `otp/verify` and of `refresh` (`200`). The refresh token goes in a cookie, not here. */
+export interface AuthSessionResponse {
+  accessToken: string;
+  /** Seconds until the access token expires. */
+  expiresIn: number;
+  customer: AuthCustomer;
+}

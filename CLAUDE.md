@@ -95,7 +95,7 @@ Scripts na raiz (rodam em todos os pacotes quando o pacote tem o script):
 
 ## Variáveis de ambiente (lista de partida)
 
-`DATABASE_URL` (papel `app_user`), `DATABASE_URL_SYSTEM` (papel `app_system`), `DATABASE_URL_MIGRATE` (dono das tabelas), `OTP_HASH_SECRET`, `TRUST_PROXY_HOPS`, `JWT_SECRET`, `COOKIE_SECRET`, `APP_URL`, `API_URL`, `SMS_PROVIDER` e credenciais do provedor, `EMAIL_FROM` e credenciais de e-mail, `MP_ACCESS_TOKEN`, `MP_WEBHOOK_SECRET`, `QR_TOKEN_SECRET`, `SENTRY_DSN`. Mantenha um `.env.example` sem valores reais.
+`DATABASE_URL` (papel `app_user`), `DATABASE_URL_SYSTEM` (papel `app_system`), `DATABASE_URL_MIGRATE` (dono das tabelas), `OTP_HASH_SECRET`, `TRUST_PROXY_HOPS`, `JWT_SECRET`, `APP_URL`, `API_URL`, `SMS_PROVIDER` e credenciais do provedor, `EMAIL_FROM` e credenciais de e-mail, `MP_ACCESS_TOKEN`, `MP_WEBHOOK_SECRET`, `QR_TOKEN_SECRET`, `SENTRY_DSN`. Mantenha um `.env.example` sem valores reais.
 
 ## Interface e sistema de design
 
