@@ -59,6 +59,23 @@ pnpm db:codegen          # regenerates the Kysely types after a migration
 `GET /health` tells that it is up and `GET /docs` shows the OpenAPI page. Errors follow
 `docs/API.md` sections 1 and 2. Logs never hold personal data (golden rule 8).
 
+### Signing in as a customer (development)
+
+There is no SMS provider yet. With `SMS_PROVIDER=console` (the default in development), asking
+for a code prints it in the **terminal where the API runs**:
+
+```
+[OTP simulado] +5511900000000 -> 482913 (vale 5 min, até 14:32:10)
+```
+
+```bash
+curl -X POST http://localhost:3000/v1/customer/auth/otp/request \
+  -H "Content-Type: application/json" -d '{"phone":"+5511900000000"}'
+```
+
+The code works for 5 minutes and only the last one is valid. A number can ask for 3 codes per
+hour, and an IP address for 20. The console sender refuses to run outside development.
+
 ## Looking at screens in development
 
 The customer app uses a simulated session until the API exists. In `pnpm dev`, open any

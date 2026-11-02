@@ -51,7 +51,7 @@ export async function createTestDatabase(
   };
   const admin = new pg.Pool({ connectionString: urls.admin, max: 2 });
   const db = createDatabase(urls.appUser, { max: 4 });
-  const system = createDatabase(urls.appSystem, { max: 2 });
+  const system = createDatabase(urls.appSystem, { max: 12 });
 
   return {
     admin,

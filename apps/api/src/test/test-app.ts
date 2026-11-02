@@ -4,6 +4,7 @@ import { Writable } from 'node:stream';
 import { z } from 'zod';
 import { createApp } from '../app';
 import { ManualClock } from '../clock/clock';
+import { loadEnv } from '../config/env';
 import { AppError, type ErrorCode } from '../errors/app-error';
 import { ZodValidationPipe } from '../http/zod-validation.pipe';
 import { createLogger } from '../logging/logger';
@@ -59,12 +60,7 @@ export async function createTestApp(extra: Type[] = []): Promise<TestApp> {
     },
   });
   const app = await createApp({
-    env: {
-      NODE_ENV: 'test',
-      PORT: 3000,
-      APP_URL: 'http://localhost:5173',
-      API_URL: 'http://localhost:3000',
-    },
+    env: loadEnv({ NODE_ENV: 'test' }),
     clock,
     logger: createLogger({ destination }),
     extraControllers: [ThrowingController, ...extra],
