@@ -114,6 +114,7 @@ export async function createApp(options: AppOptions = {}): Promise<NestExpressAp
       .setTitle('Freguês API')
       .setDescription('REST contract v1. See docs/API.md.')
       .setVersion('1')
+      .addBearerAuth()
       .build(),
   );
   SwaggerModule.setup('docs', app, document);
