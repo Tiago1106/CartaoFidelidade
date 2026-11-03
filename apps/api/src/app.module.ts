@@ -9,11 +9,15 @@ import {
 import { CLOCK, type Clock } from './clock/clock';
 import { ACCESS_TOKEN_SECRET, AccessTokenService } from './customer-auth/access-token.service';
 import { COOKIE_SECURE, CustomerAuthController } from './customer-auth/customer-auth.controller';
+import { CustomerAuthGuard } from './customer-auth/customer-auth.guard';
+import { CustomerProfileController } from './customer-auth/customer-profile.controller';
+import { CustomerProfileService } from './customer-auth/customer-profile.service';
 import { CustomerSessionService } from './customer-auth/customer-session.service';
 import { OTP_CONFIG, OtpService, type OtpConfig } from './customer-auth/otp.service';
 import { OTP_SENDER, type OtpSender } from './customer-auth/otp-sender';
 import { DATABASE, type Database } from './db/database';
 import { HealthController } from './health/health.controller';
+import { CustomerRepository } from './system/customer.repository';
 import { OtpRepository } from './system/otp.repository';
 import { SessionRepository } from './system/session.repository';
 import { SYSTEM_DATABASE, type SystemDatabase } from './system/system-database';
@@ -60,6 +64,8 @@ export class AppModule {
       controllers: [
         HealthController,
         ...(customerAuth ? [CustomerAuthController] : []),
+        // The profile is read as `app_user`, so it needs that connection too.
+        ...(customerAuth && deps.db ? [CustomerProfileController] : []),
         ...(deps.extraControllers ?? []),
       ],
       providers: [
@@ -77,6 +83,9 @@ export class AppModule {
               AccessTokenService,
               OtpService,
               CustomerSessionService,
+              CustomerAuthGuard,
+              CustomerRepository,
+              ...(deps.db ? [CustomerProfileService] : []),
             ]
           : []),
         ...(deps.ownedDatabases?.length

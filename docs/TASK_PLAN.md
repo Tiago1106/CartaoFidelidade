@@ -62,7 +62,7 @@ Tiago wants to test real behavior together with each screen, so the customer sid
 | T20 | Business, card and stamp tables | Migrations and RLS for `businesses`, `programs`, `business_customers`, `enrollments`, `cycles`, `stamps` (append-only trigger), `qr_tokens`. Isolation tests between business A and B. Seed (`pnpm db:seed`) with Maria and the three cards of the design. | RN-TEN, RN-CAR-04, golden rules 1 and 2 | Done |
 | T21 | OTP request | SMS provider interface plus a **console provider** (the code is printed in the API log, development only: same temporary exception of D-022, never in production). `POST /v1/customer/auth/otp/request`: +55 only, 3 per hour, 60 s between codes, same answer for new and existing numbers, hashed code. | RN-AUT-01, 02, 03, 05 | Done |
 | T22 | OTP verify and session | `POST .../otp/verify` (5 attempts, 15 min lock, single use, 5 min validity), access JWT (`jose`), opaque refresh in an `HttpOnly` cookie, `refresh` with rotation, `logout`. | RN-AUT-02, RN-ENT-03 | Done |
-| T23 | Customer profile | `GET` and `PATCH /v1/customer/me`: first access sends only `name` and `acceptTerms`, with terms version and date recorded. `email` optional. | RN-ENT-07, 08, RN-LGP-02 | Pending |
+| T23 | Customer profile | `GET` and `PATCH /v1/customer/me`: first access sends only `name` and `acceptTerms`, with terms version and date recorded. `email` optional. | RN-ENT-07, 08, RN-LGP-02 | Done |
 | T24 | Enrollments | `GET /v1/customer/enrollments` and `/:id` (progress, validity, prize, history) and `POST .../businesses/:slug/join`. Expiry resolved with the `Clock` (`DATA_MODEL` 10.3). | RN-ENT-02, RN-VAL | Pending |
 | T25 | Customer QR token | `POST /v1/customer/qr-token`: 45 s expiry, renewed every 30 s, single use, hashed, only the last one valid. | RN-QR | Pending |
 | T26 | Dev environment | One command brings everything up: Postgres, migrations, seed, API and web (`pnpm dev`), web talks to the API (proxy or CORS), `.env.example` updated, README. | CLAUDE.md "Comandos" | Pending |
@@ -142,3 +142,6 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-11-02  T22  In progress  Started on branch task/T22-otp-verify-session.
 2026-11-02  T22  In review  OTP verify, refresh and logout ready (rotation, reuse revocation, lock); waiting for Tiago.
 2026-11-02  T22  Done  Approved by Tiago. Squash-merged into main.
+2026-11-02  T23  In progress  Started on branch task/T23-customer-profile.
+2026-11-02  T23  In review  Customer profile (guard, GET and PATCH /v1/customer/me, Terms recorded) ready; waiting for Tiago.
+2026-11-03  T23  Done  Approved by Tiago. Squash-merged into main.

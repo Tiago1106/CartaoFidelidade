@@ -85,6 +85,14 @@ curl -b jar.txt -c jar.txt -X POST http://localhost:3000/v1/customer/auth/refres
 curl -b jar.txt -c jar.txt -X POST http://localhost:3000/v1/customer/auth/logout
 ```
 
+The profile needs the access token (`accessToken` of the answer above). A new account has no
+name yet; the first access sends the name and the acceptance of the Terms:
+
+```bash
+curl http://localhost:3000/v1/customer/me -H "Authorization: Bearer $TOKEN"
+curl -X PATCH http://localhost:3000/v1/customer/me -H "Authorization: Bearer $TOKEN"   -H "Content-Type: application/json" -d '{"name":"Carlos Mendes","acceptTerms":true}'
+```
+
 Five wrong codes kill the code and lock the number for 15 minutes. Each `refresh` gives a new
 refresh token and the old one stops working; showing an old one again ends that whole login.
 
