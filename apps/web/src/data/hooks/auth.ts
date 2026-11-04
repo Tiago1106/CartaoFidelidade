@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { requestOtp, verifyOtp } from '../auth';
 import { saveFirstAccessName } from '../firstAccess';
 
-// Phase B: simulated. In Phase C these call `/v1/customer/auth/otp/request` and `.../verify`.
+// Calls to `/v1/customer/auth/otp/request`, `.../verify` and `PATCH /v1/customer/me`.
 
 /** Asks for an SMS code for a +55 number. */
 export function useRequestOtp() {

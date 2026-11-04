@@ -39,6 +39,7 @@ export const messages = {
       otpInvalid: 'Código incorreto. Tente de novo.',
       otpExpired: 'Código vencido. Peça um novo código.',
       otpLocked: 'Muitas tentativas. Tente de novo em 15 minutos.',
+      network: 'Sem conexão. Confira a internet e tente de novo.',
       generic: 'Algo deu errado. Tente de novo.',
     },
   },

@@ -1,8 +1,9 @@
-import { fakeRequest } from './fakeRequest';
+import type { CustomerProfile } from '@fregues/shared';
+import { api } from '@/api/client';
 
-// Simulated first access (Phase B, decision D-008). RN-ENT-07: a new account gives only a name.
-// RN-ENT-08: the Terms were accepted on the phone screen, so the app sends `acceptTerms: true`.
-// Phase C replaces this with `PATCH /v1/customer/me`.
+// First access (docs/API.md section 5). RN-ENT-07: a new account gives only a name.
+// RN-ENT-08: the Terms were accepted on the phone screen, so the app sends `acceptTerms: true`;
+// the server records the version and the date.
 
 export const NAME_MAX_LENGTH = 60;
 
@@ -12,7 +13,7 @@ export function cleanName(name: string): string {
 }
 
 /** `PATCH /v1/customer/me` with `{ name, acceptTerms: true }` */
-export async function saveFirstAccessName(name: string): Promise<{ name: string }> {
+export function saveFirstAccessName(name: string): Promise<CustomerProfile> {
   const clean = cleanName(name).slice(0, NAME_MAX_LENGTH);
-  return fakeRequest({ name: clean });
+  return api.patch('/customer/me', { auth: true, body: { name: clean, acceptTerms: true } });
 }

@@ -1,10 +1,10 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { configureSimulatedAuth, requestOtp, resetSimulatedAuth } from '@/data/auth';
+import { requestOtp } from '@/data/auth';
 import { renderRoutes } from '@/test/renderRoutes';
 
-/** The code the simulation generates in these tests. */
+/** The code the fake API sends in these tests (`test/fakeApi.ts`). */
 const CODE = '482913';
 const existing = '+5511900000000';
 const stranger = '+5521987654321';
@@ -24,8 +24,6 @@ function tick(seconds: number) {
 }
 
 beforeEach(() => {
-  resetSimulatedAuth();
-  configureSimulatedAuth({ generateCode: () => CODE, announce: () => {} });
   vi.useFakeTimers({ shouldAdvanceTime: true });
 });
 afterEach(() => vi.useRealTimers());

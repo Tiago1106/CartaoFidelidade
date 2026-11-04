@@ -28,7 +28,7 @@ export function SignUpPage() {
     event.preventDefault();
     if (!filled || save.isPending) return;
     // The session opens fully and the guard sends the customer Home.
-    save.mutate(name, { onSuccess: () => completeSignUp() });
+    save.mutate(name, { onSuccess: (customer) => completeSignUp(customer) });
   };
 
   // The account has no name yet, so leaving the step ends the half-open session.

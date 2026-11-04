@@ -66,7 +66,7 @@ Tiago wants to test real behavior together with each screen, so the customer sid
 | T24 | Enrollments | `GET /v1/customer/enrollments` and `/:id` (progress, validity, prize, history) and `POST .../businesses/:slug/join`. Expiry resolved with the `Clock` (`DATA_MODEL` 10.3). | RN-ENT-02, RN-VAL | Done |
 | T25 | Customer QR token | `POST /v1/customer/qr-token`: 45 s expiry, renewed every 30 s, single use, hashed, only the last one valid. | RN-QR | Done |
 | T26 | Dev environment | One command brings everything up: Postgres, migrations, seed, API and web (`pnpm dev`), web talks to the API (proxy or CORS), `.env.example` updated, README. | CLAUDE.md "Comandos" | Done |
-| T27 | Wire sign-in and first access | Web API client (TanStack Query, access token in memory, silent refresh). Screens 03, 04 and 05 call the real endpoints. The simulated sign-in (`data/auth.ts`, `data/firstAccess.ts`) is deleted. The code is read from the API log. | RN-AUT, RN-ENT-07 | Pending |
+| T27 | Wire sign-in and first access | Web API client (TanStack Query, access token in memory, silent refresh). Screens 03, 04 and 05 call the real endpoints. The simulated sign-in (`data/auth.ts`, `data/firstAccess.ts`) is deleted. The code is read from the API log. | RN-AUT, RN-ENT-07 | In review |
 
 After T27, T13 to T16 follow as in Phase B, but each one is **built already wired** to T24 and T25 (the fixtures stop being used). What cannot be tested yet: registering visits, prizes and reversal need M3 and M4. Until then the seed holds the stamps already shown in the design.
 
@@ -149,3 +149,5 @@ One line per status change, newest on top. Format: `YYYY-MM-DD  Txx  status  not
 2026-11-04  T24  Done  Approved by Tiago in advance (backend tasks without screens). Squash-merged into main.
 2026-11-04  T25  Done  Backend task without a screen: Tiago asked to go on without approval. Squash-merged into main.
 2026-11-04  T26  Done  Backend/tooling task without a screen: Tiago asked to go on without approval. Squash-merged into main.
+2026-11-04  T27  In progress  Started on branch task/T27-wire-sign-in.
+2026-11-04  T27  In review  Screens 03, 04 and 05 wired to the real API; simulation deleted; waiting for Tiago.

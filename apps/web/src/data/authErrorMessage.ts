@@ -1,5 +1,5 @@
 import { messages } from '@/messages/pt-BR';
-import { ApiError } from './errors';
+import { ApiError } from '@/api/errors';
 
 /** User-facing text for an error of the sign-in (docs/API.md, error codes). */
 export function authErrorMessage(error: unknown): string {
@@ -16,6 +16,8 @@ export function authErrorMessage(error: unknown): string {
       return text.otpExpired;
     case 'OTP_LOCKED':
       return text.otpLocked;
+    case 'NETWORK_ERROR':
+      return text.network;
     default:
       return text.generic;
   }

@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import type { SessionStatus } from './session/SessionProvider';
 import { renderRoutes } from './test/renderRoutes';
 
-function renderAt(path: string, status: SessionStatus) {
+function renderAt(path: string, status: Exclude<SessionStatus, 'loading'>) {
   const { router, container } = renderRoutes([path], status);
   const screenName = () =>
     container.querySelector('[data-screen]')?.getAttribute('data-screen') ?? null;

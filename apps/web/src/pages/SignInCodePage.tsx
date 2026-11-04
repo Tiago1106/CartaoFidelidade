@@ -48,7 +48,7 @@ function SignInCode({ phone, retryAfterSeconds }: SignInCodeState) {
       { phone, code },
       {
         // RN-ENT-07: a new account still has to give a name, so the session is half open.
-        onSuccess: ({ customer }) => signIn({ isNewAccount: !customer.profileComplete }),
+        onSuccess: (session) => signIn(session),
         onError: (e) => setError(authErrorMessage(e)),
       },
     );

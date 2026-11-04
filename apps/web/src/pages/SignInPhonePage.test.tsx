@@ -1,10 +1,8 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, describe, expect, it } from 'vitest';
-import { requestOtp, resetSimulatedAuth } from '@/data/auth';
+import { describe, expect, it } from 'vitest';
+import { requestOtp } from '@/data/auth';
 import { renderRoutes } from '@/test/renderRoutes';
-
-beforeEach(() => resetSimulatedAuth());
 
 const phoneField = () => screen.getByLabelText('Celular');
 const submit = () => screen.getByRole('button', { name: 'Enviar código' });

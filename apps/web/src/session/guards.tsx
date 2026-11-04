@@ -1,9 +1,13 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useSession } from './SessionProvider';
 
+// While the app asks the server about the session (`loading`) no guard decides anything: sending
+// the person to the welcome screen for a moment would flash it for who is already signed in.
+
 /** Routes of the signed-in customer: Home, My QR and Profile. */
 export function RequireSession() {
   const { status } = useSession();
+  if (status === 'loading') return null;
   if (status === 'signed-out') return <Navigate to="/welcome" replace />;
   if (status === 'needs-name') return <Navigate to="/sign-up" replace />;
   return <Outlet />;
@@ -12,6 +16,7 @@ export function RequireSession() {
 /** Welcome and sign-in: only for who is not signed in. Everyone else goes Home. */
 export function PublicOnly() {
   const { status } = useSession();
+  if (status === 'loading') return null;
   if (status === 'signed-in') return <Navigate to="/" replace />;
   if (status === 'needs-name') return <Navigate to="/sign-up" replace />;
   return <Outlet />;
@@ -20,6 +25,7 @@ export function PublicOnly() {
 /** The name step shows only right after the SMS code of a new account (RN-ENT-07). */
 export function RequireNameStep() {
   const { status } = useSession();
+  if (status === 'loading') return null;
   if (status === 'signed-in') return <Navigate to="/" replace />;
   if (status === 'signed-out') return <Navigate to="/sign-in" replace />;
   return <Outlet />;

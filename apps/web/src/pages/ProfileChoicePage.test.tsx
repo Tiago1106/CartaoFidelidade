@@ -4,7 +4,11 @@ import { describe, expect, it } from 'vitest';
 import type { SessionStatus } from '@/session/SessionProvider';
 import { renderRoutes } from '@/test/renderRoutes';
 
-function renderAt(entries: string[], status: SessionStatus = 'signed-out', index?: number) {
+function renderAt(
+  entries: string[],
+  status: Exclude<SessionStatus, 'loading'> = 'signed-out',
+  index?: number,
+) {
   return renderRoutes(entries, status, index).router;
 }
 
