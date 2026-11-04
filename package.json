@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "pnpm -r --if-present --parallel dev",
+    "start:dev": "node scripts/dev.mjs",
     "build": "pnpm -r --if-present build",
     "test": "pnpm -r --if-present test",
     "lint": "eslint . && prettier --check .",
@@ -16,6 +17,7 @@
     "typecheck": "pnpm -r --if-present typecheck",
     "db:migrate": "pnpm --filter @fregues/api db:migrate",
     "db:seed": "pnpm --filter @fregues/api db:seed",
+    "db:unlock": "pnpm --filter @fregues/api db:unlock",
     "db:codegen": "pnpm --filter @fregues/api db:codegen"
   },
   "devDependencies": {

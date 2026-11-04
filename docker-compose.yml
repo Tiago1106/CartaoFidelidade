@@ -1,3 +1,7 @@
+# A fixed project name: the folder name has an accent and a space, and would give the
+# containers and the volume a name that depends on where the repository was cloned.
+name: fregues
+
 services:
   postgres:
     image: postgres:16
@@ -7,7 +11,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: fregues
     ports:
-      - '5432:5432'
+      - '${POSTGRES_PORT:-5432}:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:

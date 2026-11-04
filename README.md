@@ -15,31 +15,46 @@ Read `CLAUDE.md` and `docs/` before working. The rules live in `docs/BUSINESS_RU
 
 ## Setup
 
-Requires Node 22+ and pnpm 10.
+Requires Node 22+, pnpm 10 and Docker.
 
 ```bash
 pnpm install
-cp .env.example .env
-docker compose up -d   # Postgres 16 on localhost:5432
+pnpm start:dev
 ```
+
+`pnpm start:dev` does everything else: it creates `.env` from `.env.example` when there is none
+(and picks a free port for Postgres if 5432 is taken), starts Postgres in Docker, applies the
+migrations, loads the sample data and runs the API (http://localhost:3000) and the web app
+(http://localhost:5173). It is safe to run again. Stop it with Ctrl+C; the data stays in the
+Docker volume `fregues_pgdata`.
+
+The web app asks `/v1/...` of its own address and Vite forwards it to the API (see
+`apps/web/vite.config.ts`), so there is no CORS to set up and the refresh cookie belongs to the
+same origin as the app.
+
+The code of the SMS is printed in the terminal, in a line that starts with `[OTP simulado]`.
+Asking for codes over and over reaches the real limits (3 per hour per number); `pnpm db:unlock`
+clears the codes and the locks of your development database so you can start again.
 
 ## Scripts
 
-| Command          | What                            |
-| ---------------- | ------------------------------- |
-| `pnpm dev`       | Run every app in dev mode       |
-| `pnpm build`     | Build every package             |
-| `pnpm test`      | Run Vitest in every package     |
-| `pnpm lint`      | ESLint and Prettier check       |
-| `pnpm format`    | Format with Prettier            |
-| `pnpm typecheck` | `tsc --noEmit` in every package |
+| Command          | What                                                                       |
+| ---------------- | -------------------------------------------------------------------------- |
+| `pnpm start:dev` | Everything for development: Postgres, migrations, sample data, API and web |
+| `pnpm dev`       | Run every app in dev mode (the database must be up)                        |
+| `pnpm build`     | Build every package                                                        |
+| `pnpm test`      | Run Vitest in every package                                                |
+| `pnpm lint`      | ESLint and Prettier check                                                  |
+| `pnpm format`    | Format with Prettier                                                       |
+| `pnpm typecheck` | `tsc --noEmit` in every package                                            |
 
 ## Database
 
 ```bash
 cp .env.example .env
-docker compose up -d     # Postgres 16 on localhost:5432
+docker compose up -d     # Postgres 16 on localhost:5432 (POSTGRES_PORT in .env changes it)
 pnpm db:migrate          # applies apps/api/migrations and sets the passwords of the two roles
+pnpm db:unlock           # development only: clears SMS codes and locks
 pnpm db:seed             # sample data of the design: Maria (+55 11 90000-0000) and her 3 cards
 pnpm db:codegen          # regenerates the Kysely types after a migration
 ```
