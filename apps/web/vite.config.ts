@@ -12,7 +12,8 @@ export default defineConfig(({ mode }) => {
   const apiUrl = loadEnv(mode, fileURLToPath(new URL('../..', import.meta.url)), '').API_URL;
   const proxy = { '/v1': { target: apiUrl || 'http://localhost:3000' } };
   return {
-    server: { proxy },
+    // `pnpm start:dev --lan` opens the dev server to the local network, to try the app on a phone.
+    server: { proxy, host: process.env.DEV_LAN === '1' },
     preview: { proxy },
     plugins: [
       react(),

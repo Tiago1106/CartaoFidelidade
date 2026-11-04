@@ -3,10 +3,12 @@
 // 2. starts Postgres in Docker and waits until it is healthy,
 // 3. applies the migrations and loads the sample data,
 // 4. runs the API and the web app (`pnpm dev`).
+// With `--lan` the web app is also reachable from a phone on the same Wi-Fi.
 // Running it again is safe: every step can be repeated.
 import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import net from 'node:net';
+import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -50,10 +52,26 @@ run('docker', ['compose', 'up', '-d', '--wait', 'postgres'], 'Postgres (docker c
 run('pnpm', ['db:migrate'], 'Migrations');
 run('pnpm', ['db:seed'], 'Sample data');
 
+const lan = process.argv.includes('--lan');
+if (lan) {
+  const addresses = Object.values(os.networkInterfaces())
+    .flat()
+    .filter((i) => i && i.family === 'IPv4' && !i.internal)
+    .map((i) => i.address);
+  console.log(
+    `\nOn your phone (same Wi-Fi): ${addresses.map((a) => `http://${a}:5173`).join('  or  ')}`,
+  );
+}
+
 console.log(
   '\nWeb:  http://localhost:5173\nAPI:  http://localhost:3000  (docs at /docs)\n' +
     'The SMS codes are printed in this terminal, in lines that start with [OTP simulado].\n',
 );
-const dev = spawn('pnpm', ['dev'], { cwd: root, stdio: 'inherit', shell });
+const dev = spawn('pnpm', ['dev'], {
+  cwd: root,
+  stdio: 'inherit',
+  shell,
+  env: { ...process.env, DEV_LAN: lan ? '1' : '0' },
+});
 dev.on('exit', (code) => process.exit(code ?? 0));
 for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => dev.kill(signal));

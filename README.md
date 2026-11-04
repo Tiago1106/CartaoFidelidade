@@ -138,6 +138,11 @@ The seed (`pnpm db:seed`) has the businesses `studio-bela`, `navalha` and `espac
   It is printed only with `NODE_ENV=development`; the API refuses to start in production with the
   console sender.
 
+- **On your phone.** `pnpm start:dev --lan` also opens the web app to your Wi-Fi and prints the
+  addresses (use the one that starts with `192.168.`). Open it in the phone's browser; the PC and
+  the phone must be on the same network, and Windows may ask to allow Node through the firewall
+  (allow it on private networks). The SMS code still shows in the PC terminal. The camera (QR
+  reader) will need https later; for now, the sign in and the screens work over http.
 - **Reload.** The access token lives in memory only; on reload the app uses the refresh cookie to
   get a new one, so you stay signed in (90 days, renewed on each use).
 - **Limits.** The real limits apply (3 codes per hour per number, 5 wrong codes lock the number
