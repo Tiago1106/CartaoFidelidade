@@ -12,12 +12,18 @@ import { COOKIE_SECURE, CustomerAuthController } from './customer-auth/customer-
 import { CustomerAuthGuard } from './customer-auth/customer-auth.guard';
 import { CustomerProfileController } from './customer-auth/customer-profile.controller';
 import { CustomerProfileService } from './customer-auth/customer-profile.service';
+import {
+  CustomerEnrollmentsController,
+  PublicBusinessController,
+} from './customer-enrollments/customer-enrollments.controller';
+import { CustomerEnrollmentsService } from './customer-enrollments/customer-enrollments.service';
 import { CustomerSessionService } from './customer-auth/customer-session.service';
 import { OTP_CONFIG, OtpService, type OtpConfig } from './customer-auth/otp.service';
 import { OTP_SENDER, type OtpSender } from './customer-auth/otp-sender';
 import { DATABASE, type Database } from './db/database';
 import { HealthController } from './health/health.controller';
 import { CustomerRepository } from './system/customer.repository';
+import { EnrollmentRepository } from './system/enrollment.repository';
 import { OtpRepository } from './system/otp.repository';
 import { SessionRepository } from './system/session.repository';
 import { SYSTEM_DATABASE, type SystemDatabase } from './system/system-database';
@@ -65,7 +71,9 @@ export class AppModule {
         HealthController,
         ...(customerAuth ? [CustomerAuthController] : []),
         // The profile is read as `app_user`, so it needs that connection too.
-        ...(customerAuth && deps.db ? [CustomerProfileController] : []),
+        ...(customerAuth && deps.db
+          ? [CustomerProfileController, CustomerEnrollmentsController, PublicBusinessController]
+          : []),
         ...(deps.extraControllers ?? []),
       ],
       providers: [
@@ -85,7 +93,8 @@ export class AppModule {
               CustomerSessionService,
               CustomerAuthGuard,
               CustomerRepository,
-              ...(deps.db ? [CustomerProfileService] : []),
+              EnrollmentRepository,
+              ...(deps.db ? [CustomerProfileService, CustomerEnrollmentsService] : []),
             ]
           : []),
         ...(deps.ownedDatabases?.length

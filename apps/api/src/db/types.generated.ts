@@ -3,29 +3,30 @@
  * Please do not edit it manually.
  */
 
-import type { ColumnType } from "kysely";
+import type { ColumnType } from 'kysely';
 
-export type BillingStatus = "active" | "past_due" | "read_only" | "trialing";
+export type BillingStatus = 'active' | 'past_due' | 'read_only' | 'trialing';
 
-export type CycleStatus = "completed" | "expired" | "open";
+export type CycleStatus = 'completed' | 'expired' | 'open';
 
-export type EnrollmentStatus = "active" | "archived";
+export type EnrollmentStatus = 'active' | 'archived';
 
-export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
-  ? ColumnType<S, I | undefined, U>
-  : ColumnType<T, T | undefined, T>;
+export type Generated<T> =
+  T extends ColumnType<infer S, infer I, infer U>
+    ? ColumnType<S, I | undefined, U>
+    : ColumnType<T, T | undefined, T>;
 
-export type PrincipalType = "customer" | "staff";
+export type PrincipalType = 'customer' | 'staff';
 
-export type ProgramStatus = "active" | "archived";
+export type ProgramStatus = 'active' | 'archived';
 
-export type RedemptionStatus = "available" | "canceled" | "expired" | "redeemed";
+export type RedemptionStatus = 'available' | 'canceled' | 'expired' | 'redeemed';
 
-export type StaffRole = "employee" | "owner";
+export type StaffRole = 'employee' | 'owner';
 
-export type StampMethod = "phone" | "qr";
+export type StampMethod = 'phone' | 'qr';
 
-export type StampType = "credit" | "reversal";
+export type StampType = 'credit' | 'reversal';
 
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 

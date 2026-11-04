@@ -96,6 +96,17 @@ curl -X PATCH http://localhost:3000/v1/customer/me -H "Authorization: Bearer $TO
 Five wrong codes kill the code and lock the number for 15 minutes. Each `refresh` gives a new
 refresh token and the old one stops working; showing an old one again ends that whole login.
 
+### Cards of the customer
+
+```bash
+curl http://localhost:3000/v1/public/businesses/navalha                     # no sign-in
+curl -X POST http://localhost:3000/v1/customer/businesses/navalha/join   -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{}'
+curl http://localhost:3000/v1/customer/enrollments -H "Authorization: Bearer $TOKEN"
+```
+
+Expiry is worked out when you read: a cycle past its date shows 0 of N, and nothing is erased.
+The seed (`pnpm db:seed`) has the businesses `studio-bela`, `navalha` and `espaco-vita`.
+
 ## Looking at screens in development
 
 The customer app uses a simulated session until the API exists. In `pnpm dev`, open any

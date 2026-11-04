@@ -13,8 +13,11 @@ export interface EnrollmentBusiness {
   id: string;
   name: string;
   slug: string;
-  /** Kind of business, shown under the name on the card (for example "Barbearia"). [Premissa] */
-  category: string;
+  /**
+   * Kind of business, shown under the name on the card (for example "Barbearia"). [Premissa]
+   * `null` while the business has not set one.
+   */
+  category: string | null;
 }
 
 export interface EnrollmentProgram {

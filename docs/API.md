@@ -194,6 +194,12 @@ Todos com acesso `customer`.
 
 `GET /v1/customer/enrollments/:id` — a mesma estrutura mais `stamps` (visitas do ciclo atual, da mais recente para a mais antiga, cada uma com `number`, `createdAt`, `staffFirstName` e `reversed`; nunca traz o motivo do estorno, RN-PRE-08), `redemptions` (todos os prêmios, com status) e `pastCycles` (ciclos concluídos ou vencidos, com datas).
 
+[Implementado na T24] `GET /enrollments` responde `{ "items": [...] }`, ordenado pela atividade mais recente (última visita, ou a data da matrícula). Um cartão **arquivado** some da lista, a menos que haja um prêmio disponível (RN-CAR-06) [Premissa]. O vencimento é calculado na leitura, com o `Clock`: um ciclo aberto cuja `expires_at` já passou aparece como 0 de N, sem `expiresAt`, e o servidor **não grava** nada ao ler (o cliente não tem direito de escrita; a próxima visita ou resgate, feitos pelo negócio, gravam o estado). O ciclo vale até o instante `expires_at` e vence um instante depois. Um prêmio `available` com `expires_at` no passado aparece como `expired`. Sem ciclo aberto, `progress.cycleNumber` é o número do próximo ciclo (maior número já usado + 1) [Premissa]. `GET /enrollments/:id` acrescenta `stamps` (só do ciclo aberto e vivo; `number` conta as visitas do ciclo em ordem, as estornadas incluídas [Premissa]), `redemptions` (`id`, `rewardDescription`, `status`, `earnedAt`, `expiresAt`, `redeemedAt`) e `pastCycles` (`number`, `status`, `stampsRequired`, `stamps` mantidas, `startedAt`, `completedAt`, `expiredAt`). O cartão de outro cliente, um id que não existe e um id que não é UUID dão `404 NOT_FOUND`.
+
+`POST /businesses/:slug/join` responde `{ "enrollments": [...] }` só com os cartões pedidos. Slug inexistente ou mal formado: `404`. Um `programId` que não é do negócio: `404`. Um cartão pedido que está arquivado: `409 PROGRAM_NOT_ACTIVE`, e nada é gravado. Sem `programIds` e sem cartões ativos: `200` com lista vazia. O consentimento só é ligado aqui (data e origem `first_login`) e nunca é movido por uma chamada seguinte; depois dele, só pelo `marketing-consent`. Os endpoints do cliente continuam funcionando com o negócio em `read_only`.
+
+`GET /v1/public/businesses/:slug` está implementado (sem login, `Cache-Control: public, max-age=300`, só cartões ativos, nada de clientes nem de equipe).
+
 `POST /v1/customer/qr-token` → `200`:
 
 ```json
