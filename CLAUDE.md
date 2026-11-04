@@ -83,15 +83,16 @@ Escolhas de partida. Troque só com justificativa curta registrada em `docs/DECI
 Scripts na raiz (rodam em todos os pacotes quando o pacote tem o script):
 
 - `pnpm install`: instala tudo (Node 22 ou superior, pnpm 10).
-- `pnpm dev`: sobe os apps em modo de desenvolvimento.
+- `pnpm start:dev`: sobe tudo para desenvolver (cria o `.env`, Postgres no Docker, migrações, dados de exemplo, API e web). Pode rodar de novo.
+- `pnpm dev`: sobe só os apps em modo de desenvolvimento (o banco precisa estar de pé).
 - `pnpm build`: compila os pacotes.
 - `pnpm test`: Vitest em cada pacote.
 - `pnpm lint`: ESLint e verificação do Prettier.
 - `pnpm format`: formata com o Prettier.
 - `pnpm typecheck`: `tsc --noEmit` em cada pacote.
-- `docker compose up -d`: Postgres 16 local (usuário e senha `postgres`, banco `fregues`, porta 5432).
+- `docker compose up -d`: Postgres 16 local (usuário e senha `postgres`, banco `fregues`, porta 5432 ou `POSTGRES_PORT` do `.env`).
 
-`pnpm db:migrate` aplica as migrações de `apps/api/migrations/` (e dá senha aos papéis `app_user` e `app_system`, tiradas de `DATABASE_URL` e `DATABASE_URL_SYSTEM`). `pnpm db:codegen` regenera os tipos do Kysely depois de uma migração. Os testes de integração da API (`*.int.test.ts`) sobem um Postgres em contêiner e exigem o Docker ligado; `pnpm --filter @fregues/api test:unit` roda só os que não precisam dele. `pnpm db:seed` carrega os dados de exemplo do desenho (a Maria e seus três cartões; só em desenvolvimento, e pode rodar de novo sem duplicar).
+`pnpm db:migrate` aplica as migrações de `apps/api/migrations/` (e dá senha aos papéis `app_user` e `app_system`, tiradas de `DATABASE_URL` e `DATABASE_URL_SYSTEM`). `pnpm db:codegen` regenera os tipos do Kysely depois de uma migração. Os testes de integração da API (`*.int.test.ts`) sobem um Postgres em contêiner e exigem o Docker ligado; `pnpm --filter @fregues/api test:unit` roda só os que não precisam dele. `pnpm db:unlock` (só em desenvolvimento) apaga os códigos de SMS e os bloqueios, para repetir o login sem esperar os limites. `pnpm db:seed` carrega os dados de exemplo do desenho (a Maria e seus três cartões; só em desenvolvimento, e pode rodar de novo sem duplicar).
 
 ## Variáveis de ambiente (lista de partida)
 
