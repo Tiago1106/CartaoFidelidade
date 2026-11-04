@@ -20,11 +20,14 @@ import { CustomerEnrollmentsService } from './customer-enrollments/customer-enro
 import { CustomerSessionService } from './customer-auth/customer-session.service';
 import { OTP_CONFIG, OtpService, type OtpConfig } from './customer-auth/otp.service';
 import { OTP_SENDER, type OtpSender } from './customer-auth/otp-sender';
+import { CustomerQrController } from './customer-qr/customer-qr.controller';
+import { QR_TOKEN_SECRET, QrTokenService } from './customer-qr/qr-token.service';
 import { DATABASE, type Database } from './db/database';
 import { HealthController } from './health/health.controller';
 import { CustomerRepository } from './system/customer.repository';
 import { EnrollmentRepository } from './system/enrollment.repository';
 import { OtpRepository } from './system/otp.repository';
+import { QrTokenRepository } from './system/qr-token.repository';
 import { SessionRepository } from './system/session.repository';
 import { SYSTEM_DATABASE, type SystemDatabase } from './system/system-database';
 
@@ -47,6 +50,8 @@ export interface CustomerAuthDeps {
   otp: OtpConfig;
   /** Key that signs the access tokens. */
   accessTokenSecret: string;
+  /** Key that signs the QR tokens. */
+  qrTokenSecret: string;
   /** The refresh cookie carries `Secure` (the API is served over https). */
   cookieSecure: boolean;
 }
@@ -72,7 +77,12 @@ export class AppModule {
         ...(customerAuth ? [CustomerAuthController] : []),
         // The profile is read as `app_user`, so it needs that connection too.
         ...(customerAuth && deps.db
-          ? [CustomerProfileController, CustomerEnrollmentsController, PublicBusinessController]
+          ? [
+              CustomerProfileController,
+              CustomerEnrollmentsController,
+              PublicBusinessController,
+              CustomerQrController,
+            ]
           : []),
         ...(deps.extraControllers ?? []),
       ],
@@ -94,6 +104,9 @@ export class AppModule {
               CustomerAuthGuard,
               CustomerRepository,
               EnrollmentRepository,
+              { provide: QR_TOKEN_SECRET, useValue: customerAuth.qrTokenSecret },
+              QrTokenRepository,
+              QrTokenService,
               ...(deps.db ? [CustomerProfileService, CustomerEnrollmentsService] : []),
             ]
           : []),
