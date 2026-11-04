@@ -210,6 +210,8 @@ Todos com acesso `customer`.
 - O prefixo `lc1.` identifica o formato e a versão para o leitor.
 - Limite: 6 chamadas por minuto por cliente. [Premissa]
 
+[Implementado na T25] O token é um JWT HS256 (chave `QR_TOKEN_SECRET`) com só `jti`, `iat` e `exp`; quem é o dono e se já foi usado ficam em `qr_tokens`, que guarda apenas o `jti` e os tempos, então nada guardado serve como token (regras de ouro 8 e 9). Validade de 45 s, em segundos inteiros. [Premissa] Um token novo **substitui** os anteriores do cliente: o anterior passa a responder `QR_ALREADY_USED` (a tabela marca `consumed_at`). A chamada trava a linha do cliente, então pedidos simultâneos deixam um único token válido. Acima de 6 por minuto: `429 RATE_LIMITED` com `Retry-After`. A resposta leva `Cache-Control: no-store`. Quem lê (`scan/resolve`, tarefa futura) usa `QrTokenService.consume`: assinatura ruim, prefixo errado ou `jti` desconhecido → `400 QR_INVALID`; já usado ou substituído → `409 QR_ALREADY_USED`; passou dos 45 s → `410 QR_EXPIRED`. O token vale até o instante `expiresAt` inclusive. Uma tentativa com token inválido ou vencido não gasta o token.
+
 `PUT …/marketing-consent` — corpo `{ "optIn": true }` → `200`. Registra data e origem (`settings`).
 
 `DELETE /v1/customer/me` — [Premissa] exige reautenticação: o cliente pede um código novo em `otp/request` e envia `{ "code": "123456" }`. → `202`. A anonimização (RN-LGP-04) pode acontecer de forma assíncrona. Revoga todas as sessões.

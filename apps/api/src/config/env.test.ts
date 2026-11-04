@@ -13,6 +13,7 @@ describe('loadEnv', () => {
 
   it('refuses a signing key shorter than 32 characters', () => {
     expect(() => loadEnv({ JWT_SECRET: 'short' })).toThrow(/JWT_SECRET/);
+    expect(() => loadEnv({ QR_TOKEN_SECRET: 'short' })).toThrow(/QR_TOKEN_SECRET/);
   });
 
   it('golden rule 8: production never prints codes and never runs without its secrets', () => {
@@ -22,11 +23,15 @@ describe('loadEnv', () => {
     ).toThrow(/SMS_PROVIDER/);
     expect(() => loadEnv(production)).toThrow(/OTP_HASH_SECRET/);
     expect(() => loadEnv({ ...production, OTP_HASH_SECRET: 'x'.repeat(32) })).toThrow(/JWT_SECRET/);
+    expect(() =>
+      loadEnv({ ...production, OTP_HASH_SECRET: 'x'.repeat(32), JWT_SECRET: 'y'.repeat(32) }),
+    ).toThrow(/QR_TOKEN_SECRET/);
     expect(
       loadEnv({
         ...production,
         OTP_HASH_SECRET: 'x'.repeat(32),
         JWT_SECRET: 'y'.repeat(32),
+        QR_TOKEN_SECRET: 'z'.repeat(32),
       }).NODE_ENV,
     ).toBe('production');
   });

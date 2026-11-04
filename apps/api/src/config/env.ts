@@ -22,6 +22,9 @@ const schema = z
     // Key that signs the access tokens (32 characters or more). In development a fixed one is used
     // when it is missing.
     JWT_SECRET: z.string().min(32).optional(),
+    // Key that signs the QR tokens of the customer (32 characters or more). In development a
+    // fixed one is used when it is missing.
+    QR_TOKEN_SECRET: z.string().min(32).optional(),
     // How many proxies sit in front of the API. The limit per IP (RN-AUT-03) needs the real
     // address of the caller; with 0 the address of the connection itself is used.
     TRUST_PROXY_HOPS: z.coerce.number().int().min(0).max(5).default(0),
@@ -41,6 +44,13 @@ const schema = z
       context.addIssue({
         code: 'custom',
         path: ['JWT_SECRET'],
+        message: 'is required in production',
+      });
+    }
+    if (!env.QR_TOKEN_SECRET) {
+      context.addIssue({
+        code: 'custom',
+        path: ['QR_TOKEN_SECRET'],
         message: 'is required in production',
       });
     }

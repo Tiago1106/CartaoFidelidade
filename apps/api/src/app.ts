@@ -23,6 +23,8 @@ import { createSystemDatabase, type SystemDatabase } from './system/system-datab
 const DEVELOPMENT_OTP_HASH_SECRET = 'development-only-otp-hash-secret';
 /** Used when `JWT_SECRET` is not set, in development and in tests only. */
 const DEVELOPMENT_JWT_SECRET = 'development-only-jwt-secret-of-32-chars-or-more';
+/** Used when `QR_TOKEN_SECRET` is not set, in development and in tests only. */
+const DEVELOPMENT_QR_TOKEN_SECRET = 'development-only-qr-token-secret-32-chars-or-more';
 
 export interface AppOptions {
   env?: Env;
@@ -38,6 +40,8 @@ export interface AppOptions {
   otp?: Partial<OtpConfig>;
   /** Key of the access tokens, instead of `JWT_SECRET`. */
   jwtSecret?: string;
+  /** Key of the QR tokens, instead of `QR_TOKEN_SECRET`. */
+  qrTokenSecret?: string;
   /** Controllers added next to the real ones. For tests only. */
   extraControllers?: Type[];
 }
@@ -77,11 +81,17 @@ export async function createApp(options: AppOptions = {}): Promise<NestExpressAp
       env.JWT_SECRET ??
       (env.NODE_ENV === 'production' ? undefined : DEVELOPMENT_JWT_SECRET);
     if (!accessTokenSecret) throw new Error('JWT_SECRET is not set.');
+    const qrTokenSecret =
+      options.qrTokenSecret ??
+      env.QR_TOKEN_SECRET ??
+      (env.NODE_ENV === 'production' ? undefined : DEVELOPMENT_QR_TOKEN_SECRET);
+    if (!qrTokenSecret) throw new Error('QR_TOKEN_SECRET is not set.');
     customerAuth = {
       systemDb,
       sender: options.otpSender ?? createOtpSender(env),
       otp: { ...options.otp, hashSecret },
       accessTokenSecret,
+      qrTokenSecret,
       // The browser only keeps a `Secure` cookie from an https address (localhost aside).
       cookieSecure: env.API_URL.startsWith('https:'),
     };
